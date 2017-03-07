@@ -5,11 +5,9 @@
  */
 package dtx.oa.rbac.model;
 
-import dtx.db.ControllerFactory;
-import dtx.rbac.controller.NodeController;
-import dtx.rbac.controller.RBACController;
-import dtx.rbac.controller.RoleNodeController;
-import dtx.rbac.controller.impl.DefaultNodeControllerImpl;
+import dtx.oa.rbac.idao.INodeDao;
+import dtx.oa.rbac.idao.IRoleNodeDao;
+import dtx.oa.rbac.idao.factory.IDaoFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,12 +22,12 @@ public class NodeTree {
     private List<NodeTreeLeaf> rootLeaves=new ArrayList<>();
     private int treeDepth=Integer.MIN_VALUE;
     
-    public NodeTree(RBACController rbac){
-        init(rbac);
+    public NodeTree(User user){
+        init(user);
     }
     
-    public NodeTree(RBACController rbac,boolean status){
-        init(rbac, status);
+    public NodeTree(User user,boolean status){
+        init(user, status);
     }
     
     public NodeTree(List<Role> roles){
@@ -56,40 +54,33 @@ public class NodeTree {
         init(nodes, status, nodeType);
     }
     
-    private void init(RBACController rbac,boolean status){
-        if(!rbac.isLogin())return;
-        NodeController nc=ControllerFactory.getNodeController();
-        if(ControllerFactory.getUserController().isAdmin(rbac.getLoginInfo())){
-            Iterator<Node> iter=nc.getChilds(DefaultNodeControllerImpl.ROOTNODEID).iterator();
+    private void init(User user){
+        INodeDao inDao=IDaoFactory.iNodeDao();
+        if(IDaoFactory.iUserDao().isAdmin(user)){
+            Iterator<Node> iter=inDao.getChilds(INodeDao.ROOTID).iterator();
             while(iter.hasNext()){
                 rootLeaves.add(new NodeTreeLeaf((Node)iter.next()));
             }
-            checkRepeat();
-        }else{
-            init(ControllerFactory.getRoleUserController().getRoleByUser(rbac.getLoginInfo()),status);
-        }
-        
+        }else
+            init(IDaoFactory.iRoleUserDao().getRoleByUser(user));
     }
     
-    private void init(RBACController rbac){
-        if(!rbac.isLogin())return;
-        NodeController nc=ControllerFactory.getNodeController();
-        if(ControllerFactory.getUserController().isAdmin(rbac.getLoginInfo())){
-            Iterator<Node> iter=nc.getChilds(DefaultNodeControllerImpl.ROOTNODEID).iterator();
+    private void init(User user,boolean status){
+        INodeDao inDao=IDaoFactory.iNodeDao();
+        if(IDaoFactory.iUserDao().isAdmin(user)){
+            Iterator<Node> iter=inDao.getChilds(INodeDao.ROOTID).iterator();
             while(iter.hasNext()){
                 rootLeaves.add(new NodeTreeLeaf((Node)iter.next()));
             }
-            checkRepeat();
-        }else{
-            init(ControllerFactory.getRoleUserController().getRoleByUser(rbac.getLoginInfo()));
-        }
+        }else
+            init(IDaoFactory.iRoleUserDao().getRoleByUser(user),status);
     }
     
     private void init(List<Role> roles){
         List<Node> nodes=new ArrayList<>();
-        RoleNodeController rnc=ControllerFactory.getRoleNodeController();
+        IRoleNodeDao irnDao=IDaoFactory.iRoleNodeDao();
         for(Role role:roles){
-            nodes.addAll(rnc.getNodesByRole(role));
+            nodes.addAll(irnDao.getNodesByRole(role));
         }
         init(nodes.toArray(new Node[nodes.size()]));
         List<NodeTreeLeaf> forDelete=new ArrayList<>();
@@ -110,10 +101,10 @@ public class NodeTree {
     
     private void init(List<Role> roles,boolean status){
         List<Node> nodes=new ArrayList<>();
-        RoleNodeController rnc=ControllerFactory.getRoleNodeController();
+        IRoleNodeDao irnDao=IDaoFactory.iRoleNodeDao();
         for(Role role:roles){
             if(role.getStatus()!=status)continue;
-            nodes.addAll(rnc.getNodesByRole(role));
+            nodes.addAll(irnDao.getNodesByRole(role));
         }
         init(nodes.toArray(new Node[nodes.size()]), status);
         List<NodeTreeLeaf> forDelete=new ArrayList<>();

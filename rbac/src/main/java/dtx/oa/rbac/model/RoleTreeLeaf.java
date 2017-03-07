@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dtx.rbac.bean;
+package dtx.oa.rbac.model;
 
-import dtx.db.ControllerFactory;
+import dtx.oa.rbac.idao.factory.IDaoFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,18 +21,20 @@ public class RoleTreeLeaf {
     public RoleTreeLeaf(Role role){
         this.entityRole=role;
         leaves=new ArrayList<>();
-        List<Role> childs=ControllerFactory.getRoleController().getChilds(role.getUuid());
+        List<Role> childs=IDaoFactory.iRoleDao().getChilds(role.getUuid());
         for(Role child:childs){
             leaves.add(new RoleTreeLeaf(child));
         }
     }
     
     public RoleTreeLeaf(Role role,boolean status){
-        this.entityRole=role;
-        leaves=new ArrayList<>();
-        List<Role> childs=ControllerFactory.getRoleController().getChilds(role.getUuid());
-        for(Role child:childs){
-            leaves.add(new RoleTreeLeaf(child,status));
+        if(role.getStatus()==status){
+            this.entityRole=role;
+            leaves=new ArrayList<>();
+            List<Role> childs=IDaoFactory.iRoleDao().getChilds(role.getUuid());
+            for(Role child:childs){
+                leaves.add(new RoleTreeLeaf(child,status));
+            }
         }
     }
     

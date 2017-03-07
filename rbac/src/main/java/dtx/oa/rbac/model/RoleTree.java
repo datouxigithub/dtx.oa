@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dtx.rbac.bean;
+package dtx.oa.rbac.model;
 
-import dtx.db.ControllerFactory;
-import dtx.rbac.controller.RBACController;
-import dtx.rbac.controller.impl.DefaultRoleControllerImpl;
+import dtx.oa.rbac.idao.IRoleDao;
+import dtx.oa.rbac.idao.factory.IDaoFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,12 +19,12 @@ public class RoleTree {
    private List<RoleTreeLeaf> rootLeaves;
    private int treeDepth=Integer.MIN_VALUE;
    
-   public RoleTree(RBACController rbac){
-       init(rbac);
+   public RoleTree(User user){
+       init(user);
    }
    
-   public RoleTree(RBACController rbac,boolean status){
-       init(rbac,status);
+   public RoleTree(User user,boolean status){
+       init(user,status);
    }
    
    public RoleTree(List<Role> roles){
@@ -36,25 +35,21 @@ public class RoleTree {
        init(roles,status);
    }
    
-   private void init(RBACController rbac){
-       if(!rbac.isLogin())return;
+   private void init(User user){
        List<Role> roles=null;
-       if(ControllerFactory.getUserController().isAdmin(rbac.getLoginInfo())){
-           roles=ControllerFactory.getRoleController().getChilds(DefaultRoleControllerImpl.ROOTROLEID);
-       }else{
-           roles=ControllerFactory.getRoleUserController().getRoleByUser(rbac.getLoginInfo());
-       }
+       if(IDaoFactory.iUserDao().isAdmin(user))
+           roles=IDaoFactory.iRoleDao().getChilds(IRoleDao.ROOTID);
+       else
+           roles=IDaoFactory.iRoleUserDao().getRoleByUser(user);
        init(roles);
    }
    
-   private void init(RBACController rbac,boolean status){
-       if(!rbac.isLogin())return;
+   private void init(User user,boolean status){
        List<Role> roles=null;
-       if(ControllerFactory.getUserController().isAdmin(rbac.getLoginInfo())){
-           roles=ControllerFactory.getRoleController().getChilds(DefaultRoleControllerImpl.ROOTROLEID);
-       }else{
-           roles=ControllerFactory.getRoleUserController().getRoleByUser(rbac.getLoginInfo());
-       }
+       if(IDaoFactory.iUserDao().isAdmin(user))
+           roles=IDaoFactory.iRoleDao().getChilds(IRoleDao.ROOTID);
+       else
+           roles=IDaoFactory.iRoleUserDao().getRoleByUser(user);
        init(roles,status);
    }
    

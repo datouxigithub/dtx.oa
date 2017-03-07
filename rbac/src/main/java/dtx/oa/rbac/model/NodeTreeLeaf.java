@@ -5,7 +5,7 @@
  */
 package dtx.oa.rbac.model;
 
-import dtx.db.ControllerFactory;
+import dtx.oa.rbac.idao.factory.IDaoFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,7 +30,7 @@ public class NodeTreeLeaf {
     public NodeTreeLeaf(Node node){
         this.entityNode=node;
         leaves=new ArrayList<>();
-        List<Node> childs=ControllerFactory.getNodeController().getChilds(node.getUuid());
+        List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid());
         for(Node child:childs){
             leaves.add(new NodeTreeLeaf(child));
         }
@@ -39,7 +39,7 @@ public class NodeTreeLeaf {
     public NodeTreeLeaf(Node node,int nodeType){
         this.entityNode=node;
         leaves=new ArrayList<>();
-        List<Node> childs=ControllerFactory.getNodeController().getChildsByType(node.getUuid(), nodeType);
+        List<Node> childs=IDaoFactory.iNodeDao().getChildsByType(node.getUuid(), nodeType);
         for(Node child:childs){
             leaves.add(new NodeTreeLeaf(child, nodeType));
         }
@@ -48,7 +48,7 @@ public class NodeTreeLeaf {
     public NodeTreeLeaf(Node node,boolean status){
         this.entityNode=node;
         leaves=new ArrayList<>();
-        List<Node> childs=ControllerFactory.getNodeController().getChilds(node.getUuid(), status);
+        List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid(), status);
         for(Node child:childs){
             leaves.add(new NodeTreeLeaf(child,status));
         }
@@ -57,7 +57,7 @@ public class NodeTreeLeaf {
     public NodeTreeLeaf(Node node,boolean status,int nodeType){
         this.entityNode=node;
         leaves=new ArrayList<>();
-        List<Node> childs=ControllerFactory.getNodeController().getChilds(node.getUuid(), status);
+        List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid(), status);
         for(Node child:childs){
             if(child.getNodeType()==nodeType)
                 leaves.add(new NodeTreeLeaf(child, status, nodeType));
