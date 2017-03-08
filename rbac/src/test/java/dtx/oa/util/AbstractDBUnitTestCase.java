@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.AmbiguousTableNameException;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;

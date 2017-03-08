@@ -32,7 +32,6 @@ public class RoleUserDao implements IRoleUserDao {
         @SuppressWarnings("unchecked")
         List<RoleUser> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -44,7 +43,6 @@ public class RoleUserDao implements IRoleUserDao {
         query.setString("role_id", roleId);
         List<RoleUser> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -69,7 +67,6 @@ public class RoleUserDao implements IRoleUserDao {
         session.beginTransaction();
         RoleUser rn=(RoleUser)session.get(RoleUser.class, id);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return rn;
     }
 
@@ -81,7 +78,6 @@ public class RoleUserDao implements IRoleUserDao {
         query.setString("user_id", userId);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -93,7 +89,6 @@ public class RoleUserDao implements IRoleUserDao {
         query.setString("role_id", roleId);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -115,7 +110,6 @@ public class RoleUserDao implements IRoleUserDao {
         query.setString("id", id);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -133,7 +127,6 @@ public class RoleUserDao implements IRoleUserDao {
         ru.setRoleId(role_id);
         String result=(String) session.save(ru);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 

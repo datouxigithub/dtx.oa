@@ -32,7 +32,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         query.setString("node_id", nodeId);
         List<RoleNode> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -44,7 +43,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         query.setString("role_id", roleId);
         List<RoleNode> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -85,7 +83,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         session.beginTransaction();
         RoleNode rn=(RoleNode)session.get(RoleNode.class, id);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return rn;
     }
 
@@ -97,7 +94,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         query.setString("node_id", nodeId);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -109,7 +105,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         query.setString("role_id", roleId);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -131,7 +126,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         query.setString("id", id);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -149,7 +143,6 @@ public class RoleNodeDao implements IRoleNodeDao {
         rn.setNodeId(node_id);
         String result=(String) session.save(rn);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 

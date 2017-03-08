@@ -28,7 +28,6 @@ public class RoleDao implements IRoleDao {
         session.beginTransaction();
         Role role=(Role) session.get(Role.class, roleId);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return role;
     }
 
@@ -40,7 +39,6 @@ public class RoleDao implements IRoleDao {
         query.setBoolean("status", status);
         List<Role> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -52,7 +50,6 @@ public class RoleDao implements IRoleDao {
         query.setString("parent_id", parentId);
         List<Role> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -65,7 +62,6 @@ public class RoleDao implements IRoleDao {
         query.setBoolean("status", status);
         List<Role> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -101,7 +97,6 @@ public class RoleDao implements IRoleDao {
             result=false;
         }
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -115,7 +110,6 @@ public class RoleDao implements IRoleDao {
         query.setString("id", role.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -128,7 +122,6 @@ public class RoleDao implements IRoleDao {
         query.setString("id", role.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -141,7 +134,6 @@ public class RoleDao implements IRoleDao {
         query.setString("id", role.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -158,7 +150,6 @@ public class RoleDao implements IRoleDao {
         query.setString("id", id);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         if(result<=0)return false;
         return IDaoFactory.iRoleNodeDao().deleteByRoleId(id)&&IDaoFactory.iRoleUserDao().deleteByRoleId(id);
     }
@@ -169,7 +160,6 @@ public class RoleDao implements IRoleDao {
         session.beginTransaction();
         String result=(String) session.save(role);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
     

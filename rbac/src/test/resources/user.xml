@@ -7,6 +7,6 @@ and open the template in the editor.
 
 
 <dataset>
-    <user account="肥满" password="56789" create_time="" login_time="" login_ip="" status="1" remark="测试用户" />
-    <user account="臭臭屎" password="123698" create_time="" login_time="" login_ip="" status="0" remark="测试用户2" />
+    <user uuid="ff80808159922a2c01599237ab430001" account="肥满" password="56789" status="true" remark="测试用户" />
+    <user uuid="ff80808159a0bfb40159a0c035f40001" account="臭臭屎" password="123698" status="false" />
 </dataset>

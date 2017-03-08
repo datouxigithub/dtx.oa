@@ -25,4 +25,13 @@ public class EntitiesHelper {
         assertEquals(expected.getStatus(), target.getStatus());
         assertEquals(expected.getRemark(), target.getRemark());
     }
+    
+    public static void assertUser2(User expected,User target){
+        assertNotNull(expected);
+        assertNotNull(target);
+        assertEquals(expected.getAccount(), target.getAccount());
+        assertEquals(expected.getPassword(), target.getPassword());
+        assertEquals(expected.getStatus(), target.getStatus());
+        assertEquals(expected.getRemark(), target.getRemark());
+    }
 }

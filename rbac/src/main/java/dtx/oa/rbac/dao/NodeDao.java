@@ -29,7 +29,6 @@ public class NodeDao implements INodeDao {
         session.beginTransaction();
         Node node=(Node) session.get(Node.class, nodeId);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return node;
     }
 
@@ -41,7 +40,6 @@ public class NodeDao implements INodeDao {
         query.setBoolean("status", status);
         List<Node> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -53,7 +51,6 @@ public class NodeDao implements INodeDao {
         query.setInteger("type", nodeType);
         List<Node> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -65,7 +62,6 @@ public class NodeDao implements INodeDao {
         query.setString("parent_id", parentId);
         List<Node> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -78,7 +74,6 @@ public class NodeDao implements INodeDao {
         query.setBoolean("status", status);
         List<Node> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -91,7 +86,6 @@ public class NodeDao implements INodeDao {
         query.setInteger("node_type", nodeType);
         List<Node> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -105,7 +99,6 @@ public class NodeDao implements INodeDao {
         query.setBoolean("status", status);
         List<Node> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -179,7 +172,6 @@ public class NodeDao implements INodeDao {
             result=false;
         }
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -195,7 +187,6 @@ public class NodeDao implements INodeDao {
         query.setString("id", node.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -208,7 +199,6 @@ public class NodeDao implements INodeDao {
         query.setString("id", node.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -221,7 +211,6 @@ public class NodeDao implements INodeDao {
         query.setString("id", node.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -233,7 +222,6 @@ public class NodeDao implements INodeDao {
         query.setString("id", id);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         if(result<=0)return false;
         return IDaoFactory.iRoleNodeDao().deleteByNodeId(id);
     }
@@ -250,7 +238,6 @@ public class NodeDao implements INodeDao {
         session.beginTransaction();
         String result=(String) session.save(node);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
     
