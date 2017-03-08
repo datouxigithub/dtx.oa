@@ -77,7 +77,7 @@ public class NodeTreeLeaf {
     }
     
     public boolean hasLeaf(){
-        return leaves.size()>0 ? true:false;
+        return leaves.size()>0;
     }
     
     public JSONObject toJSON() throws JSONException{
