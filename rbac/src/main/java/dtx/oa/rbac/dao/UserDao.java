@@ -27,7 +27,6 @@ public class UserDao implements IUserDao{
         session.beginTransaction();
         User user=(User) session.get(User.class, userId);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return user;
     }
 
@@ -39,7 +38,6 @@ public class UserDao implements IUserDao{
         query.setString("account", account);
         User user=(User) query.uniqueResult();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return user;
     }
 
@@ -51,7 +49,6 @@ public class UserDao implements IUserDao{
         query.setBoolean("status", status);
         List<User> result=query.list();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -62,7 +59,6 @@ public class UserDao implements IUserDao{
         session.beginTransaction();
         String result=(String) session.save(user);
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result;
     }
 
@@ -74,7 +70,6 @@ public class UserDao implements IUserDao{
         query.setString("id", userId);
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         if(result<=0)return false;
         return IDaoFactory.iRoleUserDao().deleteByUserId(userId);
     }
@@ -98,7 +93,6 @@ public class UserDao implements IUserDao{
         query.setTimestamp("login_time", user.getLoginTime());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 
@@ -112,7 +106,6 @@ public class UserDao implements IUserDao{
         query.setString("id", user.getUuid());
         int result=query.executeUpdate();
         session.getTransaction().commit();
-        HibernateUtil.closeSession(session);
         return result>0;
     }
 

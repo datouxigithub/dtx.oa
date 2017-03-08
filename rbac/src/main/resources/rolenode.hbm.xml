@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 	
 <hibernate-mapping>
-	<class name="dtx.rbac.bean.RoleNode" table="role_node">
+	<class name="dtx.oa.rbac.model.RoleNode" table="role_node">
 		<id name="uuid" column="uuid">
 			<generator class="uuid"></generator>
 		</id>

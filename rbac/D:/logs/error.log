@@ -1,0 +1,5 @@
+2017-03-08 15:12:57 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource user.hbm.xml
+2017-03-08 15:15:01 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource user.hbm.xml
+2017-03-08 15:19:38 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource role.hbm.xml
+2017-03-08 15:20:50 [ main:0 ] - [ ERROR ] org.hibernate.HibernateException: Unable to instantiate default tuplizer [org.hibernate.tuple.entity.PojoEntityTuplizer]
+2017-03-08 15:22:29 [ main:0 ] - [ ERROR ] org.hibernate.HibernateException: Unable to instantiate default tuplizer [org.hibernate.tuple.entity.PojoEntityTuplizer]

@@ -1,0 +1,30 @@
+2017-03-08 15:12:57 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource user.hbm.xml
+2017-03-08 15:15:01 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource user.hbm.xml
+2017-03-08 15:19:38 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource role.hbm.xml
+2017-03-08 15:20:50 [ main:0 ] - [ ERROR ] org.hibernate.HibernateException: Unable to instantiate default tuplizer [org.hibernate.tuple.entity.PojoEntityTuplizer]
+2017-03-08 15:22:29 [ main:0 ] - [ ERROR ] org.hibernate.HibernateException: Unable to instantiate default tuplizer [org.hibernate.tuple.entity.PojoEntityTuplizer]
+2017-03-08 15:41:44 [ main:0 ] - [ INFO ] ff8081815aacddd8015aacddd97c0000---ff8081815aacddd8015aacddd97c0000
+2017-03-08 15:41:44 [ main:3 ] - [ INFO ] 肥满---肥满
+2017-03-08 15:41:44 [ main:4 ] - [ INFO ] Z088LBqKb5BGHopm+1VQug==---Z088LBqKb5BGHopm+1VQug==
+2017-03-08 15:41:44 [ main:4 ] - [ INFO ] 2017-03-08 15:41:44.0---2017-03-08 15:41:44.0
+2017-03-08 15:41:44 [ main:5 ] - [ INFO ] null---null
+2017-03-08 15:41:44 [ main:5 ] - [ INFO ] null---null
+2017-03-08 15:41:44 [ main:5 ] - [ INFO ] true---true
+2017-03-08 15:41:44 [ main:6 ] - [ INFO ] 测试一下---测试一下
+2017-03-08 15:43:32 [ main:0 ] - [ INFO ] ff8081815aacdf7f015aacdf80120000---ff8081815aacdf7f015aacdf80120000
+2017-03-08 15:43:32 [ main:2 ] - [ INFO ] 肥满---肥满
+2017-03-08 15:43:32 [ main:3 ] - [ INFO ] Z088LBqKb5BGHopm+1VQug==---Z088LBqKb5BGHopm+1VQug==
+2017-03-08 15:43:32 [ main:3 ] - [ INFO ] 2017-03-08 15:43:32.0---2017-03-08 15:43:32.0
+2017-03-08 15:43:32 [ main:3 ] - [ INFO ] null---null
+2017-03-08 15:43:32 [ main:4 ] - [ INFO ] null---null
+2017-03-08 15:43:32 [ main:4 ] - [ INFO ] true---true
+2017-03-08 15:43:32 [ main:4 ] - [ INFO ] 测试一下---测试一下
+2017-03-08 15:48:37 [ main:0 ] - [ INFO ] ff8081815aace426015aace427400000---ff8081815aace426015aace427400000
+2017-03-08 15:48:37 [ main:3 ] - [ INFO ] 肥满---肥满
+2017-03-08 15:48:37 [ main:3 ] - [ INFO ] Z088LBqKb5BGHopm+1VQug==---Z088LBqKb5BGHopm+1VQug==
+2017-03-08 15:48:37 [ main:3 ] - [ INFO ] 2017-03-08 15:48:37.0---2017-03-08 15:48:37.0
+2017-03-08 15:48:37 [ main:4 ] - [ INFO ] null---null
+2017-03-08 15:48:37 [ main:4 ] - [ INFO ] null---null
+2017-03-08 15:48:37 [ main:4 ] - [ INFO ] true---true
+2017-03-08 15:48:37 [ main:5 ] - [ INFO ] 测试一下---测试一下
+2017-03-08 16:00:39 [ main:0 ] - [ INFO ] /tmp/backup5856958023948246739.xml
