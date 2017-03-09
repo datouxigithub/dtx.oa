@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.11
--- http://www.phpmyadmin.net
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2017-03-08 13:18:16
+-- Generation Time: 2017-03-08 07:09:02
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.30
 
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- 表的结构 `node`
 --
 
-CREATE TABLE IF NOT EXISTS `node` (
+CREATE TABLE `node` (
   `uuid` varchar(128) NOT NULL,
   `title` varchar(200) NOT NULL,
   `address` text,
@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `node` (
 INSERT INTO `node` (`uuid`, `title`, `address`, `status`, `remark`, `parent_id`, `node_type`) VALUES
 ('ff80808159ac6d4b0159ac74e8980001', '节点组1', '', 1, '', '', 2),
 ('ff80808159ac6d4b0159ac755ebf0002', '节点11', 'abc', 1, '', 'ff80808159ac6d4b0159ac74e8980001', 1),
-('ff80808159ac6d4b0159ac75a5960003', '节点12', 'cde', 1, '', '', 1),
+('ff80808159ac6d4b0159ac75a5960003', '节点12', 'cde', 0, '', '', 1),
 ('ff80808159ac6d4b0159ac75f2460004', '节点组11', '', 1, '', 'ff80808159ac6d4b0159ac74e8980001', 2),
-('ff80808159ac6d4b0159ac7645970005', '节点111', 'ddd', 0, '', 'ff80808159ac6d4b0159ac75f2460004', 1),
+('ff80808159ac6d4b0159ac7645970005', '节点111', 'ddd', 1, '', 'ff80808159ac6d4b0159ac75f2460004', 1),
 ('ff80808159ac6d4b0159ac7688580006', '节点2', 'eee', 1, '', '', 1);
 
 -- --------------------------------------------------------
@@ -54,7 +54,7 @@ INSERT INTO `node` (`uuid`, `title`, `address`, `status`, `remark`, `parent_id`,
 -- 表的结构 `role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
+CREATE TABLE `role` (
   `uuid` varchar(128) NOT NULL,
   `role_name` varchar(200) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -85,7 +85,7 @@ INSERT INTO `role` (`uuid`, `role_name`, `status`, `remark`, `parent_id`) VALUES
 -- 表的结构 `role_node`
 --
 
-CREATE TABLE IF NOT EXISTS `role_node` (
+CREATE TABLE `role_node` (
   `uuid` varchar(128) NOT NULL,
   `role_id` varchar(128) NOT NULL,
   `node_id` varchar(128) NOT NULL
@@ -96,16 +96,14 @@ CREATE TABLE IF NOT EXISTS `role_node` (
 --
 
 INSERT INTO `role_node` (`uuid`, `role_id`, `node_id`) VALUES
-('2', 'ff808081598818400159881a49100002', 'ff80808159ac6d4b0159ac74e8980001'),
-('1', 'ff808081598818400159881a49100002', 'ff80808159ac6d4b0159ac755ebf0002'),
-('3', 'ff808081598818400159881a49100002', 'ff80808159ac6d4b0159ac75a5960003'),
-('4', 'ff808081598818400159881a49100002', 'ff80808159ac6d4b0159ac7688580006'),
 ('ff80808159da31850159db0b9e86000b', 'ff808081598818400159881aae8b0005', 'ff80808159ac6d4b0159ac7688580006'),
 ('ff80808159da31850159db0b9e87000c', 'ff808081598818400159881aae8b0005', 'ff80808159ac6d4b0159ac74e8980001'),
 ('ff80808159da31850159db0b9e88000d', 'ff808081598818400159881aae8b0005', 'ff80808159ac6d4b0159ac755ebf0002'),
-('ff8080815a40d285015a40e22e620001', 'ff808081598818400159881a696b0003', 'ff80808159ac6d4b0159ac75a5960003'),
-('ff80808159da31850159db0b51ec000a', 'ff808081598818400159881a149a0001', 'ff80808159ac6d4b0159ac75a5960003'),
-('ff8080815a40d285015a40e259990002', 'ff808081598818400159881b48530009', 'ff80808159ac6d4b0159ac75a5960003');
+('ff8081815a87f38d015a87f537fe0003', 'ff808081598818400159881a149a0001', 'ff80808159ac6d4b0159ac7645970005'),
+('ff8081815a87f38d015a87f537fd0002', 'ff808081598818400159881a149a0001', 'ff80808159ac6d4b0159ac75f2460004'),
+('ff8081815a87f38d015a87f537f10001', 'ff808081598818400159881a149a0001', 'ff80808159ac6d4b0159ac74e8980001'),
+('ff8081815a87f38d015a87f556640005', 'ff808081598818400159881a49100002', 'ff80808159ac6d4b0159ac7688580006'),
+('ff8081815a87f38d015a87f538000004', 'ff808081598818400159881a149a0001', 'ff80808159ac6d4b0159ac7688580006');
 
 -- --------------------------------------------------------
 
@@ -113,7 +111,7 @@ INSERT INTO `role_node` (`uuid`, `role_id`, `node_id`) VALUES
 -- 表的结构 `role_user`
 --
 
-CREATE TABLE IF NOT EXISTS `role_user` (
+CREATE TABLE `role_user` (
   `uuid` varchar(128) NOT NULL,
   `user_id` varchar(128) NOT NULL,
   `role_id` varchar(128) NOT NULL
@@ -125,6 +123,10 @@ CREATE TABLE IF NOT EXISTS `role_user` (
 
 INSERT INTO `role_user` (`uuid`, `user_id`, `role_id`) VALUES
 ('ff80808159a23bb70159a23c34910002', 'ff80808159a0bfb40159a0c035f40001', 'ff808081598818400159881a89a90004'),
+('ff80808159922a2c01599237ab640002', 'ff80808159922a2c01599237ab430001', 'ff808081598818400159881a149a0001'),
+('ff80808159922a2c01599237ab810003', 'ff80808159922a2c01599237ab430001', 'ff808081598818400159881aae8b0005'),
+('ff80808159922a2c01599237ab820004', 'ff80808159922a2c01599237ab430001', 'ff808081598818400159881b48530009'),
+('ff80808159922a2c01599237ab840005', 'ff80808159922a2c01599237ab430001', 'ff808081598818400159881a89a90004'),
 ('ff80808159a23bb70159a23c34890001', 'ff80808159a0bfb40159a0c035f40001', 'ff808081598818400159881aae8b0005');
 
 -- --------------------------------------------------------
@@ -133,7 +135,7 @@ INSERT INTO `role_user` (`uuid`, `user_id`, `role_id`) VALUES
 -- 表的结构 `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `uuid` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'uuid',
   `account` varchar(200) NOT NULL COMMENT '帐户名称',
   `password` text NOT NULL COMMENT '经过md5加密',
@@ -149,9 +151,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`uuid`, `account`, `password`, `create_time`, `login_time`, `login_ip`, `status`, `remark`) VALUES
-('ff80808159922a2c01599237ab430001', '臭屎洋', 'kAFQmDzST7DWlj99KOF/cg==', '2017-01-12 18:27:18', NULL, NULL, 1, ''),
-('ff80808158e69e720158e69e73510001', 'admin', 'ISMvKXpXpadDiUoOSoAfww==', '2016-12-10 10:44:53', NULL, NULL, 0, '注释!'),
-('ff80808159a0bfb40159a0c035f40001', '大头希', 'uk88CT/IB2cLk7HlefDCUA==', '2017-01-15 14:11:08', NULL, NULL, 1, '');
+('ff80808159922a2c01599237ab430001', '臭屎洋', 'uk88CT/IB2cLk7HlefDCUA==', '2017-01-12 18:27:18', '2017-02-24 11:10:05', '127.0.0.1', 1, ''),
+('ff80808158e69e720158e69e73510001', 'admin', 'ISMvKXpXpadDiUoOSoAfww==', '2016-12-10 10:44:53', '2017-03-01 11:39:30', '127.0.0.1', 0, '注释!'),
+('ff80808159a0bfb40159a0c035f40001', '大头希', 'uk88CT/IB2cLk7HlefDCUA==', '2017-01-15 14:11:08', '2017-02-27 10:59:19', '127.0.0.1', 1, '');
 
 --
 -- Indexes for dumped tables

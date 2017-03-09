@@ -8,6 +8,15 @@ public class RoleNode implements Serializable {
 
     protected String uuid,roleId,nodeId;
 
+    public RoleNode() {
+    }
+
+    public RoleNode(String uuid, String roleId, String nodeId) {
+        this.uuid = uuid;
+        this.roleId = roleId;
+        this.nodeId = nodeId;
+    }
+    
     public String getUuid() {
         return uuid;
     }

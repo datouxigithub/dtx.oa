@@ -12,6 +12,21 @@ public class Node implements Serializable {
     protected boolean status;
     protected int nodeType;
 
+    public Node() {
+    }
+
+    public Node(String uuid, String title, String address, String remark, String parentId, boolean status, int nodeType) {
+        this.uuid = uuid;
+        this.title = title;
+        this.address = address;
+        this.remark = remark;
+        this.parentId = parentId;
+        this.status = status;
+        this.nodeType = nodeType;
+    }
+
+    
+    
     public String getUuid() {
         return uuid;
     }

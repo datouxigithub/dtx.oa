@@ -1,33 +1,28 @@
-2017-03-08 15:12:57 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource user.hbm.xml
-2017-03-08 15:15:01 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource user.hbm.xml
-2017-03-08 15:19:38 [ main:0 ] - [ ERROR ] org.hibernate.InvalidMappingException: Could not parse mapping document from resource role.hbm.xml
-2017-03-08 15:20:50 [ main:0 ] - [ ERROR ] org.hibernate.HibernateException: Unable to instantiate default tuplizer [org.hibernate.tuple.entity.PojoEntityTuplizer]
-2017-03-08 15:22:29 [ main:0 ] - [ ERROR ] org.hibernate.HibernateException: Unable to instantiate default tuplizer [org.hibernate.tuple.entity.PojoEntityTuplizer]
-2017-03-08 15:41:44 [ main:0 ] - [ INFO ] ff8081815aacddd8015aacddd97c0000---ff8081815aacddd8015aacddd97c0000
-2017-03-08 15:41:44 [ main:3 ] - [ INFO ] 肥满---肥满
-2017-03-08 15:41:44 [ main:4 ] - [ INFO ] Z088LBqKb5BGHopm+1VQug==---Z088LBqKb5BGHopm+1VQug==
-2017-03-08 15:41:44 [ main:4 ] - [ INFO ] 2017-03-08 15:41:44.0---2017-03-08 15:41:44.0
-2017-03-08 15:41:44 [ main:5 ] - [ INFO ] null---null
-2017-03-08 15:41:44 [ main:5 ] - [ INFO ] null---null
-2017-03-08 15:41:44 [ main:5 ] - [ INFO ] true---true
-2017-03-08 15:41:44 [ main:6 ] - [ INFO ] 测试一下---测试一下
-2017-03-08 15:43:32 [ main:0 ] - [ INFO ] ff8081815aacdf7f015aacdf80120000---ff8081815aacdf7f015aacdf80120000
-2017-03-08 15:43:32 [ main:2 ] - [ INFO ] 肥满---肥满
-2017-03-08 15:43:32 [ main:3 ] - [ INFO ] Z088LBqKb5BGHopm+1VQug==---Z088LBqKb5BGHopm+1VQug==
-2017-03-08 15:43:32 [ main:3 ] - [ INFO ] 2017-03-08 15:43:32.0---2017-03-08 15:43:32.0
-2017-03-08 15:43:32 [ main:3 ] - [ INFO ] null---null
-2017-03-08 15:43:32 [ main:4 ] - [ INFO ] null---null
-2017-03-08 15:43:32 [ main:4 ] - [ INFO ] true---true
-2017-03-08 15:43:32 [ main:4 ] - [ INFO ] 测试一下---测试一下
-2017-03-08 15:48:37 [ main:0 ] - [ INFO ] ff8081815aace426015aace427400000---ff8081815aace426015aace427400000
-2017-03-08 15:48:37 [ main:3 ] - [ INFO ] 肥满---肥满
-2017-03-08 15:48:37 [ main:3 ] - [ INFO ] Z088LBqKb5BGHopm+1VQug==---Z088LBqKb5BGHopm+1VQug==
-2017-03-08 15:48:37 [ main:3 ] - [ INFO ] 2017-03-08 15:48:37.0---2017-03-08 15:48:37.0
-2017-03-08 15:48:37 [ main:4 ] - [ INFO ] null---null
-2017-03-08 15:48:37 [ main:4 ] - [ INFO ] null---null
-2017-03-08 15:48:37 [ main:4 ] - [ INFO ] true---true
-2017-03-08 15:48:37 [ main:5 ] - [ INFO ] 测试一下---测试一下
-2017-03-08 16:00:39 [ main:0 ] - [ INFO ] /tmp/backup5856958023948246739.xml
-2017-03-08 18:08:03 [ main:0 ] - [ INFO ] true
-2017-03-08 18:09:27 [ main:0 ] - [ INFO ] true
-2017-03-08 18:10:00 [ main:0 ] - [ INFO ] 674
+2017-03-09 10:53:20 [ main:0 ] - [ INFO ] [Ljava.lang.String;@2b5660ee
+2017-03-09 11:13:33 [ main:0 ] - [ INFO ] [Ljava.lang.String;@6a8f5ad
+2017-03-09 11:14:33 [ main:0 ] - [ INFO ] [Ljava.lang.String;@6a8f5ad
+2017-03-09 11:15:11 [ main:0 ] - [ INFO ] [Ljava.lang.String;@3e993445
+2017-03-09 11:16:48 [ main:0 ] - [ INFO ] [Ljava.lang.String;@37b1e2a3
+2017-03-09 11:19:02 [ main:0 ] - [ INFO ] [Ljava.lang.String;@3e993445
+2017-03-09 11:22:43 [ main:0 ] - [ INFO ] [Ljava.lang.String;@6a8f5ad
+2017-03-09 11:24:06 [ main:0 ] - [ INFO ] [Ljava.lang.String;@6a8f5ad
+2017-03-09 11:24:50 [ main:0 ] - [ INFO ] [Ljava.lang.String;@37b1e2a3
+2017-03-09 11:25:28 [ main:0 ] - [ INFO ] [Ljava.lang.String;@6f1b8a4c
+2017-03-09 11:26:33 [ main:0 ] - [ INFO ] [Ljava.lang.String;@4067d00a
+2017-03-09 11:27:44 [ main:0 ] - [ INFO ] [Ljava.lang.String;@3e993445
+2017-03-09 11:28:25 [ main:0 ] - [ INFO ] [Ljava.lang.String;@5f8b618e
+2017-03-09 11:29:15 [ main:0 ] - [ INFO ] [Ljava.lang.String;@6f1b8a4c
+2017-03-09 11:29:34 [ main:0 ] - [ INFO ] [Ljava.lang.String;@37b1e2a3
+2017-03-09 11:31:01 [ main:0 ] - [ INFO ] [Ljava.lang.String;@4067d00a
+2017-03-09 11:31:02 [ main:739 ] - [ DEBUG ] false---false
+2017-03-09 11:31:52 [ main:0 ] - [ INFO ] [Ljava.lang.String;@7f9657e5
+2017-03-09 11:31:53 [ main:759 ] - [ DEBUG ] false---false
+2017-03-09 11:32:20 [ main:0 ] - [ INFO ] [Ljava.lang.String;@5f8b618e
+2017-03-09 11:32:21 [ main:749 ] - [ INFO ] false---false
+2017-03-09 11:36:45 [ main:0 ] - [ INFO ] [Ljava.lang.String;@37b1e2a3
+2017-03-09 11:38:50 [ main:0 ] - [ INFO ] [Ljava.lang.String;@7144e6d4
+2017-03-09 11:39:07 [ main:0 ] - [ INFO ] [Ljava.lang.String;@25a59f15
+2017-03-09 11:39:48 [ main:0 ] - [ INFO ] [Ljava.lang.String;@645dd2c1
+2017-03-09 11:42:37 [ main:0 ] - [ INFO ] [Ljava.lang.String;@196f4e87
+2017-03-09 11:44:03 [ main:0 ] - [ INFO ] [Ljava.lang.String;@785f1254
+2017-03-09 11:44:11 [ main:0 ] - [ INFO ] [Ljava.lang.String;@69c35e78

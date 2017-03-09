@@ -8,6 +8,19 @@ public class Role implements Serializable {
 
     protected String uuid,roleName,remark,parentId;
     protected boolean status;
+
+    public Role() {
+    }
+
+    public Role(String uuid, String roleName, String remark, String parentId, boolean status) {
+        this.uuid = uuid;
+        this.roleName = roleName;
+        this.remark = remark;
+        this.parentId = parentId;
+        this.status = status;
+    }
+    
+    
     
     public String getUuid() {
         return uuid;

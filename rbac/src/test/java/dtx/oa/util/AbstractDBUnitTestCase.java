@@ -6,12 +6,12 @@
 package dtx.oa.util;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
@@ -36,6 +36,7 @@ public class AbstractDBUnitTestCase {
     @BeforeClass
     public static void init() throws DatabaseUnitException, SQLException{
         dbUnitConn=new DatabaseConnection(DBUtil.getConnection());
+        dbUnitConn.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
     }
     
     protected IDataSet createDataSet(String tableName) throws DataSetException{

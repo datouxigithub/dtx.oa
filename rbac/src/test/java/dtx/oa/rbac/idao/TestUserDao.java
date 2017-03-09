@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dtx.oa;
+package dtx.oa.rbac.idao;
 
-import dtx.oa.rbac.idao.IUserDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.User;
 import dtx.oa.util.AbstractDBUnitTestCase;
@@ -23,12 +22,14 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  *
  * @author datouxi
  */
+@Ignore
 public class TestUserDao extends AbstractDBUnitTestCase{
   
     private IUserDao ud;
@@ -52,7 +53,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
     public void setup() throws DataSetException, IOException{
         dbUnitConn.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
         ud=IDaoFactory.iUserDao();
-        backupOneTable(tableName);
+        backupCustomTables(new String[]{tableName,"role_user"});
     }
 
     @Test
