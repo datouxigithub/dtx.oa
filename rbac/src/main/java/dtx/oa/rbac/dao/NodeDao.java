@@ -113,7 +113,7 @@ public class NodeDao implements INodeDao {
         List<Node> nodes=getChilds(parentId, status);
         return new NodeTree(nodes.toArray(new Node[nodes.size()]), status);
     }
-
+/*
     @Override
     public NodeTree getAllChildsByType(String parentId, int nodeType) {
         List<Node> nodes=getChildsByType(parentId, nodeType);
@@ -125,7 +125,7 @@ public class NodeDao implements INodeDao {
         List<Node> nodes=getChildsByType(parentId, nodeType, status);
         return new NodeTree(nodes.toArray(new Node[nodes.size()]), status, nodeType);
     }
-
+*/
     @Override
     public NodeTree getAllNodes() {
         return getAllChilds(INodeDao.ROOTID);
@@ -135,7 +135,7 @@ public class NodeDao implements INodeDao {
     public NodeTree getAllNodes(boolean status) {
         return getAllChilds(INodeDao.ROOTID, status);
     }
-
+/*
     @Override
     public NodeTree getAllNodesByType(int nodeType) {
         return getAllChildsByType(INodeDao.ROOTID, nodeType);
@@ -145,7 +145,7 @@ public class NodeDao implements INodeDao {
     public NodeTree getAllNodesByType(int nodeType, boolean status) {
         return getAllChildsByType(INodeDao.ROOTID, nodeType, status);
     }
-
+*/
     @Override
     public LinkedHashMap<Integer, String> getNodeTypes() {
         LinkedHashMap<Integer,String> nodeTypes=new LinkedHashMap();

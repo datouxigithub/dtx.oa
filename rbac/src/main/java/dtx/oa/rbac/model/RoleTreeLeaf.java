@@ -38,6 +38,10 @@ public class RoleTreeLeaf {
         }
     }
     
+    public boolean isEmptyLeaf(){
+        return entityRole == null;
+    }
+    
     public Role getEntity(){
         return entityRole;
     }

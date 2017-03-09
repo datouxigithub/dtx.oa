@@ -37,6 +37,7 @@ public class NodeTreeLeaf {
     }
     
     public NodeTreeLeaf(Node node,int nodeType){
+        if(node.getNodeType()!=nodeType)return;
         this.entityNode=node;
         leaves=new ArrayList<>();
         List<Node> childs=IDaoFactory.iNodeDao().getChildsByType(node.getUuid(), nodeType);
@@ -46,6 +47,7 @@ public class NodeTreeLeaf {
     }
     
     public NodeTreeLeaf(Node node,boolean status){
+        if(node.getStatus()!=status)return;
         this.entityNode=node;
         leaves=new ArrayList<>();
         List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid(), status);
@@ -55,6 +57,7 @@ public class NodeTreeLeaf {
     }
     
     public NodeTreeLeaf(Node node,boolean status,int nodeType){
+        if(node.getStatus()!=status||node.getNodeType()!=nodeType)return;
         this.entityNode=node;
         leaves=new ArrayList<>();
         List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid(), status);
@@ -62,6 +65,10 @@ public class NodeTreeLeaf {
             if(child.getNodeType()==nodeType)
                 leaves.add(new NodeTreeLeaf(child, status, nodeType));
         }
+    }
+    
+    public boolean isEmptyLeaf(){
+        return entityNode == null;
     }
     
     public Node getEntity(){

@@ -1,6 +1,6 @@
 <dataset>
   <node uuid="ff80808159ac6d4b0159ac74e8980001" title="节点组1" address="" status="true" remark="" parent_id="" node_type="2"/>
-  <node uuid="ff80808159ac6d4b0159ac755ebf0002" title="节点11" status="true" parent_id="ff80808159ac6d4b0159ac74e8980001" node_type="1"/>
+  <node uuid="ff80808159ac6d4b0159ac755ebf0002" title="节点11" address="" status="true" parent_id="ff80808159ac6d4b0159ac74e8980001" node_type="1"/>
   <node uuid="ff80808159ac6d4b0159ac75a5960003" title="节点12" address="cde" status="false" remark="" parent_id="" node_type="1"/>
   <node uuid="ff80808159ac6d4b0159ac75f2460004" title="节点组11" address="" status="false" remark="" parent_id="ff80808159ac6d4b0159ac74e8980001" node_type="2"/>
   <node uuid="ff80808159ac6d4b0159ac7645970005" title="节点111" address="ddd" status="true" remark="" parent_id="ff80808159ac6d4b0159ac75f2460004" node_type="1"/>

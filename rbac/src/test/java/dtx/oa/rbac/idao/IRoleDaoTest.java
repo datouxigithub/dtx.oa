@@ -10,7 +10,6 @@ import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleTree;
 import dtx.oa.util.AbstractDBUnitTestCase;
 import dtx.oa.util.EntitiesHelper;
-import dtx.oa.util.LogUtil;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -145,15 +144,6 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
         expect.setRemark("注释");
         rd.updateRoleMessage(expect);
         EntitiesHelper.assertRole(expect, rd.getRoleById(expect.getUuid()));
-        
-        expect.setParentId("2369");
-        expect.setStatus(false);
-        rd.updateRoleMessage(expect);
-        try{
-            EntitiesHelper.assertRole(expect, rd.getRoleById(expect.getUuid()));
-        }catch(Exception e){
-            LogUtil.getLogger().error(e);
-        }
     }
 
     @Test
@@ -172,7 +162,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         Role expect=role3;
         expect.setStatus(false);
-        rd.updateParent(expect);
+        rd.updateStatus(expect);
         EntitiesHelper.assertRole(expect, rd.getRoleById(expect.getUuid()));
     }
 

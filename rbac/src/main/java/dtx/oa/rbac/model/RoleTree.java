@@ -7,6 +7,7 @@ package dtx.oa.rbac.model;
 
 import dtx.oa.rbac.idao.IRoleDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
+import dtx.oa.util.LogUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -64,7 +65,7 @@ public class RoleTree {
     private void init(List<Role> roles,boolean status){
         rootLeaves=new ArrayList<>();
         for(Role role:roles){
-            if(role.getStatus()!=status)continue;
+//            /if(role.getStatus()!=status)continue;
             rootLeaves.add(new RoleTreeLeaf(role,status));
         }
         checkRepeat();
@@ -153,6 +154,7 @@ public class RoleTree {
     private List<RoleTreeLeaf> toList(List<RoleTreeLeaf> leaves){
         List<RoleTreeLeaf> leafList=new ArrayList<>();
         for(RoleTreeLeaf leaf:leaves){
+            if(leaf.isEmptyLeaf())continue;
             leafList.add(leaf);
             leafList.addAll(toList(leaf.getLeaves()));
         }

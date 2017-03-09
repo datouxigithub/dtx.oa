@@ -35,17 +35,17 @@ public interface INodeDao {
 
     public NodeTree getAllChilds(String parentId,boolean status);
 
-    public NodeTree getAllChildsByType(String parentId,int nodeType);
+    //public NodeTree getAllChildsByType(String parentId,int nodeType);
 
-    public NodeTree getAllChildsByType(String parentId,int nodeType,boolean status);
+    //public NodeTree getAllChildsByType(String parentId,int nodeType,boolean status);
 
     public NodeTree getAllNodes();
 
     public NodeTree getAllNodes(boolean status);
 
-    public NodeTree getAllNodesByType(int nodeType);
+    //public NodeTree getAllNodesByType(int nodeType);
 
-    public NodeTree getAllNodesByType(int nodeType,boolean status);
+    //public NodeTree getAllNodesByType(int nodeType,boolean status);
 
     public LinkedHashMap<Integer,String> getNodeTypes();
 

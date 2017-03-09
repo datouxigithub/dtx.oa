@@ -8,6 +8,7 @@ package dtx.oa.rbac.model;
 import dtx.oa.rbac.idao.INodeDao;
 import dtx.oa.rbac.idao.IRoleNodeDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
+import dtx.oa.util.LogUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -245,6 +246,7 @@ public class NodeTree {
     private List<NodeTreeLeaf> toList(List<NodeTreeLeaf> leaves){
         List<NodeTreeLeaf> leafList=new ArrayList<>();
         for(NodeTreeLeaf leaf:leaves){
+            if(leaf.isEmptyLeaf())continue;
             leafList.add(leaf);
             leafList.addAll(toList(leaf.getLeaves()));
         }

@@ -118,8 +118,9 @@ public class IRoleUserDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.DELETE_ALL.execute(dbUnitConn, ds);
         RoleUser expect = ru1;
-        rud.addRoleUser(expect);
-        EntitiesHelper.assertRoleUser(expect, rud.queryById(expect.getUuid()));
+        assertNotNull(expect);
+        String result = rud.addRoleUser(expect);
+        assertNotNull(result);
     }
 
     @Test
