@@ -2795,3 +2795,68 @@
 2017-03-15 17:21:09 [ main:2351 ] - [ DEBUG ] Returning cached instance of singleton bean 'sessionFactory'
 2017-03-15 17:21:09 [ main:2353 ] - [ DEBUG ] Opening Hibernate Session
 2017-03-15 17:21:10 [ main:2374 ] - [ DEBUG ] Closing Hibernate Session
+2017-03-15 17:55:14 [ main:0 ] - [ INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@6d23f9b8: display name [org.springframework.context.support.ClassPathXmlApplicationContext@6d23f9b8]; startup date [Wed Mar 15 17:55:14 CST 2017]; root of context hierarchy
+2017-03-15 17:55:14 [ main:49 ] - [ INFO ] Loading XML bean definitions from class path resource [beans.xml]
+2017-03-15 17:55:14 [ main:64 ] - [ DEBUG ] Using JAXP provider [com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl]
+2017-03-15 17:55:14 [ main:115 ] - [ DEBUG ] Loading schema mappings from [META-INF/spring.schemas]
+2017-03-15 17:55:14 [ main:117 ] - [ DEBUG ] Loaded schema mappings: {http://www.springframework.org/schema/lang/spring-lang-2.5.xsd=org/springframework/scripting/config/spring-lang-2.5.xsd, http://www.springframework.org/schema/lang/spring-lang.xsd=org/springframework/scripting/config/spring-lang-2.5.xsd, http://www.springframework.org/schema/context/spring-context-2.5.xsd=org/springframework/context/config/spring-context-2.5.xsd, http://www.springframework.org/schema/jms/spring-jms-2.5.xsd=org/springframework/jms/config/spring-jms-2.5.xsd, http://www.springframework.org/schema/context/spring-context.xsd=org/springframework/context/config/spring-context-2.5.xsd, http://www.springframework.org/schema/aop/spring-aop.xsd=org/springframework/aop/config/spring-aop-2.5.xsd, http://www.springframework.org/schema/util/spring-util-2.0.xsd=org/springframework/beans/factory/xml/spring-util-2.0.xsd, http://www.springframework.org/schema/util/spring-util-2.5.xsd=org/springframework/beans/factory/xml/spring-util-2.5.xsd, http://www.springframework.org/schema/tool/spring-tool-2.0.xsd=org/springframework/beans/factory/xml/spring-tool-2.0.xsd, http://www.springframework.org/schema/tx/spring-tx-2.0.xsd=org/springframework/transaction/config/spring-tx-2.0.xsd, http://www.springframework.org/schema/tool/spring-tool-2.5.xsd=org/springframework/beans/factory/xml/spring-tool-2.5.xsd, http://www.springframework.org/schema/tx/spring-tx-2.5.xsd=org/springframework/transaction/config/spring-tx-2.5.xsd, http://www.springframework.org/schema/beans/spring-beans-2.0.xsd=org/springframework/beans/factory/xml/spring-beans-2.0.xsd, http://www.springframework.org/schema/jms/spring-jms.xsd=org/springframework/jms/config/spring-jms-2.5.xsd, http://www.springframework.org/schema/beans/spring-beans-2.5.xsd=org/springframework/beans/factory/xml/spring-beans-2.5.xsd, http://www.springframework.org/schema/beans/spring-beans.xsd=org/springframework/beans/factory/xml/spring-beans-2.5.xsd, http://www.springframework.org/schema/jee/spring-jee.xsd=org/springframework/ejb/config/spring-jee-2.5.xsd, http://www.springframework.org/schema/tool/spring-tool.xsd=org/springframework/beans/factory/xml/spring-tool-2.5.xsd, http://www.springframework.org/schema/tx/spring-tx.xsd=org/springframework/transaction/config/spring-tx-2.5.xsd, http://www.springframework.org/schema/jee/spring-jee-2.0.xsd=org/springframework/ejb/config/spring-jee-2.0.xsd, http://www.springframework.org/schema/aop/spring-aop-2.0.xsd=org/springframework/aop/config/spring-aop-2.0.xsd, http://www.springframework.org/schema/aop/spring-aop-2.5.xsd=org/springframework/aop/config/spring-aop-2.5.xsd, http://www.springframework.org/schema/jee/spring-jee-2.5.xsd=org/springframework/ejb/config/spring-jee-2.5.xsd, http://www.springframework.org/schema/lang/spring-lang-2.0.xsd=org/springframework/scripting/config/spring-lang-2.0.xsd, http://www.springframework.org/schema/util/spring-util.xsd=org/springframework/beans/factory/xml/spring-util-2.5.xsd}
+2017-03-15 17:55:16 [ main:2105 ] - [ DEBUG ] Loading bean definitions
+2017-03-15 17:55:16 [ main:2123 ] - [ DEBUG ] Loaded mappings [{http://www.springframework.org/schema/p=org.springframework.beans.factory.xml.SimplePropertyNamespaceHandler, http://www.springframework.org/schema/lang=org.springframework.scripting.config.LangNamespaceHandler, http://www.springframework.org/schema/jee=org.springframework.ejb.config.JeeNamespaceHandler, http://www.springframework.org/schema/aop=org.springframework.aop.config.AopNamespaceHandler, http://www.springframework.org/schema/util=org.springframework.beans.factory.xml.UtilNamespaceHandler, http://www.springframework.org/schema/jms=org.springframework.jms.config.JmsNamespaceHandler, http://www.springframework.org/schema/tx=org.springframework.transaction.config.TxNamespaceHandler, http://www.springframework.org/schema/context=org.springframework.context.config.ContextNamespaceHandler}]
+2017-03-15 17:55:16 [ main:2177 ] - [ DEBUG ] Loaded 8 bean definitions from location pattern [beans.xml]
+2017-03-15 17:55:16 [ main:2177 ] - [ INFO ] Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@6d23f9b8]: org.springframework.beans.factory.support.DefaultListableBeanFactory@45b44df2
+2017-03-15 17:55:16 [ main:2177 ] - [ DEBUG ] 8 beans defined in org.springframework.context.support.ClassPathXmlApplicationContext@6d23f9b8: display name [org.springframework.context.support.ClassPathXmlApplicationContext@6d23f9b8]; startup date [Wed Mar 15 17:55:14 CST 2017]; root of context hierarchy
+2017-03-15 17:55:16 [ main:2194 ] - [ DEBUG ] Creating shared instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
+2017-03-15 17:55:16 [ main:2194 ] - [ DEBUG ] Creating instance of bean 'org.springframework.aop.config.internalAutoProxyCreator'
+2017-03-15 17:55:16 [ main:2207 ] - [ DEBUG ] Eagerly caching bean 'org.springframework.aop.config.internalAutoProxyCreator' to allow for resolving potential circular references
+2017-03-15 17:55:16 [ main:2218 ] - [ DEBUG ] Finished creating instance of bean 'org.springframework.aop.config.internalAutoProxyCreator'
+2017-03-15 17:55:16 [ main:2220 ] - [ DEBUG ] Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@35662250]
+2017-03-15 17:55:16 [ main:2221 ] - [ DEBUG ] Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@333bf7d0]
+2017-03-15 17:55:16 [ main:2222 ] - [ INFO ] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@45b44df2: defining beans [dataSource,sessionFactory,txManager,hibernateUtil,org.springframework.aop.config.internalAutoProxyCreator,org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0,org.springframework.transaction.interceptor.TransactionInterceptor#0,org.springframework.transaction.config.internalTransactionAdvisor]; root of factory hierarchy
+2017-03-15 17:55:16 [ main:2222 ] - [ DEBUG ] Creating shared instance of singleton bean 'dataSource'
+2017-03-15 17:55:16 [ main:2222 ] - [ DEBUG ] Creating instance of bean 'dataSource'
+2017-03-15 17:55:16 [ main:2233 ] - [ DEBUG ] Eagerly caching bean 'dataSource' to allow for resolving potential circular references
+2017-03-15 17:55:16 [ main:2246 ] - [ DEBUG ] Creating shared instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:16 [ main:2246 ] - [ DEBUG ] Creating instance of bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:16 [ main:2247 ] - [ DEBUG ] Eagerly caching bean 'org.springframework.transaction.config.internalTransactionAdvisor' to allow for resolving potential circular references
+2017-03-15 17:55:16 [ main:2251 ] - [ DEBUG ] Creating shared instance of singleton bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0'
+2017-03-15 17:55:16 [ main:2251 ] - [ DEBUG ] Creating instance of bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0'
+2017-03-15 17:55:16 [ main:2252 ] - [ DEBUG ] Eagerly caching bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0' to allow for resolving potential circular references
+2017-03-15 17:55:16 [ main:2256 ] - [ DEBUG ] Finished creating instance of bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0'
+2017-03-15 17:55:16 [ main:2256 ] - [ DEBUG ] Finished creating instance of bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:16 [ main:2259 ] - [ DEBUG ] Finished creating instance of bean 'dataSource'
+2017-03-15 17:55:16 [ main:2260 ] - [ DEBUG ] Creating shared instance of singleton bean 'sessionFactory'
+2017-03-15 17:55:16 [ main:2260 ] - [ DEBUG ] Creating instance of bean 'sessionFactory'
+2017-03-15 17:55:16 [ main:2282 ] - [ DEBUG ] Eagerly caching bean 'sessionFactory' to allow for resolving potential circular references
+2017-03-15 17:55:16 [ main:2294 ] - [ DEBUG ] Returning cached instance of singleton bean 'dataSource'
+2017-03-15 17:55:16 [ main:2295 ] - [ DEBUG ] Invoking afterPropertiesSet() on bean with name 'sessionFactory'
+2017-03-15 17:55:17 [ main:2628 ] - [ INFO ] Building new Hibernate SessionFactory
+2017-03-15 17:55:17 [ main:3129 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:17 [ main:3138 ] - [ DEBUG ] Finished creating instance of bean 'sessionFactory'
+2017-03-15 17:55:17 [ main:3138 ] - [ DEBUG ] Creating shared instance of singleton bean 'txManager'
+2017-03-15 17:55:17 [ main:3138 ] - [ DEBUG ] Creating instance of bean 'txManager'
+2017-03-15 17:55:17 [ main:3142 ] - [ DEBUG ] Eagerly caching bean 'txManager' to allow for resolving potential circular references
+2017-03-15 17:55:17 [ main:3146 ] - [ DEBUG ] Returning cached instance of singleton bean 'sessionFactory'
+2017-03-15 17:55:17 [ main:3147 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:17 [ main:3152 ] - [ DEBUG ] Invoking afterPropertiesSet() on bean with name 'txManager'
+2017-03-15 17:55:17 [ main:3158 ] - [ INFO ] Using DataSource [org.apache.commons.dbcp.BasicDataSource@63b99bb9] of Hibernate SessionFactory for HibernateTransactionManager
+2017-03-15 17:55:17 [ main:3158 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:17 [ main:3159 ] - [ DEBUG ] Finished creating instance of bean 'txManager'
+2017-03-15 17:55:17 [ main:3159 ] - [ DEBUG ] Creating shared instance of singleton bean 'hibernateUtil'
+2017-03-15 17:55:17 [ main:3159 ] - [ DEBUG ] Creating instance of bean 'hibernateUtil'
+2017-03-15 17:55:17 [ main:3159 ] - [ DEBUG ] Eagerly caching bean 'hibernateUtil' to allow for resolving potential circular references
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Returning cached instance of singleton bean 'sessionFactory'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Finished creating instance of bean 'hibernateUtil'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Creating shared instance of singleton bean 'org.springframework.transaction.interceptor.TransactionInterceptor#0'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Creating instance of bean 'org.springframework.transaction.interceptor.TransactionInterceptor#0'
+2017-03-15 17:55:17 [ main:3161 ] - [ DEBUG ] Eagerly caching bean 'org.springframework.transaction.interceptor.TransactionInterceptor#0' to allow for resolving potential circular references
+2017-03-15 17:55:17 [ main:3164 ] - [ DEBUG ] Returning cached instance of singleton bean 'txManager'
+2017-03-15 17:55:17 [ main:3164 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0'
+2017-03-15 17:55:17 [ main:3164 ] - [ DEBUG ] Invoking afterPropertiesSet() on bean with name 'org.springframework.transaction.interceptor.TransactionInterceptor#0'
+2017-03-15 17:55:17 [ main:3164 ] - [ DEBUG ] Finished creating instance of bean 'org.springframework.transaction.interceptor.TransactionInterceptor#0'
+2017-03-15 17:55:17 [ main:3164 ] - [ DEBUG ] Returning cached instance of singleton bean 'org.springframework.transaction.config.internalTransactionAdvisor'
+2017-03-15 17:55:17 [ main:3164 ] - [ DEBUG ] Returning cached instance of singleton bean 'sessionFactory'
+2017-03-15 17:55:17 [ main:3166 ] - [ DEBUG ] Opening Hibernate Session
+2017-03-15 17:55:17 [ main:3185 ] - [ DEBUG ] Closing Hibernate Session
