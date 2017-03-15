@@ -6,3 +6,15 @@
 2017-03-09 20:23:56 [ main:17 ] - [ ERROR ] org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: [dtx.oa.rbac.model.Node#ff80808159ac6d4b0159ac755ebf0002]
 2017-03-09 20:24:29 [ main:0 ] - [ ERROR ] org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: [dtx.oa.rbac.model.Node#ff80808159ac6d4b0159ac755ebf0002]
 2017-03-09 20:24:29 [ main:16 ] - [ ERROR ] org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session: [dtx.oa.rbac.model.Node#ff80808159ac6d4b0159ac755ebf0002]
+2017-03-15 11:37:00 [ main:2165 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:37:00 [ main:2238 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:37:00 [ main:2290 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:37:00 [ main:2307 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:08 [ main:1744 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:08 [ main:1815 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:08 [ main:1864 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:08 [ main:1882 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:49 [ main:2146 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:49 [ main:2215 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:49 [ main:2265 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here
+2017-03-15 11:39:49 [ main:2282 ] - [ ERROR ] org.hibernate.HibernateException: No Hibernate Session bound to thread, and configuration does not allow creation of non-transactional one here

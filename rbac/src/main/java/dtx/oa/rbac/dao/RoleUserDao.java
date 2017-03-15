@@ -5,45 +5,49 @@
  */
 package dtx.oa.rbac.dao;
 
+import dtx.oa.rbac.basic.BasicDao;
 import dtx.oa.rbac.idao.IRoleDao;
 import dtx.oa.rbac.idao.IRoleUserDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleUser;
 import dtx.oa.rbac.model.User;
-import dtx.oa.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author datouxi
  */
-public class RoleUserDao implements IRoleUserDao {
+@Transactional
+public class RoleUserDao extends BasicDao implements IRoleUserDao {
 
     @Override
     public List<RoleUser> queryByUserId(String userId) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        Query query=session.createQuery("FROM RoleUser role_user WHERE role_user.userId=:user_id");
-        query.setString("user_id", userId);
-        @SuppressWarnings("unchecked")
-        List<RoleUser> result=query.list();
-        session.getTransaction().commit();
-        return result;
+        return executeQuery("FROM RoleUser role_user WHERE role_user.userId=?", new Object[]{userId});
+        
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        Query query=session.createQuery("FROM RoleUser role_user WHERE role_user.userId=:user_id");
+//        query.setString("user_id", userId);
+//        @SuppressWarnings("unchecked")
+//        List<RoleUser> result=query.list();
+//        session.getTransaction().commit();
+//        return result;
     }
 
     @Override
     public List<RoleUser> queryByRoleId(String roleId) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        Query query=session.createQuery("FROM RoleUser role_user WHERE role_user.roleId=:role_id");
-        query.setString("role_id", roleId);
-        List<RoleUser> result=query.list();
-        session.getTransaction().commit();
-        return result;
+        return executeQuery("FROM RoleUser role_user WHERE role_user.roleId=?", new Object[]{roleId});
+        
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        Query query=session.createQuery("FROM RoleUser role_user WHERE role_user.roleId=:role_id");
+//        query.setString("role_id", roleId);
+//        List<RoleUser> result=query.list();
+//        session.getTransaction().commit();
+//        return result;
     }
 
     @Override
@@ -63,33 +67,39 @@ public class RoleUserDao implements IRoleUserDao {
 
     @Override
     public RoleUser queryById(String id) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        RoleUser rn=(RoleUser)session.get(RoleUser.class, id);
-        session.getTransaction().commit();
-        return rn;
+        return (RoleUser) findById(RoleUser.class, id);
+        
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        RoleUser rn=(RoleUser)session.get(RoleUser.class, id);
+//        session.getTransaction().commit();
+//        return rn;
     }
 
     @Override
     public boolean deleteByUserId(String userId) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        Query query=session.createQuery("DELETE FROM RoleUser role_user WHERE role_user.userId=:user_id");
-        query.setString("user_id", userId);
-        int result=query.executeUpdate();
-        session.getTransaction().commit();
-        return result>0;
+        return update("DELETE FROM RoleUser role_user WHERE role_user.userId=?", new Object[]{userId})>0;
+        
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        Query query=session.createQuery("DELETE FROM RoleUser role_user WHERE role_user.userId=:user_id");
+//        query.setString("user_id", userId);
+//        int result=query.executeUpdate();
+//        session.getTransaction().commit();
+//        return result>0;
     }
 
     @Override
     public boolean deleteByRoleId(String roleId) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        Query query=session.createQuery("DELETE FROM RoleUser role_user WHERE role_user.roleId=:role_id");
-        query.setString("role_id", roleId);
-        int result=query.executeUpdate();
-        session.getTransaction().commit();
-        return result>0;
+        return update("DELETE FROM RoleUser role_user WHERE role_user.roleId=?", new Object[]{roleId})>0;
+        
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        Query query=session.createQuery("DELETE FROM RoleUser role_user WHERE role_user.roleId=:role_id");
+//        query.setString("role_id", roleId);
+//        int result=query.executeUpdate();
+//        session.getTransaction().commit();
+//        return result>0;
     }
 
     @Override
@@ -104,13 +114,15 @@ public class RoleUserDao implements IRoleUserDao {
 
     @Override
     public boolean delete(String id) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        Query query=session.createQuery("DELETE FROM RoleUser role_user WHERE role_user.uuid=:id");
-        query.setString("id", id);
-        int result=query.executeUpdate();
-        session.getTransaction().commit();
-        return result>0;
+        return update("DELETE FROM RoleUser role_user WHERE role_user.uuid=?", new Object[]{id})>0;
+        
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        Query query=session.createQuery("DELETE FROM RoleUser role_user WHERE role_user.uuid=:id");
+//        query.setString("id", id);
+//        int result=query.executeUpdate();
+//        session.getTransaction().commit();
+//        return result>0;
     }
 
     @Override
@@ -120,19 +132,21 @@ public class RoleUserDao implements IRoleUserDao {
 
     @Override
     public String addRoleUser(String user_id, String role_id) {
-        Session session=HibernateUtil.getSession();
-        session.beginTransaction();
-        RoleUser ru=new RoleUser();
-        ru.setUserId(user_id);
-        ru.setRoleId(role_id);
-        String result=(String) session.save(ru);
-        session.getTransaction().commit();
-        return result;
+        return addRoleUser(new RoleUser(null, user_id, role_id));
+//        Session session=HibernateUtil.getSession();
+//        session.beginTransaction();
+//        RoleUser ru=new RoleUser();
+//        ru.setUserId(user_id);
+//        ru.setRoleId(role_id);
+//        String result=(String) session.save(ru);
+//        session.getTransaction().commit();
+//        return result;
     }
 
     @Override
     public String addRoleUser(RoleUser ru) {
-        return addRoleUser(ru.getUserId(), ru.getRoleId());
+        return (String) add(ru);
+//        return addRoleUser(ru.getUserId(), ru.getRoleId());
     }
 
     @Override

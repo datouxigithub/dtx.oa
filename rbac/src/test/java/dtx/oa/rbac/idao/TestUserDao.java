@@ -29,7 +29,6 @@ import org.junit.Test;
  *
  * @author datouxi
  */
-@Ignore
 public class TestUserDao extends AbstractDBUnitTestCase{
   
     private IUserDao ud;
@@ -56,6 +55,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         backupCustomTables(new String[]{tableName,"role_user"});
     }
 
+    @Ignore
     @Test
     public void testAddUser() throws DataSetException, DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
@@ -78,7 +78,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         assertNull(user.getRemark());
     }
     
-    
+    @Ignore
     @Test
     public void testGetUserByAccount() throws DataSetException, DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
@@ -99,6 +99,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         assertTrue(users.size()==1);
     }
     
+    @Ignore
     @Test
     public void testDeleteUser() throws DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
@@ -109,6 +110,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         assertNull(target);
     }
     
+    @Ignore
     @Test
     public void testUpdateUser() throws DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
@@ -134,6 +136,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         EntitiesHelper.assertUser(target, result);
     }
     
+    @Ignore
     @Test
     public void testUpdateLoginMessage() throws DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
@@ -147,6 +150,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         assertEquals(target.getLoginIp(), result.getLoginIp());
     }
     
+    @Ignore
     @Test
     public void testIsAdmin() throws DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);

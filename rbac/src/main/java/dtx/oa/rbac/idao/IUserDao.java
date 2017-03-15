@@ -5,6 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
+import dtx.oa.rbac.basic.BasicDaoInter;
 import dtx.oa.rbac.model.User;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IUserDao {
+public interface IUserDao extends BasicDaoInter{
     public User getUserById(String userId);
 
     public User getUserByAccount(String account);

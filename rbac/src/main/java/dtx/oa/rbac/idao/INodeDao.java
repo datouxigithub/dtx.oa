@@ -5,6 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
+import dtx.oa.rbac.basic.BasicDaoInter;
 import dtx.oa.rbac.model.Node;
 import dtx.oa.rbac.model.NodeTree;
 import java.util.LinkedHashMap;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface INodeDao {
+public interface INodeDao extends BasicDaoInter{
     public final static String ROOTID="";
     
     public Node getNodeById(String nodeId);

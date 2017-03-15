@@ -5,6 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
+import dtx.oa.rbac.basic.BasicDaoInter;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleUser;
 import dtx.oa.rbac.model.User;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IRoleUserDao {
+public interface IRoleUserDao extends BasicDaoInter{
     public List<RoleUser> queryByUserId(String userId);
 
     public List<RoleUser> queryByRoleId(String roleId);

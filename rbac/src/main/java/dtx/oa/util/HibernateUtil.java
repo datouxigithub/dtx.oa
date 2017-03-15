@@ -5,35 +5,33 @@
  */
 package dtx.oa.util;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 /**
  *
  * @author datouxi
  */
 public class HibernateUtil {
-    private static SessionFactory factory;
-    static{
-        try{
-            factory=new Configuration().configure().buildSessionFactory();
-        }catch(HibernateException e){
-            LogUtil.getLogger().error(e);
-        }
-        
+    private SessionFactory factory;
+    
+    public void setSessionFactory(SessionFactory sf){
+        factory=sf;
     }
     
-    public static SessionFactory getSessionFactory(){
+    public SessionFactory getSessionFactory(){
         return factory;
     }
     
-    public static Session getSession(){
+    public Session getSession(){
         return factory.getCurrentSession();
     }
     
-    public static void closeSession(Session session){
+    public void closeSession(Session session){
         if(session!=null)session.close();
+    }
+    
+    public static HibernateUtil getInstance(){
+        return (HibernateUtil) ApplicationContextUtil.getApplicationContext().getBean("hibernateUtil");
     }
 }

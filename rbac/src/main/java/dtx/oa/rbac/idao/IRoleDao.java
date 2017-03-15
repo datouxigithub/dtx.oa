@@ -5,6 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
+import dtx.oa.rbac.basic.BasicDaoInter;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleTree;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IRoleDao {
+public interface IRoleDao extends BasicDaoInter{
     public final static String ROOTID="";
     
     public Role getRoleById(String roleId);
