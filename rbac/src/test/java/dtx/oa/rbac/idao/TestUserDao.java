@@ -22,7 +22,6 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
