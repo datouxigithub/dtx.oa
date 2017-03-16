@@ -64,14 +64,24 @@
         </property>
     </bean>
     
-    <!-- 配置事务管理器 -->
-    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="userDao" class="dtx.oa.rbac.dao.UserDao">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="roleDao" class="dtx.oa.rbac.dao.RoleDao">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="nodeDao" class="dtx.oa.rbac.dao.NodeDao">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="roleUserDao" class="dtx.oa.rbac.dao.RoleUserDao">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="roleNodeDao" class="dtx.oa.rbac.dao.RoleNodeDao">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    
-    
-    <bean id="hibernateUtil" class="dtx.oa.util.HibernateUtil" scope="singleton">
+    <!-- 配置事务管理器 -->
+    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     

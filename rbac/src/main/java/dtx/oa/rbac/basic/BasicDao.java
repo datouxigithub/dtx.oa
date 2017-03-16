@@ -5,12 +5,12 @@
  */
 package dtx.oa.rbac.basic;
 
-import dtx.oa.util.HibernateUtil;
 import dtx.oa.util.LogUtil;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -20,14 +20,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public abstract class BasicDao implements BasicDaoInter{
 
+    protected SessionFactory sessionFactory;
+    
     @Override
     public Object findById(Class clazz,Serializable id) {
-        return HibernateUtil.getInstance().getSession().get(clazz, id);
+        return sessionFactory.getCurrentSession().get(clazz, id);
     }
 
     @Override
     public List executeQuery(String hql, Object[] args) {
-        Query query=HibernateUtil.getInstance().getSession().createQuery(hql);
+        Query query=sessionFactory.getCurrentSession().createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -38,7 +40,7 @@ public abstract class BasicDao implements BasicDaoInter{
 
     @Override
     public List executeQuery(String hql, Object[] args, int pageNow, int pageSize) {
-        Query query=HibernateUtil.getInstance().getSession().createQuery(hql);
+        Query query=sessionFactory.getCurrentSession().createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -49,12 +51,12 @@ public abstract class BasicDao implements BasicDaoInter{
 
     @Override
     public Serializable add(Object obj) {
-        return HibernateUtil.getInstance().getSession().save(obj);
+        return sessionFactory.getCurrentSession().save(obj);
     }
 
     @Override
     public int update(String hql, Object[] args) {
-        Query query=HibernateUtil.getInstance().getSession().createQuery(hql);
+        Query query=sessionFactory.getCurrentSession().createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -65,7 +67,7 @@ public abstract class BasicDao implements BasicDaoInter{
 
     @Override
     public Object uniqueQuery(String hql, Object[] args) {
-        Query query=HibernateUtil.getInstance().getSession().createQuery(hql);
+        Query query=sessionFactory.getCurrentSession().createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -77,12 +79,19 @@ public abstract class BasicDao implements BasicDaoInter{
     @Override
     public boolean update(Object obj) {
         try{
-            HibernateUtil.getInstance().getSession().update(obj);
+            sessionFactory.getCurrentSession().update(obj);
             return true;
         }catch(HibernateException e){
             LogUtil.getLogger().error(e);
             return false;
         }
+    }
+
+    /**
+     * @param sessionFactory the sessionFactory to set
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
     
 }

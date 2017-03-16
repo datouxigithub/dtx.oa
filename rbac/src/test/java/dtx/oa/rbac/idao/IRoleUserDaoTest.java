@@ -26,7 +26,6 @@ import org.junit.Ignore;
  *
  * @author datouxi
  */
-@Ignore
 public class IRoleUserDaoTest extends AbstractDBUnitTestCase{
     
     private final String tableName = "role_user";

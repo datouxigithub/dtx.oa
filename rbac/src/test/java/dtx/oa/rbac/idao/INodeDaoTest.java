@@ -25,7 +25,6 @@ import org.junit.Ignore;
  *
  * @author datouxi
  */
-@Ignore
 public class INodeDaoTest extends AbstractDBUnitTestCase{
     
     private final String tableName="node";

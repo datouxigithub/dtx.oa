@@ -7,6 +7,7 @@ package dtx.oa.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -23,6 +24,7 @@ public class HibernateUtil {
         return factory;
     }
     
+    @Transactional
     public Session getSession(){
         return factory.getCurrentSession();
     }

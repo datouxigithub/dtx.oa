@@ -5,16 +5,12 @@
  */
 package dtx.oa.rbac.idao.factory;
 
-import dtx.oa.rbac.dao.NodeDao;
-import dtx.oa.rbac.dao.RoleDao;
-import dtx.oa.rbac.dao.RoleNodeDao;
-import dtx.oa.rbac.dao.RoleUserDao;
-import dtx.oa.rbac.dao.UserDao;
 import dtx.oa.rbac.idao.INodeDao;
 import dtx.oa.rbac.idao.IRoleDao;
 import dtx.oa.rbac.idao.IRoleNodeDao;
 import dtx.oa.rbac.idao.IRoleUserDao;
 import dtx.oa.rbac.idao.IUserDao;
+import dtx.oa.util.ApplicationContextUtil;
 
 /**
  *
@@ -23,23 +19,23 @@ import dtx.oa.rbac.idao.IUserDao;
 public class IDaoFactory {
     
     public static IUserDao iUserDao(){
-        return new UserDao();
+        return (IUserDao) ApplicationContextUtil.getApplicationContext().getBean("userDao");
     }
     
     public static IRoleDao iRoleDao(){
-        return new RoleDao();
+        return (IRoleDao) ApplicationContextUtil.getApplicationContext().getBean("roleDao");
     }
     
     public static INodeDao iNodeDao(){
-        return new NodeDao();
+        return (INodeDao) ApplicationContextUtil.getApplicationContext().getBean("nodeDao");
     }
     
     public static IRoleNodeDao iRoleNodeDao(){
-        return new RoleNodeDao();
+        return (IRoleNodeDao) ApplicationContextUtil.getApplicationContext().getBean("roleNodeDao");
     }
     
     public static IRoleUserDao iRoleUserDao(){
-        return new RoleUserDao();
+        return (IRoleUserDao) ApplicationContextUtil.getApplicationContext().getBean("roleUserDao");
     }
     
 }

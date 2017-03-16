@@ -28,7 +28,6 @@ import org.junit.Ignore;
  *
  * @author datouxi
  */
-@Ignore
 public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
     
     private final String tableName = "role_node";
@@ -55,11 +54,6 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
     @After
     public void tearDown() throws DatabaseUnitException, SQLException, IOException {
         resumeTable();
-    }
-    
-    @Test
-    public void test(){
-        assertTrue(1>0);
     }
 
     @Test

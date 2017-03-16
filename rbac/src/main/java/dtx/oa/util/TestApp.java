@@ -5,22 +5,24 @@
  */
 package dtx.oa.util;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
+import dtx.oa.rbac.idao.IUserDao;
+import dtx.oa.rbac.idao.factory.IDaoFactory;
+import dtx.oa.rbac.model.User;
 
 /**
  *
  * @author datouxi
  */
-@Transactional
 public class TestApp {
     public static void main(String[] args) {
-        ApplicationContext ac=ApplicationContextUtil.getApplicationContext();
-        SessionFactory sf=(SessionFactory) ac.getBean("sessionFactory");
-        Session session=sf.getCurrentSession();
-        System.out.println(session.toString());
+        new TestApp().test();
         
+    }
+    
+    public void test(){
+        IUserDao iud=IDaoFactory.iUserDao();
+        User user=iud.getUserByAccount("大头希");
+        if(user!=null)
+            System.out.println(user.getUuid());
     }
 }
