@@ -27,17 +27,17 @@ import static org.junit.Assert.*;
  * @author datouxi
  */
 public class IRoleDaoTest extends AbstractDBUnitTestCase{
-    private final String tableName="role";
-    String[] tables={tableName,"role_user","role_node"};
+    private final String tableName="rbac_role";
+    String[] tables={tableName,"rbac_role_user","rbac_role_node"};
     private IRoleDao rd;
     private final Role role1,role2,role3,role4,role5;
     
     {
-        role1=new Role("ff808081598818400159881a149a0001", "A", "", "", true);
-        role2=new Role("ff808081598818400159881a49100002", "B", null, "ff808081598818400159881a149a0001", true);
-        role3=new Role("ff808081598818400159881aae8b0005", "E", "", "ff808081598818400159881a49100002", true);
-        role4=new Role("ff808081598818400159881ad1980006", "F", "", "ff808081598818400159881a49100002", false);
-        role5=new Role("ff808081598818400159881a696b0003", "C", "", "ff808081598818400159881a149a0001", false);
+        role1=new Role("ff808081598818400159881a149a0001", "A", "", null, true);
+        role2=new Role("ff808081598818400159881a49100002", "B", null, role1, true);
+        role3=new Role("ff808081598818400159881aae8b0005", "E", "", role2, true);
+        role4=new Role("ff808081598818400159881ad1980006", "F", "", role2, false);
+        role5=new Role("ff808081598818400159881a696b0003", "C", "", role1, false);
     }
     
     @Before
@@ -66,7 +66,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     
     @Test
     public void testGetByStatus() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
+        IDataSet ds=createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         List<Role> roles=rd.getByStatus(false);
         assertTrue(roles.size()==2);
@@ -76,7 +76,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     public void testGetChilds_String() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        List<Role> roles=rd.getChilds(role1.getUuid());
+        List<Role> roles=rd.getChilds(role1);
         assertTrue(roles.size()==2);
     }
     
@@ -84,7 +84,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     public void testGetChilds_String_boolean() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        List<Role> roles=rd.getChilds(role1.getUuid(),true);
+        List<Role> roles=rd.getChilds(role1,true);
         assertTrue(roles.size()==1);
     }
     
@@ -92,7 +92,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     public void testGetAllChilds_String() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        RoleTree roleTree = rd.getAllChilds(role1.getUuid());
+        RoleTree roleTree = rd.getAllChilds(role1);
         assertTrue(roleTree.toList().size()==4);
     }
     
@@ -108,7 +108,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     public void testGetAllChilds_String_boolean() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        RoleTree roleTree = rd.getAllChilds(role1.getUuid(),true);
+        RoleTree roleTree = rd.getAllChilds(role1,true);
         assertTrue(roleTree.toList().size()==2);
     }
     
@@ -126,7 +126,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         Role expect=role3;
         expect.setRoleName("更新标题");
-        expect.setParentId("2369");
+        expect.setParentRole(role1);
         expect.setStatus(false);
         expect.setRemark("注释");
         rd.updateRole(expect);
@@ -149,7 +149,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         Role expect=role3;
-        expect.setParentId("2369");
+        expect.setParentRole(role5);
         rd.updateParent(expect);
         EntitiesHelper.assertRole(expect, rd.getRoleById(expect.getUuid()));
     }
@@ -171,17 +171,21 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
         Role expect=role3;
         rd.deleteRole(expect);
         assertNull(rd.getRoleById(expect.getUuid()));
-        assertTrue(IDaoFactory.iRoleUserDao().queryByRoleId(expect.getUuid()).isEmpty());
-        assertTrue(IDaoFactory.iRoleNodeDao().queryByRoleId(expect.getUuid()).isEmpty());
+        assertTrue(IDaoFactory.iRoleUserDao().queryByRole(expect).isEmpty());
+        assertTrue(IDaoFactory.iRoleNodeDao().queryByRole(expect).isEmpty());
     }
 
     @Test
     public void testAddRole() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.DELETE_ALL.execute(dbUnitConn, ds);
-        Role expect = role3;
+        Role expect = role1;
         rd.addRole(expect);
         Role result = rd.getRoleById(expect.getUuid());
+        EntitiesHelper.assertRole(expect, result);
+        expect=role5;
+        rd.addRole(expect);
+        result=rd.getRoleById(expect.getUuid());
         EntitiesHelper.assertRole(expect, result);
     } 
 }

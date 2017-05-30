@@ -6,6 +6,7 @@
 package dtx.oa.rbac.idao;
 
 import dtx.oa.rbac.idao.factory.IDaoFactory;
+import dtx.oa.rbac.model.Node;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleNode;
 import dtx.oa.util.AbstractDBUnitTestCase;
@@ -34,14 +35,14 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
     private final RoleNode rn1,rn2,rn3,rn4,rn5,rn6,rn7,rn8;
     
     {
-        rn1 = new RoleNode("ff80808159da31850159db0b9e86000b", "ff808081598818400159881aae8b0005", "ff80808159ac6d4b0159ac7688580006");
-        rn2 = new RoleNode("ff80808159da31850159db0b9e87000c", "ff808081598818400159881aae8b0005", "ff80808159ac6d4b0159ac74e8980001");
-        rn3 = new RoleNode("ff80808159da31850159db0b9e88000d", "ff808081598818400159881aae8b0005", "ff80808159ac6d4b0159ac755ebf0002");
-        rn4 = new RoleNode("ff8081815a87f38d015a87f537fe0003", "ff808081598818400159881a149a0001", "ff80808159ac6d4b0159ac7645970005");
-        rn5 = new RoleNode("ff8081815a87f38d015a87f537fd0002", "ff808081598818400159881a149a0001", "ff80808159ac6d4b0159ac75f2460004");
-        rn6 = new RoleNode("ff8081815a87f38d015a87f537f10001", "ff808081598818400159881a149a0001", "ff80808159ac6d4b0159ac74e8980001");
-        rn7 = new RoleNode("ff8081815a87f38d015a87f556640005", "ff808081598818400159881a49100002", "ff80808159ac6d4b0159ac7688580006");
-        rn8 = new RoleNode("ff8081815a87f38d015a87f538000004", "ff808081598818400159881a149a0001", "ff80808159ac6d4b0159ac7688580006");
+        rn1 = new RoleNode("ff80808159da31850159db0b9e86000b", new Role("ff808081598818400159881aae8b0005", null, null, null, true), new Node("ff80808159ac6d4b0159ac7688580006", null, null, null, null, true, 0));
+        rn2 = new RoleNode("ff80808159da31850159db0b9e87000c", new Role("ff808081598818400159881aae8b0005", null, null, null, true), new Node("ff80808159ac6d4b0159ac74e8980001", null, null, null, null, true, 0));
+        rn3 = new RoleNode("ff80808159da31850159db0b9e88000d", new Role("ff808081598818400159881aae8b0005", null, null, null, true), new Node("ff80808159ac6d4b0159ac755ebf0002", null, null, null, null, true, 0));
+        rn4 = new RoleNode("ff8081815a87f38d015a87f537fe0003", new Role("ff808081598818400159881a149a0001", null, null, null, true), new Node("ff80808159ac6d4b0159ac7645970005", null, null, null, null, true, 0));
+        rn5 = new RoleNode("ff8081815a87f38d015a87f537fd0002", new Role("ff808081598818400159881a149a0001", null, null, null, true), new Node("ff80808159ac6d4b0159ac75f2460004", null, null, null, null, true, 0));
+        rn6 = new RoleNode("ff8081815a87f38d015a87f537f10001", new Role("ff808081598818400159881a149a0001", null, null, null, true), new Node("ff80808159ac6d4b0159ac74e8980001", null, null, null, null, true, 0));
+        rn7 = new RoleNode("ff8081815a87f38d015a87f556640005", new Role("ff808081598818400159881a49100002", null, null, null, true), new Node("ff80808159ac6d4b0159ac7688580006", null, null, null, null, true, 0));
+        rn8 = new RoleNode("ff8081815a87f38d015a87f538000004", new Role("ff808081598818400159881a149a0001", null, null, null, true), new Node("ff80808159ac6d4b0159ac7688580006", null, null, null, null, true, 0));
     }
     
     @Before
@@ -60,7 +61,7 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         RoleNode expect = rn1;
-        assertTrue(rnd.queryByNodeId(expect.getNodeId()).size()==3);
+        assertTrue(rnd.queryByNode(expect.getNode()).size()==3);
     }
 
     @Test
@@ -68,7 +69,7 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         RoleNode expect = rn1;
-        assertTrue(rnd.queryByRoleId(expect.getRoleId()).size()==3);
+        assertTrue(rnd.queryByRole(expect.getRole()).size()==3);
     }
 
     @Test
@@ -102,8 +103,8 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         RoleNode expect = rn1;
-        rnd.deleteByNodeId(expect);
-        assertTrue(rnd.queryByNodeId(expect.getNodeId()).isEmpty());
+        rnd.deleteByNode(expect);
+        assertTrue(rnd.queryByNode(expect.getNode()).isEmpty());
     }
 
     @Test
@@ -111,8 +112,8 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         RoleNode expect = rn1;
-        rnd.deleteByRoleId(expect);
-        assertTrue(rnd.queryByRoleId(expect.getRoleId()).isEmpty());
+        rnd.deleteByRole(expect);
+        assertTrue(rnd.queryByRole(expect.getRole()).isEmpty());
     }
 
     @Test
@@ -129,7 +130,7 @@ public class IRoleNodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.DELETE_ALL.execute(dbUnitConn, ds);
         RoleNode expect = rn1;
-        String result = rnd.addRoleNode(expect);
+        String result = rnd.addRoleNode(expect).getUuid();
         assertNotNull(result);
     }
 }

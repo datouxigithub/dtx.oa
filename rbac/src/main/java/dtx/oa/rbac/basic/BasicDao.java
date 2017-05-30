@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author datouxi
  */
 @Transactional
-public abstract class BasicDao implements BasicDaoInter{
+public abstract class BasicDao implements IBasicDao{
 
     protected SessionFactory sessionFactory;
     
@@ -85,6 +85,12 @@ public abstract class BasicDao implements BasicDaoInter{
             LogUtil.getLogger().error(e);
             return false;
         }
+    }
+    
+    @Override
+    public boolean delete(Object obj){
+        sessionFactory.getCurrentSession().delete(obj);
+        return true;
     }
 
     /**

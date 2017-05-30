@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-  <role uuid="ff808081598818400159881a149a0001" role_name="A" status="true" remark="" parent_id=""/>
-  <role uuid="ff808081598818400159881a49100002" role_name="B" status="true" parent_id="ff808081598818400159881a149a0001"/>
-  <role uuid="ff808081598818400159881a696b0003" role_name="C" status="false" remark="" parent_id="ff808081598818400159881a149a0001"/>
-  <role uuid="ff808081598818400159881aae8b0005" role_name="E" status="true" remark="" parent_id="ff808081598818400159881a49100002"/>
-  <role uuid="ff808081598818400159881ad1980006" role_name="F" status="false" remark="" parent_id="ff808081598818400159881a49100002"/>
-</dataset>

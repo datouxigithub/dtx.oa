@@ -7,7 +7,6 @@ package dtx.oa.rbac.dao;
 
 import dtx.oa.rbac.basic.BasicDao;
 import dtx.oa.rbac.idao.IUserDao;
-import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.User;
 import dtx.oa.util.StringUtil;
 import java.sql.Timestamp;
@@ -43,14 +42,8 @@ public class UserDao extends BasicDao implements IUserDao{
     }
 
     @Override
-    public boolean deleteUser(String userId) {
-        if(update("DELETE FROM User user WHERE user.uuid=?", new Object[]{userId})>0)return IDaoFactory.iRoleUserDao().deleteByUserId(userId);
-        return false;
-    }
-
-    @Override
     public boolean deleteUser(User user) {
-        return deleteUser(user.getUuid());
+        return deleteUser(user,true);
     }
 
     @Override
@@ -67,14 +60,16 @@ public class UserDao extends BasicDao implements IUserDao{
     }
 
     @Override
-    public boolean isAdmin(String account) {
-        final String ADMINNAME="admin";
-        return ADMINNAME.equals(account);
+    public boolean isAdmin(User user) {
+        return IUserDao.ADMININAME.equals(user.getAccount());
     }
 
     @Override
-    public boolean isAdmin(User user) {
-        return isAdmin(user.getAccount());
+    public boolean deleteUser(User user, boolean isDeleteCascade) {
+        if(!isDeleteCascade&&user.getRoles().size()>0)
+            return false;
+        else
+            return delete(user);
     }
     
 }

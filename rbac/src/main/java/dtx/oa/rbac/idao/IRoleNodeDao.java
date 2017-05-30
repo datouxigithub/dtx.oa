@@ -5,7 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
-import dtx.oa.rbac.basic.BasicDaoInter;
+import dtx.oa.rbac.basic.IBasicDao;
 import dtx.oa.rbac.model.Node;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleNode;
@@ -15,12 +15,10 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IRoleNodeDao extends BasicDaoInter{
-    public List<RoleNode> queryByNodeId(String nodeId);
+public interface IRoleNodeDao extends IBasicDao{
+    public List<RoleNode> queryByNode(Node node);
 
-    public List<RoleNode> queryByRoleId(String roleId);
-    
-    public List<Node> getNodesByRole(String roleId);
+    public List<RoleNode> queryByRole(Role role);
     
     public List<Node> getNodesByRole(Role role);
     
@@ -28,19 +26,17 @@ public interface IRoleNodeDao extends BasicDaoInter{
 
     public RoleNode queryById(String id);
 
-    public boolean deleteByNodeId(String nodeId);
+    public boolean deleteByNode(Node node);
 
-    public boolean deleteByRoleId(String roleId);
+    public boolean deleteByRole(Role role);
 
-    public boolean deleteByNodeId(RoleNode rn);
+    public boolean deleteByNode(RoleNode rn);
 
-    public boolean deleteByRoleId(RoleNode rn);
+    public boolean deleteByRole(RoleNode rn);
 
-    public boolean delete(String id);
+    public boolean deleteRoleNode(RoleNode rn);
 
-    public boolean delete(RoleNode rn);
+    public RoleNode addRoleNode(Node node,Role role);
 
-    public String addRoleNode(String node_id,String role_id);
-
-    public String addRoleNode(RoleNode rn);
+    public RoleNode addRoleNode(RoleNode rn);
 }

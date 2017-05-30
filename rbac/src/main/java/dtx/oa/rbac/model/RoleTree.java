@@ -7,7 +7,6 @@ package dtx.oa.rbac.model;
 
 import dtx.oa.rbac.idao.IRoleDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
-import dtx.oa.util.LogUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,53 +19,74 @@ public class RoleTree {
    private List<RoleTreeLeaf> rootLeaves;
    private int treeDepth=Integer.MIN_VALUE;
    
+   public RoleTree(boolean isDepth,User user){
+       init(user,isDepth);
+   }
+   
    public RoleTree(User user){
-       init(user);
+       this(true,user);
+   }
+   
+   public RoleTree(User user,boolean status,boolean isDepth){
+       init(user,status,isDepth);
    }
    
    public RoleTree(User user,boolean status){
-       init(user,status);
+       this(user,status,true);
+   }
+   
+   public RoleTree(boolean isDepth,List<Role> roles){
+       init(roles,isDepth);
    }
    
    public RoleTree(List<Role> roles){
-       init(roles);
+       this(true,roles);
+   }
+   
+   public RoleTree(List<Role> roles,boolean status,boolean isDepth){
+       init(roles,status,isDepth);
    }
    
    public RoleTree(List<Role> roles,boolean status){
-       init(roles,status);
+       this(roles,status,true);
    }
    
-   private void init(User user){
+   private void init(User user,boolean isDepth){
        List<Role> roles=null;
        if(IDaoFactory.iUserDao().isAdmin(user))
-           roles=IDaoFactory.iRoleDao().getChilds(IRoleDao.ROOTID);
+           roles=IDaoFactory.iRoleDao().getRoots();
+//           roles=IDaoFactory.iRoleDao().getChilds(IRoleDao.ROOTID);
        else
            roles=IDaoFactory.iRoleUserDao().getRoleByUser(user);
-       init(roles);
+       init(roles,isDepth);
    }
    
-   private void init(User user,boolean status){
+   private void init(User user,boolean status,boolean isDepth){
        List<Role> roles=null;
        if(IDaoFactory.iUserDao().isAdmin(user))
-           roles=IDaoFactory.iRoleDao().getChilds(IRoleDao.ROOTID);
+           roles=IDaoFactory.iRoleDao().getRoots();
+//           roles=IDaoFactory.iRoleDao().getChilds(IRoleDao.ROOTID);
        else
            roles=IDaoFactory.iRoleUserDao().getRoleByUser(user);
-       init(roles,status);
+       init(roles,status,isDepth);
    }
    
-   private void init(List<Role> roles){
-        rootLeaves=new ArrayList<>();
+   private void init(List<Role> roles,boolean isDepth){
+       rootLeaves=new ArrayList<>();
         for(Role role:roles){
-            rootLeaves.add(new RoleTreeLeaf(role));
+            RoleTreeLeaf leaf=new RoleTreeLeaf(role, isDepth);
+            if(!rootLeaves.contains(leaf))
+                rootLeaves.add(leaf);
         }
         checkRepeat();
-    }
+   }
     
-    private void init(List<Role> roles,boolean status){
+   private void init(List<Role> roles,boolean status,boolean isDepth){
         rootLeaves=new ArrayList<>();
         for(Role role:roles){
-//            /if(role.getStatus()!=status)continue;
-            rootLeaves.add(new RoleTreeLeaf(role,status));
+            RoleTreeLeaf leaf=new RoleTreeLeaf(role, status, isDepth);
+            if(!rootLeaves.contains(leaf))
+                rootLeaves.add(leaf);
         }
         checkRepeat();
     }
@@ -111,7 +131,7 @@ public class RoleTree {
     }
     
     public RoleTreeLeaf find(String roleId){
-        return find(roleId, rootLeaves);
+        return find(roleId, getRoots());
     }
    
    private boolean delete(String roleId,List<RoleTreeLeaf> leaves){
@@ -148,7 +168,7 @@ public class RoleTree {
             maxDepth=maxDepth<depth ? depth:maxDepth;
         }
         treeDepth=maxDepth!=0 ? maxDepth:treeDepth;
-        return maxDepth;
+        return treeDepth;
     }
     
     private List<RoleTreeLeaf> toList(List<RoleTreeLeaf> leaves){

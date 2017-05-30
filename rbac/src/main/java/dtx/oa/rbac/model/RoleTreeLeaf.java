@@ -18,24 +18,40 @@ public class RoleTreeLeaf {
     private Role entityRole;
     private List<RoleTreeLeaf> leaves;
     
-    public RoleTreeLeaf(Role role){
+    public RoleTreeLeaf(Role role,boolean isDepth){
         this.entityRole=role;
         leaves=new ArrayList<>();
-        List<Role> childs=IDaoFactory.iRoleDao().getChilds(role.getUuid());
-        for(Role child:childs){
-            leaves.add(new RoleTreeLeaf(child));
+        if(isDepth){
+            List<Role> childs=IDaoFactory.iRoleDao().getChilds(role);
+            for(Role child:childs){
+                RoleTreeLeaf leaf=new RoleTreeLeaf(child, isDepth);
+                if(!leaves.contains(leaf))
+                    leaves.add(leaf);
+            }
         }
     }
     
-    public RoleTreeLeaf(Role role,boolean status){
+    public RoleTreeLeaf(Role role){
+        this(role,true);
+    }
+    
+    public RoleTreeLeaf(Role role,boolean status,boolean isDepth){
         if(role.getStatus()==status){
             this.entityRole=role;
             leaves=new ArrayList<>();
-            List<Role> childs=IDaoFactory.iRoleDao().getChilds(role.getUuid());
-            for(Role child:childs){
-                leaves.add(new RoleTreeLeaf(child,status));
+            if(isDepth){
+                List<Role> childs=IDaoFactory.iRoleDao().getChilds(role);
+                for(Role child:childs){
+                    RoleTreeLeaf leaf=new RoleTreeLeaf(child, status,isDepth);
+                    if(!leaves.contains(leaf))
+                        leaves.add(leaf);
+                }
             }
         }
+    }
+    
+    public RoleTreeLeaf(boolean status,Role role){
+        this(role,status,true);
     }
     
     public boolean isEmptyLeaf(){

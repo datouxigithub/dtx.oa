@@ -5,7 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
-import dtx.oa.rbac.basic.BasicDaoInter;
+import dtx.oa.rbac.basic.IBasicDao;
 import dtx.oa.rbac.model.User;
 import java.util.List;
 
@@ -13,7 +13,9 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IUserDao extends BasicDaoInter{
+public interface IUserDao extends IBasicDao{
+    public final static String ADMININAME="admin";
+    
     public User getUserById(String userId);
 
     public User getUserByAccount(String account);
@@ -22,15 +24,13 @@ public interface IUserDao extends BasicDaoInter{
 
     public String addUser(User user);
 
-    public boolean deleteUser(String userId);
-
     public boolean deleteUser(User user);
+    
+    public boolean deleteUser(User user,boolean isDeleteCascade);
 
     public boolean updateUser(User user);
 
     public boolean updateLoginMessage(User user);
-
-    public boolean isAdmin(String account);
 
     public boolean isAdmin(User user);
 }

@@ -29,35 +29,36 @@ public class RoleDao extends BasicDao implements IRoleDao {
     public List<Role> getByStatus(boolean status) {
         return executeQuery("FROM Role role WHERE role.status=?", new Object[]{status});
     }
-
+    
     @Override
-    public List<Role> getChilds(String parentId) {
-        return executeQuery("FROM Role role WHERE role.parentId=?", new Object[]{parentId});
+    public List<Role> getChilds(Role parentRole){
+        return executeQuery("FROM Role role WHERE role.parentRole=?", new Object[]{parentRole});
     }
-
+    
     @Override
-    public List<Role> getChilds(String parentId, boolean status) {
-        return executeQuery("FROM Role role WHERE role.parentId=? and role.status=?", new Object[]{parentId,status});
+    public List<Role> getChilds(Role parentRole,boolean status){
+        return executeQuery("FROM Role role WHERE role.parentRole=? and role.status=?", new Object[]{parentRole,status});
     }
-
+    
     @Override
-    public RoleTree getAllChilds(String parentId) {
-        return new RoleTree(getChilds(parentId));
+    public RoleTree getAllChilds(Role parentRole){
+        return new RoleTree(getChilds(parentRole));
     }
 
     @Override
     public RoleTree getAllRoles() {
-        return getAllChilds(IRoleDao.ROOTID);
+        return new RoleTree(getRoots());
     }
-
+    
     @Override
-    public RoleTree getAllChilds(String parentid, boolean status) {
-        return new RoleTree(getChilds(parentid, status), status);
+    public RoleTree getAllChilds(Role parentRole, boolean status) {
+        return new RoleTree(getChilds(parentRole, status), status);
     }
 
     @Override
     public RoleTree getAllRoles(boolean status) {
-        return getAllChilds(IRoleDao.ROOTID, status);
+//        return getAllChilds(null, status);
+        return new RoleTree(getRoots(status),status);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class RoleDao extends BasicDao implements IRoleDao {
 
     @Override
     public boolean updateParent(Role role) {
-        return update("UPDATE Role role SET role.parentId=? WHERE role.uuid=?", new Object[]{role.getParentId(),role.getUuid()})>0;
+        return update("UPDATE Role role SET role.parentRole=? WHERE role.uuid=?", new Object[]{role.getParentRole(),role.getUuid()})>0;
     }
 
     @Override
@@ -82,18 +83,30 @@ public class RoleDao extends BasicDao implements IRoleDao {
 
     @Override
     public boolean deleteRole(Role role) {
-        return deleteRole(role.getUuid());
+        return deleteRole(role, true);
     }
-
+    
     @Override
-    public boolean deleteRole(String id) {
-        if(update("DELETE FROM Role role WHERE role.uuid=?", new Object[]{id})>0)return IDaoFactory.iRoleNodeDao().deleteByRoleId(id)&&IDaoFactory.iRoleUserDao().deleteByRoleId(id);
-        return false;
+    public boolean deleteRole(Role role,boolean isDeleteCascade){
+        if(!isDeleteCascade&&(role.getUsers().size()>0||role.getNodes().size()>0))
+            return false;
+        else
+            return delete(role);
     }
 
     @Override
     public String addRole(Role role) {
         return (String) add(role);
+    }
+
+    @Override
+    public List<Role> getRoots() {
+        return executeQuery("FROM Role role WHERE role.parentRole IS NULL", null);
+    }
+
+    @Override
+    public List<Role> getRoots(boolean status) {
+        return executeQuery("FROM Role role WHERE role.parentRole IS NULL AND role.status=?", new Object[]{status});
     }
     
 }

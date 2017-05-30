@@ -5,7 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
-import dtx.oa.rbac.basic.BasicDaoInter;
+import dtx.oa.rbac.basic.IBasicDao;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleTree;
 import java.util.List;
@@ -14,22 +14,26 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IRoleDao extends BasicDaoInter{
+public interface IRoleDao extends IBasicDao{
     public final static String ROOTID="";
     
     public Role getRoleById(String roleId);
 	
     public List<Role> getByStatus(boolean status);
 
-    public List<Role> getChilds(String parentId);
+    public List<Role> getChilds(Role parentRole);
 
-    public List<Role> getChilds(String parentId,boolean status);
+    public List<Role> getChilds(Role parentRole,boolean status);
 
-    public RoleTree getAllChilds(String parentId);
+    public RoleTree getAllChilds(Role parentRole);
 
+    public List<Role> getRoots();
+    
+    public List<Role> getRoots(boolean status);
+    
     public RoleTree getAllRoles();
 
-    public RoleTree getAllChilds(String parentid,boolean status);
+    public RoleTree getAllChilds(Role parentRole,boolean status);
 
     public RoleTree getAllRoles(boolean status);
 
@@ -44,8 +48,8 @@ public interface IRoleDao extends BasicDaoInter{
     public boolean updateStatus(Role role);
 
     public boolean deleteRole(Role role);
-
-    public boolean deleteRole(String id);
+    
+    public boolean deleteRole(Role role,boolean isDeleteCascade);
 	
     public String addRole(Role role);
 }

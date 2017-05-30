@@ -1,22 +1,53 @@
 package dtx.oa.rbac.model;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
+@Entity
+@Table(name = "rbac_role_node")
 public class RoleNode implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    protected String uuid,roleId,nodeId;
+    protected String uuid;
+    protected Role role;
+
+    @JoinColumn(name = "roleId",referencedColumnName = "uuid")
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @JoinColumn(name = "nodeId",referencedColumnName = "uuid")
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
+    protected Node node;
 
     public RoleNode() {
     }
 
-    public RoleNode(String uuid, String roleId, String nodeId) {
+    public RoleNode(String uuid, Role role, Node node) {
         this.uuid = uuid;
-        this.roleId = roleId;
-        this.nodeId = nodeId;
+        this.role=role;
+        this.node=node;
     }
     
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid",strategy = "uuid")
     public String getUuid() {
         return uuid;
     }
@@ -25,27 +56,11 @@ public class RoleNode implements Serializable {
         this.uuid = uuid;
     }
 
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getNodeId() {
-        return nodeId;
-    }
-
-    public void setNodeId(String nodeId) {
-        this.nodeId = nodeId;
-    }
-
     @Override
     public String toString(){
         return "uuid:"+((uuid==null) ? "[null]":uuid)+";"+
-                "role_id:"+((roleId==null) ? "[null]":roleId)+";"+
-                "node_id:"+((nodeId==null) ? "[null]":nodeId);
+                "role_id:"+((role==null) ? "[null]":role.getUuid())+";"+
+                "node_id:"+((node==null) ? "[null]":node.getUuid());
     }
 
     @Override

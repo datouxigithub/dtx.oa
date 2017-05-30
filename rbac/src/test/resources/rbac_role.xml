@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <rbac_role uuid="ff808081598818400159881a149a0001" roleName="A" status="true" remark="" parentId="[null]" />
+  <rbac_role uuid="ff808081598818400159881a49100002" roleName="B" status="true" parentId="ff808081598818400159881a149a0001" />
+  <rbac_role uuid="ff808081598818400159881a696b0003" roleName="C" status="false" remark="" parentId="ff808081598818400159881a149a0001" />
+  <rbac_role uuid="ff808081598818400159881aae8b0005" roleName="E" status="true" remark="" parentId="ff808081598818400159881a49100002" />
+  <rbac_role uuid="ff808081598818400159881ad1980006" roleName="F" status="false" remark="" parentId="ff808081598818400159881a49100002" />
+</dataset>

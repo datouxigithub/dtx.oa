@@ -7,7 +7,6 @@ package dtx.oa.rbac.dao;
 
 import dtx.oa.rbac.basic.BasicDao;
 import dtx.oa.rbac.idao.INodeDao;
-import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.Node;
 import dtx.oa.rbac.model.NodeTree;
 import java.util.LinkedHashMap;
@@ -38,20 +37,40 @@ public class NodeDao extends BasicDao implements INodeDao {
     public List<Node> getChilds(String parentId) {
         return executeQuery("FROM Node node WHERE node.parentId=?", new Object[]{parentId});
     }
+    
+    @Override
+    public List<Node> getChilds(Node parentNode) {
+        return getChilds(parentNode.getUuid());
+    }
 
     @Override
     public List<Node> getChilds(String parentId, boolean status) {
         return executeQuery("FROM Node node WHERE node.parentId=? AND node.status=?", new Object[]{parentId,status});
+    }
+    
+    @Override
+    public List<Node> getChilds(Node parentNode,boolean status) {
+        return getChilds(parentNode.getUuid(),status);
     }
 
     @Override
     public List<Node> getChildsByType(String parentId, int nodeType) {
         return executeQuery("FROM Node node WHERE node.parentId=? AND node.nodeType=?", new Object[]{parentId,nodeType});
     }
+    
+    @Override
+    public List<Node> getChildsByType(Node parentNode,int nodeType) {
+        return getChildsByType(parentNode.getUuid(),nodeType);
+    }
 
     @Override
     public List<Node> getChildsByType(String parentId, int nodeType, boolean status) {
         return executeQuery("FROM Node node WHERE node.parentId=? AND node.nodeType=? AND node.status=?", new Object[]{parentId,nodeType,status});
+    }
+    
+    @Override
+    public List<Node> getChildsByType(Node parentNode, int nodeType, boolean status) {
+        return getChildsByType(parentNode, nodeType, status);
     }
 
     @Override
@@ -59,11 +78,21 @@ public class NodeDao extends BasicDao implements INodeDao {
         List<Node> childs=getChilds(parentId);
         return new NodeTree(childs.toArray(new Node[childs.size()]));
     }
+    
+    @Override
+    public NodeTree getAllChilds(Node parentNode) {
+        return getAllChilds(parentNode.getUuid());
+    }
 
     @Override
     public NodeTree getAllChilds(String parentId, boolean status) {
         List<Node> nodes=getChilds(parentId, status);
         return new NodeTree(nodes.toArray(new Node[nodes.size()]), status);
+    }
+    
+    @Override
+    public NodeTree getAllChilds(Node parentNode,boolean status) {
+        return getAllChilds(parentNode, status);
     }
 
     @Override
@@ -84,11 +113,11 @@ public class NodeDao extends BasicDao implements INodeDao {
         return nodeTypes;
     }
 
-    @Override
-    public String getParentId(String nodeId) {
-        Node node=getNodeById(nodeId);
-        return node==null ? null:node.getParentId();
-    }
+//    @Override
+//    public String getParentId(String nodeId) {
+//        Node node=getNodeById(nodeId);
+//        return node==null ? null:node.getParentNode().getUuid();
+//    }
 
     @Override
     public boolean updateNode(Node node) {
@@ -103,7 +132,7 @@ public class NodeDao extends BasicDao implements INodeDao {
 
     @Override
     public boolean updateParent(Node node) {
-        return update("UPDATE Node node SET node.parentId=? WHERE node.uuid=?",new Object[]{node.getParentId(),node.getUuid()})>0;
+        return update("UPDATE Node node SET node.parentId=? WHERE node.uuid=?",new Object[]{node.getParentNode().getUuid(),node.getUuid()})>0;
     }
 
     @Override
@@ -112,14 +141,16 @@ public class NodeDao extends BasicDao implements INodeDao {
     }
 
     @Override
-    public boolean delete(String id) {
-        if(update("DELETE FROM Node node WHERE node.uuid=?", new Object[]{id})>0)return IDaoFactory.iRoleNodeDao().deleteByNodeId(id);
-        return false;
+    public boolean deleteNode(Node node) {
+        return deleteNode(node, true);
     }
-
+    
     @Override
-    public boolean delete(Node node) {
-        return delete(node.getUuid());
+    public boolean deleteNode(Node node,boolean isDeleteCascade){
+        if(!isDeleteCascade&&node.getRoles().size()>0)
+            return false;
+        else
+            return delete(node);
     }
 
     @Override

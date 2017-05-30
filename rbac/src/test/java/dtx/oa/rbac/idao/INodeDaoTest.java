@@ -32,12 +32,12 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
     private final Node node1,node2,node3,node4,node5,node6;
     
     {
-        node1=new Node("ff80808159ac6d4b0159ac74e8980001", "节点组1", "", "", "", true, 2);
-        node2=new Node("ff80808159ac6d4b0159ac755ebf0002", "节点11", "", null, "ff80808159ac6d4b0159ac74e8980001", true, 1);
-        node3=new Node("ff80808159ac6d4b0159ac75a5960003", "节点12", "cde", "", "", false, 1);
-        node4=new Node("ff80808159ac6d4b0159ac75f2460004", "节点组11", "", "", "ff80808159ac6d4b0159ac74e8980001", false, 2);
-        node5=new Node("ff80808159ac6d4b0159ac7645970005", "节点111", "ddd", "", "ff80808159ac6d4b0159ac75f2460004", true, 1);
-        node6=new Node("ff80808159ac6d4b0159ac7688580006", "节点2", "eee", "", "", false, 1);
+        node1=new Node("ff80808159ac6d4b0159ac74e8980001", "节点组1", "", "", new Node("", null, null, null, null, true, 0), true, 2);
+        node2=new Node("ff80808159ac6d4b0159ac755ebf0002", "节点11", "", null, new Node("ff80808159ac6d4b0159ac74e8980001", null, null, null, null, true, 0), true, 1);
+        node3=new Node("ff80808159ac6d4b0159ac75a5960003", "节点12", "cde", "", new Node("", null, null, null, null, true, 0), false, 1);
+        node4=new Node("ff80808159ac6d4b0159ac75f2460004", "节点组11", "", "", new Node("ff80808159ac6d4b0159ac74e8980001", null, null, null, null, true, 0), false, 2);
+        node5=new Node("ff80808159ac6d4b0159ac7645970005", "节点111", "ddd", "", new Node("ff80808159ac6d4b0159ac75f2460004", null, null, null, null, true, 0), true, 1);
+        node6=new Node("ff80808159ac6d4b0159ac7688580006", "节点2", "eee", "", new Node("", null, null, null, null, true, 0), false, 1);
     }
     
     @Before
@@ -170,7 +170,7 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
     public void testGetParentId() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertEquals(nd.getParentId(node5.getUuid()), node4.getUuid());
+        assertEquals(node5.getParentNode().getUuid(), node4.getUuid());
     }
 
     @Test
@@ -181,7 +181,7 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         expect.setTitle("更新后的标题");
         expect.setAddress("新地址");
         expect.setRemark("新注释");
-        expect.setParentId("56987");
+        expect.setParentNode(new Node("56987", null, null, null, null, true, 0));
         expect.setNodeType(2);
         expect.setStatus(false);
         nd.updateNode(expect);
@@ -189,7 +189,7 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         
         expect.setTitle("");
         expect.setRemark(null);
-        expect.setParentId(null);
+        expect.setParentNode(null);
         nd.updateNode(expect);
         EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
     }
@@ -211,7 +211,7 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         Node expect = node2;
-        expect.setParentId("56987");
+        expect.setParentNode(new Node("56987", null, null, null, null, true, 0));
         nd.updateNode(expect);
         EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
     }
@@ -233,7 +233,7 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         Node expect = node2;
         nd.delete(expect);
         assertNull(nd.getNodeById(expect.getUuid()));
-        assertTrue(IDaoFactory.iRoleNodeDao().queryByNodeId(expect.getUuid()).isEmpty());
+        assertTrue(IDaoFactory.iRoleNodeDao().queryByNode(expect).isEmpty());
     }
 
     @Test

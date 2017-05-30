@@ -28,7 +28,7 @@
     <!-- 配置datasource -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/dtaoa?useUnicode=true&amp;characterEncoding=utf-8" />
+        <property name="url" value="jdbc:mysql://localhost:3306/testsshdb?useUnicode=true&amp;characterEncoding=utf-8" />
         <property name="username" value="root" />
         <property name="password" value="449449" />
         <!-- 连接池启动时的初始值 -->
@@ -42,17 +42,9 @@
     </bean>
     
     <!-- 配置SessionFactory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="mappingResources">
-            <list>
-                <value>user.hbm.xml</value>
-                <value>role.hbm.xml</value>
-                <value>node.hbm.xml</value>
-                <value>rolenode.hbm.xml</value>
-                <value>roleuser.hbm.xml</value>
-            </list>
-        </property>
+        <property name="packagesToScan" value="dtx.oa.rbac.model" />
         <property name="hibernateProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect

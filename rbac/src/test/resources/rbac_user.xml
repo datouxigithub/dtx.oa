@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<dataset>
+    <rbac_user uuid="ff80808159922a2c01599237ab430001" account="肥满" password="56789" status="true" remark="测试用户" />
+    <rbac_user uuid="ff80808159a0bfb40159a0c035f40001" account="臭臭屎" password="123698" status="false" />
+</dataset>

@@ -5,9 +5,9 @@
  */
 package dtx.oa.util;
 
-import dtx.oa.rbac.idao.IUserDao;
+import dtx.oa.rbac.idao.IRoleDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
-import dtx.oa.rbac.model.User;
+import dtx.oa.rbac.model.Role;
 
 /**
  *
@@ -20,9 +20,11 @@ public class TestApp {
     }
     
     public void test(){
-        IUserDao iud=IDaoFactory.iUserDao();
-        User user=iud.getUserByAccount("大头希");
-        if(user!=null)
-            System.out.println(user.getUuid());
+        IRoleDao dao=IDaoFactory.iRoleDao();
+        Role role1=new Role("", "qweruqiwep", null, null, true);
+        dao.addRole(role1);
+        Role role=new Role("uwqpru", "ddsd", null, role1, true);
+        String result=dao.addRole(role);
+        System.out.println("---------------->>>"+result);
     }
 }

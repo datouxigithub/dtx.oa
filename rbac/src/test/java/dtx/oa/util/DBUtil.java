@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class DBUtil {
     public static Connection getConnection() throws SQLException{
         Connection conn=null;
-        conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/dtaoa??useUnicode=true&characterEncoding=utf-8", "root", "449449");
+        conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/testsshdb??useUnicode=true&characterEncoding=utf-8", "root", "449449");
         return conn;
     }
     

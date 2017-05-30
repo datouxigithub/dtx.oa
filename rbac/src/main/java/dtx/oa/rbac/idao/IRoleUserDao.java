@@ -5,7 +5,7 @@
  */
 package dtx.oa.rbac.idao;
 
-import dtx.oa.rbac.basic.BasicDaoInter;
+import dtx.oa.rbac.basic.IBasicDao;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleUser;
 import dtx.oa.rbac.model.User;
@@ -15,31 +15,29 @@ import java.util.List;
  *
  * @author datouxi
  */
-public interface IRoleUserDao extends BasicDaoInter{
-    public List<RoleUser> queryByUserId(String userId);
+public interface IRoleUserDao extends IBasicDao{
+    public List<RoleUser> queryByUser(User user);
 
-    public List<RoleUser> queryByRoleId(String roleId);
+    public List<RoleUser> queryByRole(Role role);
     
     public List<Role> getRoleByUser(User user);
 
     public RoleUser queryById(String id);
 
-    public boolean deleteByUserId(String userId);
+    public boolean deleteByUser(User user);
 
-    public boolean deleteByRoleId(String roleId);
+    public boolean deleteByRole(Role role);
 
-    public boolean deleteByUserId(RoleUser ru);
+    public boolean deleteByUser(RoleUser ru);
 
-    public boolean deleteByRoleId(RoleUser ru);
+    public boolean deleteByRole(RoleUser ru);
 
-    public boolean delete(String id);
-
-    public boolean delete(RoleUser ru);
+    public boolean deleteRoleUser(RoleUser ru);
 
     //返回新插入的uuid
-    public String addRoleUser(String user_id,String role_id);
+    public RoleUser addRoleUser(User user,Role role);
 
-    public String addRoleUser(RoleUser ru);
+    public RoleUser addRoleUser(RoleUser ru);
 
-    public void addRoleUsers(String user_id,String[] roles);
+    public void addRoleUsers(User user,List<Role> roles);
 }

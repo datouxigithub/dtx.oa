@@ -31,7 +31,7 @@ import org.junit.Test;
 public class TestUserDao extends AbstractDBUnitTestCase{
   
     private IUserDao ud;
-    private final String tableName="user";
+    private final String tableName="rbac_user";
     private final User expectUser1,expectUser2;
     
     {
@@ -51,7 +51,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
     public void setup() throws DataSetException, IOException{
         dbUnitConn.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
         ud=IDaoFactory.iUserDao();
-        backupCustomTables(new String[]{tableName,"role_user"});
+        backupCustomTables(new String[]{tableName,"rbac_role_user"});
     }
 
     @Test
@@ -102,7 +102,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         User target = ud.getUserByAccount(expectUser1.getAccount());
-        ud.deleteUser(target.getUuid());
+        ud.deleteUser(target);
         target = ud.getUserByAccount(expectUser1.getAccount());
         assertNull(target);
     }
@@ -149,7 +149,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
     public void testIsAdmin() throws DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertFalse(ud.isAdmin(expectUser1.getAccount()));
+        assertFalse(ud.isAdmin(expectUser1));
     }
     
     @After

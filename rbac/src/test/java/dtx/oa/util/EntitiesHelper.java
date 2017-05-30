@@ -44,7 +44,7 @@ public class EntitiesHelper {
         assertNotNull(target);
         assertEquals(expected.getUuid(), target.getUuid());
         assertEquals(expected.getRoleName(), target.getRoleName());
-        assertEquals(expected.getParentId(), target.getParentId());
+        assertEquals(expected.getParentRole(), target.getParentRole());
         assertEquals(expected.getRemark(), target.getRemark());
         assertEquals(expected.getStatus(), target.getStatus());
     }
@@ -56,7 +56,7 @@ public class EntitiesHelper {
         assertEquals(expected.getTitle(), target.getTitle());
         assertEquals(expected.getAddress(), target.getAddress());
         assertEquals(expected.getNodeType(), target.getNodeType());
-        assertEquals(expected.getParentId(), target.getParentId());
+        assertEquals(expected.getParentNode().getUuid(), target.getParentNode().getUuid());
         assertEquals(expected.getRemark(), target.getRemark());
         assertEquals(expected.getStatus(), target.getStatus());
     }
@@ -65,15 +65,15 @@ public class EntitiesHelper {
         assertNotNull(expected);
         assertNotNull(target);
         assertEquals(expected.getUuid(), target.getUuid());
-        assertEquals(expected.getRoleId(), target.getRoleId());
-        assertEquals(expected.getNodeId(), target.getNodeId());
+        assertEquals(expected.getRole().getUuid(), target.getRole().getUuid());
+        assertEquals(expected.getNode().getUuid(), target.getNode().getUuid());
     }
     
     public static void assertRoleUser(RoleUser expected,RoleUser target){
         assertNotNull(expected);
         assertNotNull(target);
         assertEquals(expected.getUuid(), target.getUuid());
-        assertEquals(expected.getRoleId(), target.getRoleId());
-        assertEquals(expected.getUserId(), target.getUserId());
+        assertEquals(expected.getRole().getUuid(), target.getRole().getUuid());
+        assertEquals(expected.getUser().getUuid(), target.getUser().getUuid());
     }
 }

@@ -17,6 +17,7 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlProducer;
 import org.dbunit.operation.DatabaseOperation;
@@ -42,7 +43,10 @@ public class AbstractDBUnitTestCase {
     protected IDataSet createDataSet(String tableName) throws DataSetException{
         InputStream is=this.getClass().getClassLoader().getResourceAsStream(tableName+".xml");
         assertNotNull("dbunit的基本数据xml文件不存在", is);
-        return new FlatXmlDataSet(new FlatXmlProducer(new InputSource(is)));
+//        return new FlatXmlDataSet(new FlatXmlProducer(new InputSource(is)));
+        ReplacementDataSet ds=new ReplacementDataSet(new FlatXmlDataSet(new FlatXmlProducer(new InputSource(is))));
+        ds.addReplacementObject("[null]", null);
+        return ds;
     }
     
     protected void writeBackupFile(IDataSet ds) throws IOException, DataSetException{
@@ -66,6 +70,7 @@ public class AbstractDBUnitTestCase {
     }
     
     protected void resumeTable() throws DatabaseUnitException, SQLException, IOException{
+        dbUnitConn.getConnection().prepareStatement("set @@session.foreign_key_checks = 0").execute();
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, new FlatXmlDataSet(backupFile));
     }
     

@@ -6,15 +6,14 @@
 package dtx.oa.rbac.dao;
 
 import dtx.oa.rbac.basic.BasicDao;
-import dtx.oa.rbac.idao.INodeDao;
 import dtx.oa.rbac.idao.IRoleNodeDao;
-import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.Node;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleNode;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -25,44 +24,26 @@ import org.springframework.transaction.annotation.Transactional;
 public class RoleNodeDao extends BasicDao implements IRoleNodeDao {
 
     @Override
-    public List<RoleNode> queryByNodeId(String nodeId) {
-        return executeQuery("FROM RoleNode role_node WHERE role_node.nodeId=?", new Object[]{nodeId});
+    public List<RoleNode> queryByNode(Node node) {
+        return executeQuery("FROM RoleNode role_node WHERE role_node.node=?", new Object[]{node});
     }
 
     @Override
-    public List<RoleNode> queryByRoleId(String roleId) {
-        return executeQuery("FROM RoleNode role_node WHERE role_node.roleId=?", new Object[]{roleId});
-    }
-
-    @Override
-    public List<Node> getNodesByRole(String roleId) {
-        List<Node> nodes=new ArrayList<>();
-        INodeDao nc=IDaoFactory.iNodeDao();
-        Iterator<RoleNode> iter=queryByRoleId(roleId).iterator();
-        while(iter.hasNext()){
-            nodes.add(nc.getNodeById(((RoleNode)iter.next()).getNodeId()));
-        }
-        return nodes;
+    public List<RoleNode> queryByRole(Role role) {
+        return executeQuery("FROM RoleNode role_node WHERE role_node.roleId=?", new Object[]{role});
     }
 
     @Override
     public List<Node> getNodesByRole(Role role) {
-        if(role==null)return new ArrayList<Node>();
-        return getNodesByRole(role.getUuid());
+        return new ArrayList<>(role.getNodes());
     }
 
     @Override
     public List<Node> getNodesByRole(List<Role> roles) {
-        List<Node> nodes=new ArrayList<>();
-        for(Role role:roles){
-            Iterator<Node> nodeIter=getNodesByRole(role).iterator();
-            while(nodeIter.hasNext()){
-                Node current=nodeIter.next();
-                if(!nodes.contains(current))
-                    nodes.add(current);
-            }
-        }
-        return nodes;
+        Set<Node> nodeSet=new HashSet<Node>();
+        for(Role role:roles)
+            nodeSet.addAll(role.getNodes());
+        return new ArrayList<>(nodeSet);
     }
 
     @Override
@@ -71,43 +52,38 @@ public class RoleNodeDao extends BasicDao implements IRoleNodeDao {
     }
 
     @Override
-    public boolean deleteByNodeId(String nodeId) {
-        return update("DELETE FROM RoleNode role_node WHERE role_node.nodeId=?", new Object[]{nodeId})>0;
+    public boolean deleteByNode(Node node) {
+        return update("DELETE FROM RoleNode role_node WHERE role_node.node=?", new Object[]{node})>0;
     }
 
     @Override
-    public boolean deleteByRoleId(String roleId) {
-        return update("DELETE FROM RoleNode role_node WHERE role_node.roleId=?", new Object[]{roleId})>0;
+    public boolean deleteByRole(Role role) {
+        return update("DELETE FROM RoleNode role_node WHERE role_node.role=?", new Object[]{role})>0;
     }
 
     @Override
-    public boolean deleteByNodeId(RoleNode rn) {
-        return deleteByNodeId(rn.getNodeId());
+    public boolean deleteByNode(RoleNode rn) {
+        return deleteByNode(rn.getNode());
     }
 
     @Override
-    public boolean deleteByRoleId(RoleNode rn) {
-        return deleteByRoleId(rn.getRoleId());
+    public boolean deleteByRole(RoleNode rn) {
+        return deleteByRole(rn.getRole());
     }
 
     @Override
-    public boolean delete(String id) {
-        return update("DELETE FROM RoleNode role_node WHERE role_node.uuid=?", new Object[]{id})>0;
+    public boolean deleteRoleNode(RoleNode rn) {
+        return delete(rn);
     }
 
     @Override
-    public boolean delete(RoleNode rn) {
-        return delete(rn.getUuid());
+    public RoleNode addRoleNode(Node node,Role role) {
+        return addRoleNode(new RoleNode(null, role, node));
     }
 
     @Override
-    public String addRoleNode(String node_id, String role_id) {
-        return addRoleNode(new RoleNode(null, role_id, node_id));
-    }
-
-    @Override
-    public String addRoleNode(RoleNode rn) {
-        return (String) add(rn);
+    public RoleNode addRoleNode(RoleNode rn) {
+        return add(rn)==null ? null:rn;
     }
     
 }
