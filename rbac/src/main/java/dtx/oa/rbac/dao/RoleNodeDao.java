@@ -12,6 +12,7 @@ import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleNode;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,19 +31,23 @@ public class RoleNodeDao extends BasicDao implements IRoleNodeDao {
 
     @Override
     public List<RoleNode> queryByRole(Role role) {
-        return executeQuery("FROM RoleNode role_node WHERE role_node.roleId=?", new Object[]{role});
+        return executeQuery("FROM RoleNode role_node WHERE role_node.role=?", new Object[]{role});
     }
 
     @Override
     public List<Node> getNodesByRole(Role role) {
-        return new ArrayList<>(role.getNodes());
+        Iterator<RoleNode> iter=role.getRoleNodes().iterator();
+        List<Node> nodes=new ArrayList<>();
+        while(iter.hasNext())
+            nodes.add(iter.next().getNode());
+        return nodes;
     }
 
     @Override
     public List<Node> getNodesByRole(List<Role> roles) {
         Set<Node> nodeSet=new HashSet<Node>();
         for(Role role:roles)
-            nodeSet.addAll(role.getNodes());
+            nodeSet.addAll(getNodesByRole(role));
         return new ArrayList<>(nodeSet);
     }
 

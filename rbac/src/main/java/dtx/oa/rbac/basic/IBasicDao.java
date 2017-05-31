@@ -23,6 +23,8 @@ public interface IBasicDao {
     public List executeQuery(String hql,Object[] args,int pageNow,int pageSize);
     //添加对象
     public Serializable add(Object obj);
+    //批量添加
+    public void add(List objs);
     //更新对象
     public boolean update(Object obj);
     //更新\删除对象

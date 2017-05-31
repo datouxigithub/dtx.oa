@@ -26,18 +26,18 @@ import static org.junit.Assert.*;
  */
 public class INodeDaoTest extends AbstractDBUnitTestCase{
     
-    private final String tableName="node";
-    String[] tables={tableName,"role_node"};
+    private final String tableName="rbac_node";
+    String[] tables={tableName,"rbac_role","rbac_user","rbac_role_user","rbac_role_node"};
     private INodeDao nd;
     private final Node node1,node2,node3,node4,node5,node6;
     
     {
-        node1=new Node("ff80808159ac6d4b0159ac74e8980001", "节点组1", "", "", new Node("", null, null, null, null, true, 0), true, 2);
-        node2=new Node("ff80808159ac6d4b0159ac755ebf0002", "节点11", "", null, new Node("ff80808159ac6d4b0159ac74e8980001", null, null, null, null, true, 0), true, 1);
-        node3=new Node("ff80808159ac6d4b0159ac75a5960003", "节点12", "cde", "", new Node("", null, null, null, null, true, 0), false, 1);
-        node4=new Node("ff80808159ac6d4b0159ac75f2460004", "节点组11", "", "", new Node("ff80808159ac6d4b0159ac74e8980001", null, null, null, null, true, 0), false, 2);
-        node5=new Node("ff80808159ac6d4b0159ac7645970005", "节点111", "ddd", "", new Node("ff80808159ac6d4b0159ac75f2460004", null, null, null, null, true, 0), true, 1);
-        node6=new Node("ff80808159ac6d4b0159ac7688580006", "节点2", "eee", "", new Node("", null, null, null, null, true, 0), false, 1);
+        node1=new Node("ff80808159ac6d4b0159ac74e8980001", "节点组1", "", "", null, true, 2);
+        node2=new Node("ff80808159ac6d4b0159ac755ebf0002", "节点11", "", null, node1, true, 1);
+        node3=new Node("ff80808159ac6d4b0159ac75a5960003", "节点12", "cde", "", null, false, 1);
+        node4=new Node("ff80808159ac6d4b0159ac75f2460004", "节点组11", "", "", node1, false, 2);
+        node5=new Node("ff80808159ac6d4b0159ac7645970005", "节点111", "ddd", "", node4, true, 1);
+        node6=new Node("ff80808159ac6d4b0159ac7688580006", "节点2", "eee", "", null, false, 1);
     }
     
     @Before
@@ -78,42 +78,42 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
     public void testGetChilds_String() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChilds(node1.getUuid()).size()==2);
+        assertTrue(nd.getChilds(node1).size()==2);
     }
 
     @Test
     public void testGetChilds_String_boolean() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChilds(node1.getUuid(), true).size()==1);
+        assertTrue(nd.getChilds(node1, true).size()==1);
     }
 
     @Test
     public void testGetChildsByType_String_int() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChildsByType(node1.getUuid(), 1).size()==1);
+        assertTrue(nd.getChildsByType(node1, 1).size()==1);
     }
 
     @Test
     public void testGetChildsByType_3args() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChildsByType(node1.getUuid(), 2, false).size()==1);
+        assertTrue(nd.getChildsByType(node1, 2, false).size()==1);
     }
 
     @Test
     public void testGetAllChilds_String() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getAllChilds(node1.getUuid()).toList().size()==3);
+        assertTrue(nd.getAllChilds(node1).toList().size()==3);
     }
 
     @Test
     public void testGetAllChilds_String_boolean() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getAllChilds(node1.getUuid(),true).toList().size()==1);
+        assertTrue(nd.getAllChilds(node1,true).toList().size()==1);
     }
 /*
     @Test
@@ -177,11 +177,11 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
     public void testUpdateNode() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = node2;
+        Node expect = IDaoFactory.iNodeDao().getNodeById(node2.getUuid());
         expect.setTitle("更新后的标题");
         expect.setAddress("新地址");
         expect.setRemark("新注释");
-        expect.setParentNode(new Node("56987", null, null, null, null, true, 0));
+        expect.setParentNode(node5);
         expect.setNodeType(2);
         expect.setStatus(false);
         nd.updateNode(expect);
@@ -211,7 +211,7 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
         Node expect = node2;
-        expect.setParentNode(new Node("56987", null, null, null, null, true, 0));
+        expect.setParentNode(node5);
         nd.updateNode(expect);
         EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
     }
@@ -230,8 +230,10 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
     public void testDelete_Node() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = node2;
-        nd.delete(expect);
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role"));
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role_node"));
+        Node expect = IDaoFactory.iNodeDao().getNodeById(node2.getUuid());
+        nd.deleteNode(expect);
         assertNull(nd.getNodeById(expect.getUuid()));
         assertTrue(IDaoFactory.iRoleNodeDao().queryByNode(expect).isEmpty());
     }
@@ -240,7 +242,9 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
     public void testAddNode() throws DatabaseUnitException, SQLException {
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.DELETE_ALL.execute(dbUnitConn, ds);
-        Node expect = node2;
+        Node expect = node1;
+        nd.addNode(expect);
+        expect=node2;
         nd.addNode(expect);
         Node result = nd.getNodeById(expect.getUuid());
         EntitiesHelper.assertNode(expect, result);

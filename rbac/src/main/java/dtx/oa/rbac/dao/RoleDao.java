@@ -7,7 +7,6 @@ package dtx.oa.rbac.dao;
 
 import dtx.oa.rbac.basic.BasicDao;
 import dtx.oa.rbac.idao.IRoleDao;
-import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleTree;
 import java.util.List;
@@ -57,7 +56,6 @@ public class RoleDao extends BasicDao implements IRoleDao {
 
     @Override
     public RoleTree getAllRoles(boolean status) {
-//        return getAllChilds(null, status);
         return new RoleTree(getRoots(status),status);
     }
 
@@ -88,7 +86,7 @@ public class RoleDao extends BasicDao implements IRoleDao {
     
     @Override
     public boolean deleteRole(Role role,boolean isDeleteCascade){
-        if(!isDeleteCascade&&(role.getUsers().size()>0||role.getNodes().size()>0))
+        if(!isDeleteCascade&&(role.getRoleUsers().size()>0||role.getRoleNodes().size()>0))
             return false;
         else
             return delete(role);

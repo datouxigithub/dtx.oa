@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -26,32 +27,32 @@ public class Role implements Serializable {
     protected String uuid,roleName,remark;
     protected boolean status;
     protected Role parentRole;
-    protected Set<User> users=new HashSet<>();
+    protected Set<RoleUser> roleUsers=new HashSet<>();
 
-    @ManyToMany
-    @Cascade(CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "rbac_role_user",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "userId")})
-    public Set<User> getUsers() {
-        return users;
+    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER,cascade = {javax.persistence.CascadeType.MERGE,javax.persistence.CascadeType.REMOVE})
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    @JoinTable(name = "rbac_role_user",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "userId")})
+    public Set<RoleUser> getRoleUsers() {
+        return roleUsers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setRoleUsers(Set<RoleUser> roleUsers) {
+        this.roleUsers = roleUsers;
     }
 
-    @ManyToMany
-    @Cascade(CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "rbac_role_node",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "nodeId")})
-    public Set<Node> getNodes() {
-        return nodes;
+    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER,cascade = {javax.persistence.CascadeType.MERGE,javax.persistence.CascadeType.REMOVE})
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    @JoinTable(name = "rbac_role_node",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "nodeId")})
+    public Set<RoleNode> getRoleNodes() {
+        return roleNodes;
     }
 
-    public void setNodes(Set<Node> nodes) {
-        this.nodes = nodes;
+    public void setRoleNodes(Set<RoleNode> roleNodes) {
+        this.roleNodes = roleNodes;
     }
-    protected Set<Node> nodes=new HashSet<>();
+    protected Set<RoleNode> roleNodes=new HashSet<>();
 
-    @ManyToOne(cascade = javax.persistence.CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+    @ManyToOne(cascade = javax.persistence.CascadeType.MERGE,fetch = FetchType.EAGER,optional = true)
     @JoinColumn(name = "parentId",referencedColumnName = "uuid")
     public Role getParentRole() {
         return parentRole;

@@ -89,7 +89,7 @@ public class NodeTree {
     private void init(User user,boolean isDepth){
         INodeDao inDao=IDaoFactory.iNodeDao();
         if(IDaoFactory.iUserDao().isAdmin(user)){
-            Iterator<Node> iter=inDao.getChilds(INodeDao.ROOTID).iterator();
+            Iterator<Node> iter=inDao.getRoots().iterator();
             while(iter.hasNext()){
                 rootLeaves.add(new NodeTreeLeaf((Node)iter.next()));
             }
@@ -100,7 +100,7 @@ public class NodeTree {
     private void init(User user,boolean status,boolean isDepth){
         INodeDao inDao=IDaoFactory.iNodeDao();
         if(IDaoFactory.iUserDao().isAdmin(user)){
-            Iterator<Node> iter=inDao.getChilds(INodeDao.ROOTID).iterator();
+            Iterator<Node> iter=inDao.getRoots().iterator();
             while(iter.hasNext()){
                 rootLeaves.add(new NodeTreeLeaf((Node)iter.next()));
             }

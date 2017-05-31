@@ -56,7 +56,10 @@ public class EntitiesHelper {
         assertEquals(expected.getTitle(), target.getTitle());
         assertEquals(expected.getAddress(), target.getAddress());
         assertEquals(expected.getNodeType(), target.getNodeType());
-        assertEquals(expected.getParentNode().getUuid(), target.getParentNode().getUuid());
+        if(expected.getParentNode()!=null)
+            assertEquals(expected.getParentNode().getUuid(), target.getParentNode().getUuid());
+        else
+            assertNull(target.getParentNode());
         assertEquals(expected.getRemark(), target.getRemark());
         assertEquals(expected.getStatus(), target.getStatus());
     }

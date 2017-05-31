@@ -43,7 +43,8 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     @Before
     public void setUp() throws DataSetException, IOException {
         rd=IDaoFactory.iRoleDao();
-        backupCustomTables(tables);
+//        backupCustomTables(tables);
+        backupCustomTables(new String[]{tableName,"rbac_user","rbac_role_user","rbac_role_node"});
     }
     
     @After
@@ -166,9 +167,12 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
 
     @Test
     public void testDeleteRole() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Role expect=role3;
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet(tableName));
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_user"));
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_node"));
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role_user"));
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role_node"));
+        Role expect=IDaoFactory.iRoleDao().getRoleById(role3.getUuid());
         rd.deleteRole(expect);
         assertNull(rd.getRoleById(expect.getUuid()));
         assertTrue(IDaoFactory.iRoleUserDao().queryByRole(expect).isEmpty());

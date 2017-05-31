@@ -8,12 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -28,20 +25,20 @@ public class Node implements Serializable {
     protected boolean status;
     protected int nodeType;
     protected Node parentNode;
-    protected Set<Role> roles=new HashSet<>();
+    protected Set<RoleNode> roleNodes=new HashSet<>();
 
-    @ManyToMany
-    @Cascade(CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "rbac_role_node",joinColumns = {@JoinColumn(name = "nodeId")},inverseJoinColumns = {@JoinColumn(name = "roleId")})
-    public Set<Role> getRoles() {
-        return roles;
+    @OneToMany(mappedBy = "node",cascade = {javax.persistence.CascadeType.MERGE,javax.persistence.CascadeType.REMOVE})
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    @JoinTable(name = "rbac_role_node",joinColumns = {@JoinColumn(name = "nodeId")},inverseJoinColumns = {@JoinColumn(name = "roleId")})
+    public Set<RoleNode> getRoleNodes() {
+        return roleNodes;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoleNodes(Set<RoleNode> roleNodes) {
+        this.roleNodes = roleNodes;
     }
 
-    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+    @ManyToOne(cascade = javax.persistence.CascadeType.MERGE)
     @JoinColumn(name = "parentId",referencedColumnName = "uuid")
     public Node getParentNode() {
         return parentNode;

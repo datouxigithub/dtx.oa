@@ -24,24 +24,32 @@ public interface INodeDao extends IBasicDao{
 
     public List<Node> getByType(int nodeType);
 
-    public List<Node> getChilds(String parentId);
+//    public List<Node> getChilds(String parentId);
     public List<Node> getChilds(Node parentNode);
 
-    public List<Node> getChilds(String parentId,boolean status);
+//    public List<Node> getChilds(String parentId,boolean status);
     public List<Node> getChilds(Node parentNode,boolean status);
 
-    public List<Node> getChildsByType(String parentId,int nodeType);
+//    public List<Node> getChildsByType(String parentId,int nodeType);
     public List<Node> getChildsByType(Node parentNode,int nodeType);
 
-    public List<Node> getChildsByType(String parentId,int nodeType,boolean status);
+//    public List<Node> getChildsByType(String parentId,int nodeType,boolean status);
     public List<Node> getChildsByType(Node parentNode,int nodeType,boolean status);
 
-    public NodeTree getAllChilds(String parentId);
+//    public NodeTree getAllChilds(String parentId);
     public NodeTree getAllChilds(Node parentNode);
 
-    public NodeTree getAllChilds(String parentId,boolean status);
+//    public NodeTree getAllChilds(String parentId,boolean status);
     public NodeTree getAllChilds(Node parentNode,boolean status);
 
+    public List<Node> getRoots();
+    
+    public List<Node> getRoots(boolean status);
+    
+    public List<Node> getRoots(int nodeType);
+    
+    public List<Node> getRoots(boolean status,int nodeType);
+    
     public NodeTree getAllNodes();
 
     public NodeTree getAllNodes(boolean status);

@@ -6,6 +6,7 @@
 package dtx.oa.rbac.idao;
 
 import dtx.oa.rbac.idao.factory.IDaoFactory;
+import dtx.oa.rbac.model.RoleUser;
 import dtx.oa.rbac.model.User;
 import dtx.oa.util.AbstractDBUnitTestCase;
 import dtx.oa.util.EntitiesHelper;
@@ -51,7 +52,7 @@ public class TestUserDao extends AbstractDBUnitTestCase{
     public void setup() throws DataSetException, IOException{
         dbUnitConn.getConfig().setProperty(DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, true);
         ud=IDaoFactory.iUserDao();
-        backupCustomTables(new String[]{tableName,"rbac_role_user"});
+        backupCustomTables(new String[]{tableName,"rbac_role","rbac_role_user"});
     }
 
     @Test
@@ -101,10 +102,16 @@ public class TestUserDao extends AbstractDBUnitTestCase{
     public void testDeleteUser() throws DatabaseUnitException, SQLException{
         IDataSet ds = createDataSet(tableName);
         DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role"));
+        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role_user"));
         User target = ud.getUserByAccount(expectUser1.getAccount());
+        User testUser=ud.getUserByAccount(expectUser2.getAccount());
         ud.deleteUser(target);
+        List<RoleUser> rus=IDaoFactory.iRoleUserDao().queryByUser(target);
         target = ud.getUserByAccount(expectUser1.getAccount());
         assertNull(target);
+        assertTrue(rus.isEmpty());
+        assertTrue(IDaoFactory.iRoleUserDao().queryByUser(testUser).size()==2);
     }
     
     @Test

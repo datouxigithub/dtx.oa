@@ -32,77 +32,49 @@ public class NodeDao extends BasicDao implements INodeDao {
     public List<Node> getByType(int nodeType) {
         return executeQuery("FROM Node node WHERE node.nodeType=?", new Object[]{nodeType});
     }
-
-    @Override
-    public List<Node> getChilds(String parentId) {
-        return executeQuery("FROM Node node WHERE node.parentId=?", new Object[]{parentId});
-    }
     
     @Override
     public List<Node> getChilds(Node parentNode) {
-        return getChilds(parentNode.getUuid());
+        return executeQuery("FROM Node node WHERE node.parentNode=?", new Object[]{parentNode});
     }
 
-    @Override
-    public List<Node> getChilds(String parentId, boolean status) {
-        return executeQuery("FROM Node node WHERE node.parentId=? AND node.status=?", new Object[]{parentId,status});
-    }
-    
     @Override
     public List<Node> getChilds(Node parentNode,boolean status) {
-        return getChilds(parentNode.getUuid(),status);
+        return executeQuery("FROM Node node WHERE node.parentNode=? AND node.status=?", new Object[]{parentNode,status});
     }
 
-    @Override
-    public List<Node> getChildsByType(String parentId, int nodeType) {
-        return executeQuery("FROM Node node WHERE node.parentId=? AND node.nodeType=?", new Object[]{parentId,nodeType});
-    }
-    
     @Override
     public List<Node> getChildsByType(Node parentNode,int nodeType) {
-        return getChildsByType(parentNode.getUuid(),nodeType);
+        return executeQuery("FROM Node node WHERE node.parentNode=? AND node.nodeType=?", new Object[]{parentNode,nodeType});
     }
 
-    @Override
-    public List<Node> getChildsByType(String parentId, int nodeType, boolean status) {
-        return executeQuery("FROM Node node WHERE node.parentId=? AND node.nodeType=? AND node.status=?", new Object[]{parentId,nodeType,status});
-    }
-    
     @Override
     public List<Node> getChildsByType(Node parentNode, int nodeType, boolean status) {
-        return getChildsByType(parentNode, nodeType, status);
+        return executeQuery("FROM Node node WHERE node.parentNode=? AND node.nodeType=? AND node.status=?", new Object[]{parentNode,nodeType,status});
     }
 
-    @Override
-    public NodeTree getAllChilds(String parentId) {
-        List<Node> childs=getChilds(parentId);
-        return new NodeTree(childs.toArray(new Node[childs.size()]));
-    }
-    
     @Override
     public NodeTree getAllChilds(Node parentNode) {
-        return getAllChilds(parentNode.getUuid());
+        List<Node> childs=getChilds(parentNode);
+        return new NodeTree(childs.toArray(new Node[childs.size()]));
     }
 
     @Override
-    public NodeTree getAllChilds(String parentId, boolean status) {
-        List<Node> nodes=getChilds(parentId, status);
-        return new NodeTree(nodes.toArray(new Node[nodes.size()]), status);
-    }
-    
-    @Override
     public NodeTree getAllChilds(Node parentNode,boolean status) {
-        return getAllChilds(parentNode, status);
+        List<Node> nodes=getChilds(parentNode, status);
+        return new NodeTree(nodes.toArray(new Node[nodes.size()]), status);
     }
 
     @Override
     public NodeTree getAllNodes() {
-        return getAllChilds(INodeDao.ROOTID);
+        List<Node> nodes=getRoots();
+        return new NodeTree(nodes.toArray(new Node[nodes.size()]));
     }
 
     @Override
     public NodeTree getAllNodes(boolean status) {
-        return getAllChilds(INodeDao.ROOTID, status);
+        List<Node> nodes=getRoots(status);
+        return new NodeTree(nodes.toArray(new Node[nodes.size()]),status);
     }
 
     @Override
@@ -147,7 +119,7 @@ public class NodeDao extends BasicDao implements INodeDao {
     
     @Override
     public boolean deleteNode(Node node,boolean isDeleteCascade){
-        if(!isDeleteCascade&&node.getRoles().size()>0)
+        if(!isDeleteCascade&&node.getRoleNodes().size()>0)
             return false;
         else
             return delete(node);
@@ -156,6 +128,26 @@ public class NodeDao extends BasicDao implements INodeDao {
     @Override
     public String addNode(Node node) {
         return (String) add(node);
+    }
+
+    @Override
+    public List<Node> getRoots() {
+        return executeQuery("FROM Node node WHERE node.parentNode IS NULL", null);
+    }
+
+    @Override
+    public List<Node> getRoots(boolean status) {
+        return executeQuery("FROM Node node WHERE node.parentNode IS NULL AND node.status=?", new Object[]{status});
+    }
+
+    @Override
+    public List<Node> getRoots(int nodeType) {
+        return executeQuery("FROM Node node WHERE node.parentNode IS NULL AND node.nodeType=?", new Object[]{nodeType});
+    }
+
+    @Override
+    public List<Node> getRoots(boolean status, int nodeType) {
+        return executeQuery("FROM Node node WHERE node.parentNode IS NULL AND node.status=? AND node.nodeType=?", new Object[]{status,nodeType});
     }
     
 }

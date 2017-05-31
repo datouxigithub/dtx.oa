@@ -6,13 +6,13 @@
 package dtx.oa.rbac.dao;
 
 import dtx.oa.rbac.basic.BasicDao;
-import dtx.oa.rbac.idao.IRoleDao;
 import dtx.oa.rbac.idao.IRoleUserDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.Role;
 import dtx.oa.rbac.model.RoleUser;
 import dtx.oa.rbac.model.User;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,15 @@ public class RoleUserDao extends BasicDao implements IRoleUserDao {
     @Override
     public List<Role> getRoleByUser(User user) {
         if(IDaoFactory.iUserDao().isAdmin(user))
-            return IDaoFactory.iRoleDao().getChilds(null);
-        else
-            return new ArrayList<Role>(user.getRoles());
+            return IDaoFactory.iRoleDao().getRoots();
+        else{
+            List<Role> roles=new ArrayList<>();
+            Iterator<RoleUser> iter=user.getRoleUsers().iterator();
+            while(iter.hasNext()){
+                roles.add(iter.next().getRole());
+            }
+            return roles;
+        }
     }
 
     @Override
@@ -84,8 +90,10 @@ public class RoleUserDao extends BasicDao implements IRoleUserDao {
 
     @Override
     public void addRoleUsers(User user, List<Role> roles) {
+        List<RoleUser> rus=new ArrayList<>();
         for(Role role:roles)
-            if(addRoleUser(user, role)==null)return;
+            rus.add(new RoleUser(null, user, role));
+        add(rus);
     }
     
 }

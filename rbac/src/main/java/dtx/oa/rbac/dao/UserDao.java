@@ -66,7 +66,7 @@ public class UserDao extends BasicDao implements IUserDao{
 
     @Override
     public boolean deleteUser(User user, boolean isDeleteCascade) {
-        if(!isDeleteCascade&&user.getRoles().size()>0)
+        if(!isDeleteCascade&&user.getRoleUsers().size()>0)
             return false;
         else
             return delete(user);

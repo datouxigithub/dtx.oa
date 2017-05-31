@@ -31,7 +31,7 @@ public class NodeTreeLeaf {
         this.entityNode=node;
         leaves=new ArrayList<>();
         if(isDepth){
-            List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid());
+            List<Node> childs=IDaoFactory.iNodeDao().getChilds(node);
             for(Node child:childs){
                 leaves.add(new NodeTreeLeaf(child));
             }
@@ -47,7 +47,7 @@ public class NodeTreeLeaf {
         this.entityNode=node;
         leaves=new ArrayList<>();
         if(isDepth){
-            List<Node> childs=IDaoFactory.iNodeDao().getChildsByType(node.getUuid(), nodeType);
+            List<Node> childs=IDaoFactory.iNodeDao().getChildsByType(node, nodeType);
             for(Node child:childs){
                 leaves.add(new NodeTreeLeaf(child, nodeType));
             }
@@ -63,7 +63,7 @@ public class NodeTreeLeaf {
         this.entityNode=node;
         leaves=new ArrayList<>();
         if(isDepth){
-            List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid(), status);
+            List<Node> childs=IDaoFactory.iNodeDao().getChilds(node, status);
             for(Node child:childs){
                 leaves.add(new NodeTreeLeaf(child,status));
             }
@@ -79,7 +79,7 @@ public class NodeTreeLeaf {
         this.entityNode=node;
         leaves=new ArrayList<>();
         if(isDepth){
-            List<Node> childs=IDaoFactory.iNodeDao().getChilds(node.getUuid(), status);
+            List<Node> childs=IDaoFactory.iNodeDao().getChilds(node, status);
             for(Node child:childs){
                 if(child.getNodeType()==nodeType)
                     leaves.add(new NodeTreeLeaf(child, status, nodeType));
