@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author datouxi
  */
 public class ApplicationContextUtil {
-    private final static ApplicationContext appContext=new ClassPathXmlApplicationContext("beans.xml");
+    private final static ApplicationContext appContext=new ClassPathXmlApplicationContext("rbac_beans.xml");
     
     public static ApplicationContext getApplicationContext(){
         return appContext;
