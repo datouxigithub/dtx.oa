@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,7 +39,7 @@ public class Node implements Serializable {
         this.roleNodes = roleNodes;
     }
 
-    @ManyToOne(cascade = javax.persistence.CascadeType.MERGE)
+    @ManyToOne(cascade = javax.persistence.CascadeType.MERGE,fetch = FetchType.EAGER,optional = true)
     @JoinColumn(name = "parentId",referencedColumnName = "uuid")
     public Node getParentNode() {
         return parentNode;

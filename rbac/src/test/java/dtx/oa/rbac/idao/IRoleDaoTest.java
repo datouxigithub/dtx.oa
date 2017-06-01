@@ -44,7 +44,7 @@ public class IRoleDaoTest extends AbstractDBUnitTestCase{
     public void setUp() throws DataSetException, IOException {
         rd=IDaoFactory.iRoleDao();
 //        backupCustomTables(tables);
-        backupCustomTables(new String[]{tableName,"rbac_user","rbac_role_user","rbac_role_node"});
+        backupCustomTables(new String[]{tableName,"rbac_user","rbac_node","rbac_role_user","rbac_role_node"});
     }
     
     @After

@@ -9,7 +9,6 @@ import dtx.oa.rbac.idao.IRBACDao;
 import dtx.oa.rbac.idao.factory.IDaoFactory;
 import dtx.oa.rbac.model.Node;
 import dtx.oa.rbac.model.NodeTree;
-import dtx.oa.rbac.model.NodeTreeLeaf;
 import dtx.oa.rbac.model.RoleTree;
 import dtx.oa.rbac.model.User;
 import dtx.oa.util.StringUtil;
@@ -43,8 +42,7 @@ public class RBACDao implements IRBACDao {
     public boolean accessDecision(String nodeId) {
         if(!isLogin())return false;
         if(IDaoFactory.iUserDao().isAdmin(loginInfo))return true;
-        NodeTreeLeaf leaf=nodeTree.find(nodeId);
-        return leaf != null;
+        return nodeTree.find(nodeId) != null;
     }
 
     @Override

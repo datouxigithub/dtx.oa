@@ -51,70 +51,70 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         resumeTable();
     }
     
-    @Test
-    public void testGetNodeById() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = node2;
-        Node result = nd.getNodeById(expect.getUuid());
-        EntitiesHelper.assertNode(expect, result);
-    }
-
-    @Test
-    public void testGetByStatus() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getByStatus(true).size()==3);
-    }
-
-    @Test
-    public void testGetByType() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getByType(2).size()==2);
-    }
-
-    @Test
-    public void testGetChilds_String() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChilds(node1).size()==2);
-    }
-
-    @Test
-    public void testGetChilds_String_boolean() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChilds(node1, true).size()==1);
-    }
-
-    @Test
-    public void testGetChildsByType_String_int() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChildsByType(node1, 1).size()==1);
-    }
-
-    @Test
-    public void testGetChildsByType_3args() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getChildsByType(node1, 2, false).size()==1);
-    }
-
-    @Test
-    public void testGetAllChilds_String() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getAllChilds(node1).toList().size()==3);
-    }
-
-    @Test
-    public void testGetAllChilds_String_boolean() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getAllChilds(node1,true).toList().size()==1);
-    }
+//    @Test
+//    public void testGetNodeById() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        Node expect = node2;
+//        Node result = nd.getNodeById(expect.getUuid());
+//        EntitiesHelper.assertNode(expect, result);
+//    }
+//
+//    @Test
+//    public void testGetByStatus() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getByStatus(true).size()==3);
+//    }
+//
+//    @Test
+//    public void testGetByType() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getByType(2).size()==2);
+//    }
+//
+//    @Test
+//    public void testGetChilds_String() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getChilds(node1).size()==2);
+//    }
+//
+//    @Test
+//    public void testGetChilds_String_boolean() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getChilds(node1, true).size()==1);
+//    }
+//
+//    @Test
+//    public void testGetChildsByType_String_int() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getChildsByType(node1, 1).size()==1);
+//    }
+//
+//    @Test
+//    public void testGetChildsByType_3args() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getChildsByType(node1, 2, false).size()==1);
+//    }
+//
+//    @Test
+//    public void testGetAllChilds_String() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getAllChilds(node1).toList().size()==3);
+//    }
+//
+//    @Test
+//    public void testGetAllChilds_String_boolean() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getAllChilds(node1,true).toList().size()==1);
+//    }
 /*
     @Test
     public void testGetAllChildsByType_String_int() throws DatabaseUnitException, SQLException {
@@ -130,19 +130,19 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         assertTrue(nd.getAllChildsByType(node1.getUuid(), 1,false).toList().isEmpty());
     }
 */
-    @Test
-    public void testGetAllNodes_0args() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getAllNodes().toList().size()==6);
-    }
-
-    @Test
-    public void testGetAllNodes_boolean() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getAllNodes(true).toList().size()==2);
-    }
+//    @Test
+//    public void testGetAllNodes_0args() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getAllNodes().toList().size()==6);
+//    }
+//
+//    @Test
+//    public void testGetAllNodes_boolean() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getAllNodes(true).toList().size()==2);
+//    }
 /*
     @Test
     public void testGetAllNodesByType_int() throws DatabaseUnitException, SQLException {
@@ -159,94 +159,94 @@ public class INodeDaoTest extends AbstractDBUnitTestCase{
         assertTrue(nd.getAllNodesByType(2, true).toList().size()==1);
     }
 */
-    @Test
-    public void testGetNodeTypes() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertTrue(nd.getNodeTypes().entrySet().size()==2);
-    }
-
-    @Test
-    public void testGetParentId() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        assertEquals(node5.getParentNode().getUuid(), node4.getUuid());
-    }
-
-    @Test
-    public void testUpdateNode() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = IDaoFactory.iNodeDao().getNodeById(node2.getUuid());
-        expect.setTitle("更新后的标题");
-        expect.setAddress("新地址");
-        expect.setRemark("新注释");
-        expect.setParentNode(node5);
-        expect.setNodeType(2);
-        expect.setStatus(false);
-        nd.updateNode(expect);
-        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
-        
-        expect.setTitle("");
-        expect.setRemark(null);
-        expect.setParentNode(null);
-        nd.updateNode(expect);
-        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
-    }
-
-    @Test
-    public void testUpdateNodeMessage() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = node2;
-        expect.setTitle("更新后的标题");
-        expect.setAddress("新地址");
-        expect.setRemark("新注释");
-        nd.updateNode(expect);
-        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
-    }
-
-    @Test
-    public void testUpdateParent() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = node2;
-        expect.setParentNode(node5);
-        nd.updateNode(expect);
-        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
-    }
-
-    @Test
-    public void testUpdateStatus() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        Node expect = node2;
-        expect.setStatus(false);
-        nd.updateNode(expect);
-        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
-    }
-
-    @Test
-    public void testDelete_Node() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role"));
-        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role_node"));
-        Node expect = IDaoFactory.iNodeDao().getNodeById(node2.getUuid());
-        nd.deleteNode(expect);
-        assertNull(nd.getNodeById(expect.getUuid()));
-        assertTrue(IDaoFactory.iRoleNodeDao().queryByNode(expect).isEmpty());
-    }
-
-    @Test
-    public void testAddNode() throws DatabaseUnitException, SQLException {
-        IDataSet ds = createDataSet(tableName);
-        DatabaseOperation.DELETE_ALL.execute(dbUnitConn, ds);
-        Node expect = node1;
-        nd.addNode(expect);
-        expect=node2;
-        nd.addNode(expect);
-        Node result = nd.getNodeById(expect.getUuid());
-        EntitiesHelper.assertNode(expect, result);
-    }
+//    @Test
+//    public void testGetNodeTypes() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertTrue(nd.getNodeTypes().entrySet().size()==2);
+//    }
+//
+//    @Test
+//    public void testGetParentId() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        assertEquals(node5.getParentNode().getUuid(), node4.getUuid());
+//    }
+//
+//    @Test
+//    public void testUpdateNode() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        Node expect = IDaoFactory.iNodeDao().getNodeById(node2.getUuid());
+//        expect.setTitle("更新后的标题");
+//        expect.setAddress("新地址");
+//        expect.setRemark("新注释");
+//        expect.setParentNode(node5);
+//        expect.setNodeType(2);
+//        expect.setStatus(false);
+//        nd.updateNode(expect);
+//        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
+//        
+//        expect.setTitle("");
+//        expect.setRemark(null);
+//        expect.setParentNode(null);
+//        nd.updateNode(expect);
+//        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
+//    }
+//
+//    @Test
+//    public void testUpdateNodeMessage() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        Node expect = node2;
+//        expect.setTitle("更新后的标题");
+//        expect.setAddress("新地址");
+//        expect.setRemark("新注释");
+//        nd.updateNode(expect);
+//        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
+//    }
+//
+//    @Test
+//    public void testUpdateParent() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        Node expect = node2;
+//        expect.setParentNode(node5);
+//        nd.updateNode(expect);
+//        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
+//    }
+//
+//    @Test
+//    public void testUpdateStatus() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        Node expect = node2;
+//        expect.setStatus(false);
+//        nd.updateNode(expect);
+//        EntitiesHelper.assertNode(expect, nd.getNodeById(expect.getUuid()));
+//    }
+//
+//    @Test
+//    public void testDelete_Node() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, ds);
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role"));
+//        DatabaseOperation.CLEAN_INSERT.execute(dbUnitConn, createDataSet("rbac_role_node"));
+//        Node expect = IDaoFactory.iNodeDao().getNodeById(node2.getUuid());
+//        nd.deleteNode(expect);
+//        assertNull(nd.getNodeById(expect.getUuid()));
+//        assertTrue(IDaoFactory.iRoleNodeDao().queryByNode(expect).isEmpty());
+//    }
+//
+//    @Test
+//    public void testAddNode() throws DatabaseUnitException, SQLException {
+//        IDataSet ds = createDataSet(tableName);
+//        DatabaseOperation.DELETE_ALL.execute(dbUnitConn, ds);
+//        Node expect = node1;
+//        nd.addNode(expect);
+//        expect=node2;
+//        nd.addNode(expect);
+//        Node result = nd.getNodeById(expect.getUuid());
+//        EntitiesHelper.assertNode(expect, result);
+//    }
 }
