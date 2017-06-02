@@ -1,0 +1,8 @@
+2017-06-02 15:46:48 [ main:0 ] - [ DEBUG ] Adding [systemProperties] PropertySource with lowest search precedence
+2017-06-02 15:46:48 [ main:2 ] - [ DEBUG ] Adding [systemEnvironment] PropertySource with lowest search precedence
+2017-06-02 15:46:48 [ main:2 ] - [ DEBUG ] Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+2017-06-02 15:46:48 [ main:5 ] - [ INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3f102e87: startup date [Fri Jun 02 15:46:48 CST 2017]; root of context hierarchy
+2017-06-02 15:46:48 [ main:31 ] - [ DEBUG ] Adding [systemProperties] PropertySource with lowest search precedence
+2017-06-02 15:46:48 [ main:31 ] - [ DEBUG ] Adding [systemEnvironment] PropertySource with lowest search precedence
+2017-06-02 15:46:48 [ main:32 ] - [ DEBUG ] Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+2017-06-02 15:46:48 [ main:37 ] - [ INFO ] Loading XML bean definitions from class path resource [testbeans.xml]
