@@ -11,8 +11,6 @@ import dtx.oa.workflow.model.CustomFormClassModel;
 import dtx.oa.workflow.model.CustomFormInfoModel;
 import dtx.oa.workflow.model.DefaultUserForm;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,7 +41,7 @@ import org.json.JSONObject;
  */
 public class FormDesign {
     
-    public final static String PACKAGE="dtx.test.activiti.web.model";
+    public final static String PACKAGE="dtx.oa.workflow.model";
     
     public CustomFormInfoModel parseForm(String customName,String template){
         CustomFormInfoModel customForm=new CustomFormInfoModel();
