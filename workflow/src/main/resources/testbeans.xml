@@ -103,6 +103,12 @@
     <bean id="customFormInfoDao" class="dtx.oa.workflow.dao.CustomFormInfoDao">
         <property name="sessionFactory" ref="dynamicSessionFactory" />
     </bean>
+    <bean id="userFormDao" class="dtx.oa.workflow.dao.UserFormDao">
+        <property name="sessionFactory" ref="dynamicSessionFactory" />
+    </bean>
+    <bean id="approverOptionDao" class="dtx.oa.workflow.dao.ApproverOptionDao">
+        <property name="sessionFactory" ref="dynamicSessionFactory" />
+    </bean>
     <bean id="customClassLoader" class="dtx.oa.workflow.app.CustomClassLoader" />
     <bean id="customFormClassHelper" class="dtx.oa.workflow.app.CustomFormClassHelper">
         <property name="customClassLoader" ref="customClassLoader" />

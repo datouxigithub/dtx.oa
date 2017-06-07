@@ -23,12 +23,17 @@ public interface IBasicDao {
     public List executeQuery(String hql,Object[] args,int pageNow,int pageSize);
     //添加对象
     public Serializable add(Object obj);
+    public Serializable add(Object obj,boolean isRollback);
     //批量添加
     public void add(List objs);
+    public void add(List objs,boolean isRollback);
     //更新对象
     public boolean update(Object obj);
+    public boolean update(Object obj,boolean isRollback);
     //更新\删除对象
     public int update(String hql,Object[] args);
+    public int update(String hql,Object[] args,boolean isRollback);
     //删除对象
     public boolean delete(Object obj);
+    public boolean delete(Object obj,boolean isRollback);
 }

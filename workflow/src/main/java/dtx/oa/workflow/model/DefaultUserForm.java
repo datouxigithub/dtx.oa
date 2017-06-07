@@ -1,24 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dtx.oa.workflow.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- *
- * @author gg
- */
 @MappedSuperclass
-public class DefaultUserForm implements Serializable {
-    private int id,uid,foreignId,updateTime,dateLine;
+public abstract class DefaultUserForm implements Serializable {
+    private int id;
     private boolean isDel;
+    private Date startDate,dateLine;
+
+    @Column(nullable = false,columnDefinition = "timestamp default current_timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getDateLine() {
+        return dateLine;
+    }
+
+    public void setDateLine(Date dateLine) {
+        this.dateLine = dateLine;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,38 +46,7 @@ public class DefaultUserForm implements Serializable {
         this.id = id;
     }
 
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public int getForeignId() {
-        return foreignId;
-    }
-
-    public void setForeignId(int foreignId) {
-        this.foreignId = foreignId;
-    }
-
-    public int getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(int updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public int getDateLine() {
-        return dateLine;
-    }
-
-    public void setDateLine(int dateLine) {
-        this.dateLine = dateLine;
-    }
-
+    @Column(nullable = false,columnDefinition = "tinyint default 0")
     public boolean isIsDel() {
         return isDel;
     }

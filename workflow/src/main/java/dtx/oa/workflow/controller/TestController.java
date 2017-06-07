@@ -9,12 +9,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dtx.oa.workflow.app.ManageTaskListener;
 import dtx.oa.workflow.dao.TestDao;
+import dtx.oa.workflow.idao.IApproverOptionDao;
 import dtx.oa.workflow.idao.ICustomFormInfoDao;
+import dtx.oa.workflow.idao.IUserFormDao;
 import dtx.oa.workflow.model.ApproverOptionModel;
 import dtx.oa.workflow.model.CustomFormInfoModel;
 import dtx.oa.workflow.model.DefaultUserForm;
 import dtx.oa.workflow.util.EntityUtil;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import javassist.CannotCompileException;
 import javax.servlet.http.HttpServletRequest;
@@ -57,15 +60,18 @@ public class TestController {
     @RequestMapping(value = "submit",method = RequestMethod.POST)
     public void submit(@ModelAttribute("userForm") DefaultUserForm userForm,HttpServletRequest request,HttpServletResponse response) throws IOException, IllegalArgumentException, IllegalAccessException, CannotCompileException, ReflectiveOperationException{
         EntityUtil.getDynamicSessionFactory().createNewSessionFactory(userForm.getClass());
-        TestDao dao=(TestDao) EntityUtil.getContext().getBean("testDao");
-        dao.save(userForm, EntityUtil.getDynamicSessionFactory());
-        ApproverOptionModel option=new ApproverOptionModel();
-        option.setAppvoer(ManageTaskListener.sampleUsers.pop());
-        option.setComment(request.getParameter("comment"));
-        option.setApprolDate(new Date());
-        option.setUserFormId(userForm.getClass().getSimpleName()+"."+userForm.getId());
-        dao.save(option, EntityUtil.getDynamicSessionFactory());
-        response.getWriter().write(option.toString());
+//        TestDao dao=(TestDao) EntityUtil.getContext().getBean("testDao");
+        IUserFormDao iUserDao=(IUserFormDao) EntityUtil.getContext().getBean("userFormDao");
+        Serializable result=iUserDao.add(userForm);
+        response.getWriter().write(result.toString());
+//        ApproverOptionModel option=new ApproverOptionModel();
+//        option.setAppvoer(ManageTaskListener.sampleUsers.pop());
+//        option.setComment(request.getParameter("comment"));
+//        option.setApprolDate(new Date());
+//        option.setUserFormId(userForm.getClass().getSimpleName()+"."+userForm.getId());
+//        IApproverOptionDao iApproverDao=(IApproverOptionDao) EntityUtil.getContext().getBean("approverOptionDao");
+//        iApproverDao.add(option);
+//        response.getWriter().write(option.toString());
     }
     
     @RequestMapping(value = "run/{modelId}")

@@ -12,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -52,25 +53,29 @@ public abstract class BasicDao implements IBasicDao{
 
     @Override
     public Serializable add(Object obj) {
-        return sessionFactory.getCurrentSession().save(obj);
+        return add(obj, true);
+    }
+    
+    @Override
+    public Serializable add(Object obj,boolean isRollback) {
+        Session session=sessionFactory.getCurrentSession();
+        try{
+            return session.save(obj);
+        }catch(HibernateException e){
+            if(isRollback&&session.getTransaction()!=null)
+                session.getTransaction().rollback();
+            throw e;
+        }
     }
     
     @Override 
     public void add(List objs){
-        Session session=sessionFactory.getCurrentSession();
-        for(Object obj:objs)
-            session.persist(obj);
+        add(objs, true);
     }
 
     @Override
     public int update(String hql, Object[] args) {
-        Query query=sessionFactory.getCurrentSession().createQuery(hql);
-        if(args!=null&&args.length>0){
-            for(int i=0,len=args.length;i<len;i++){
-                query.setParameter(i, args[i]);
-            }
-        }
-        return query.executeUpdate();
+        return update(hql, args, true);
     }
 
     @Override
@@ -86,10 +91,18 @@ public abstract class BasicDao implements IBasicDao{
 
     @Override
     public boolean update(Object obj) {
+        return update(obj, true);
+    }
+    
+    @Override
+    public boolean update(Object obj,boolean isRollback) {
+        Session session=sessionFactory.getCurrentSession();
         try{
-            sessionFactory.getCurrentSession().update(obj);
+            session.update(obj);
             return true;
         }catch(HibernateException e){
+            if(isRollback&&session.getTransaction()!=null)
+                session.getTransaction().rollback();
             LogUtil.getLogger().error(e);
             return false;
         }
@@ -97,8 +110,21 @@ public abstract class BasicDao implements IBasicDao{
     
     @Override
     public boolean delete(Object obj){
-        sessionFactory.getCurrentSession().delete(obj);
-        return true;
+        return delete(obj, true);
+    }
+    
+    @Override
+    public boolean delete(Object obj,boolean isRollback){
+        Session session=sessionFactory.getCurrentSession();
+        try{
+            session.delete(obj);
+            return true;
+        }catch(HibernateException ex){
+            if(isRollback&&session.getTransaction()!=null)
+                session.getTransaction().rollback();
+            LogUtil.getLogger().error(ex);
+            return false;
+        }
     }
 
     /**
@@ -106,6 +132,41 @@ public abstract class BasicDao implements IBasicDao{
      */
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public void add(List objs, boolean isRollback) {
+        Session session=sessionFactory.getCurrentSession();
+        for(Object obj:objs){
+            try{
+                session.persist(obj);
+            }catch(HibernateException e){
+                if(isRollback&&session.getTransaction()!=null)
+                    session.getTransaction().rollback();
+                LogUtil.getLogger().error(e);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public int update(String hql, Object[] args, boolean isRollback) {
+        Session session=sessionFactory.getCurrentSession();
+        Query query=session.createQuery(hql);
+        if(args!=null&&args.length>0){
+            for(int i=0,len=args.length;i<len;i++){
+                query.setParameter(i, args[i]);
+            }
+        }
+        try{
+            return query.executeUpdate();
+        }catch(HibernateException e){
+            if(isRollback&&session.getTransaction()!=null)
+                session.getTransaction().rollback();
+            LogUtil.getLogger().error(e);
+            return 0;
+        }
+        
     }
     
 }
