@@ -9,8 +9,6 @@ import dtx.oa.workflow.util.EntityUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import javassist.CannotCompileException;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 public class UserFormDao extends BasicDao implements IUserFormDao{
     
@@ -35,10 +33,7 @@ public class UserFormDao extends BasicDao implements IUserFormDao{
             throw new RuntimeException("保存的对象必须为DefaultUserForm类型");
         }
         loadClass(obj.getClass().getName());
-//        return super.add(obj);
-        Session session=sessionFactory.getCurrentSession();
-        Serializable result=session.save(obj);
-        return result;
+        return super.add(obj);
     }
 
     @Override

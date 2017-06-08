@@ -12,7 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -26,12 +26,12 @@ public abstract class BasicDao implements IBasicDao{
     
     @Override
     public Object findById(Class clazz,Serializable id) {
-        return sessionFactory.getCurrentSession().get(clazz, id);
+        return SessionFactoryUtils.getSession(sessionFactory, false).get(clazz, id);
     }
 
     @Override
     public List executeQuery(String hql, Object[] args) {
-        Query query=sessionFactory.getCurrentSession().createQuery(hql);
+        Query query=SessionFactoryUtils.getSession(sessionFactory, false).createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -42,7 +42,7 @@ public abstract class BasicDao implements IBasicDao{
 
     @Override
     public List executeQuery(String hql, Object[] args, int pageNow, int pageSize) {
-        Query query=sessionFactory.getCurrentSession().createQuery(hql);
+        Query query=SessionFactoryUtils.getSession(sessionFactory, false).createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -58,7 +58,7 @@ public abstract class BasicDao implements IBasicDao{
     
     @Override
     public Serializable add(Object obj,boolean isRollback) {
-        Session session=sessionFactory.getCurrentSession();
+        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
         try{
             return session.save(obj);
         }catch(HibernateException e){
@@ -80,7 +80,7 @@ public abstract class BasicDao implements IBasicDao{
 
     @Override
     public Object uniqueQuery(String hql, Object[] args) {
-        Query query=sessionFactory.getCurrentSession().createQuery(hql);
+        Query query=SessionFactoryUtils.getSession(sessionFactory, false).createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
                 query.setParameter(i, args[i]);
@@ -96,7 +96,7 @@ public abstract class BasicDao implements IBasicDao{
     
     @Override
     public boolean update(Object obj,boolean isRollback) {
-        Session session=sessionFactory.getCurrentSession();
+        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
         try{
             session.update(obj);
             return true;
@@ -115,7 +115,7 @@ public abstract class BasicDao implements IBasicDao{
     
     @Override
     public boolean delete(Object obj,boolean isRollback){
-        Session session=sessionFactory.getCurrentSession();
+        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
         try{
             session.delete(obj);
             return true;
@@ -136,7 +136,7 @@ public abstract class BasicDao implements IBasicDao{
 
     @Override
     public void add(List objs, boolean isRollback) {
-        Session session=sessionFactory.getCurrentSession();
+        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
         for(Object obj:objs){
             try{
                 session.persist(obj);
@@ -151,7 +151,7 @@ public abstract class BasicDao implements IBasicDao{
 
     @Override
     public int update(String hql, Object[] args, boolean isRollback) {
-        Session session=sessionFactory.getCurrentSession();
+        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
         Query query=session.createQuery(hql);
         if(args!=null&&args.length>0){
             for(int i=0,len=args.length;i<len;i++){
