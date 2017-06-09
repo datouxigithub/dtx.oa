@@ -19,7 +19,7 @@ public class RoleUser implements Serializable {
     protected User user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "userId",referencedColumnName = "uuid")
+    @JoinColumn(name = "userId",referencedColumnName = "uuid",nullable = false)
     public User getUser() {
         return user;
     }
@@ -29,7 +29,7 @@ public class RoleUser implements Serializable {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "roleId",referencedColumnName = "uuid")
+    @JoinColumn(name = "roleId",referencedColumnName = "uuid",nullable = false)
     public Role getRole() {
         return role;
     }

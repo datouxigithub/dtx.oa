@@ -35,7 +35,7 @@ public class CustomFormClassModel implements Serializable{
         this.id = id;
     }
 
-    @Column(nullable = false,length = 255)
+    @Column(nullable = false,length = 255,unique = true)
     public String getFormClassName() {
         return formClassName;
     }

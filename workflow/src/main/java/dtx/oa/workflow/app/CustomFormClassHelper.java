@@ -38,7 +38,6 @@ public class CustomFormClassHelper {
     }
     
     public Class<?> loadClass(CustomFormClassModel formClass) throws IOException, CannotCompileException{
-//        return customClassLoader.loadClass(formClass.getClassSource());
         return customClassLoader.loadClass(formClass.getFormClassName(), formClass.getClassSource());
     }
     
@@ -58,7 +57,7 @@ public class CustomFormClassHelper {
         ICustomFormClassDao dao=(ICustomFormClassDao) EntityUtil.getContext().getBean("customFormClassDao");
         try {
             dynamicSessionFactory.createNewSessionFactory(loadClass(dao.getCustomFormClassModels()));
-        } catch (Exception ex) {
+        } catch (IOException | CannotCompileException | ReflectiveOperationException | IllegalArgumentException ex) {
             ex.printStackTrace();
         } finally{
             isInitCustomFormClassHolder.set(true);

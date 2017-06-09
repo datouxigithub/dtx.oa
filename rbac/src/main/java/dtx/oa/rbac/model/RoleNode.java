@@ -2,6 +2,7 @@ package dtx.oa.rbac.model;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class RoleNode implements Serializable {
     protected Role role;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "roleId",referencedColumnName = "uuid")
+    @JoinColumn(name = "roleId",referencedColumnName = "uuid",nullable = false)
     public Role getRole() {
         return role;
     }
@@ -31,7 +32,7 @@ public class RoleNode implements Serializable {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "nodeId",referencedColumnName = "uuid")
+    @JoinColumn(name = "nodeId",referencedColumnName = "uuid",nullable = false)
     public Node getNode() {
         return node;
     }

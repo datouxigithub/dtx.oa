@@ -7,12 +7,8 @@ package dtx.oa.workflow.util;
 
 import dtx.oa.workflow.app.CustomFormClassHelper;
 import dtx.oa.workflow.app.DynamicSessionFactory;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.sql.DataSource;
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
@@ -21,14 +17,9 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
-import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 
 /**
  *
@@ -37,8 +28,6 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 public class EntityUtil {
     
     private final static ApplicationContext context=new ClassPathXmlApplicationContext("testbeans.xml");
-    
-    private final static List<SessionFactory> sessionFactories=new ArrayList<>();
     
     public static ApplicationContext getContext(){
         return context;
@@ -86,34 +75,5 @@ public class EntityUtil {
     
     public static IdentityService getIdentityService(){
         return (IdentityService) context.getBean("identityService");
-    }
-    
-    public synchronized static SessionFactory obtanSessionFactory(Class<?> entityClass) throws HibernateException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
-        SessionFactory sessionFactory=(SessionFactory) getContext().getBean("sessionFactory");
-        
-        Map<String,ClassMetadata> classMetaDataMap=sessionFactory.getAllClassMetadata();
-        Set<String> keySet=classMetaDataMap.keySet();
-        
-        if(keySet.contains(entityClass.getName()))
-            return sessionFactory;
-        
-        for(SessionFactory sf:sessionFactories){
-            keySet=sf.getAllClassMetadata().keySet();
-            if(keySet.contains(entityClass.getName())){
-                return sf;
-            }
-        }
-        
-        AnnotationSessionFactoryBean sessionFactoryBean=(AnnotationSessionFactoryBean) getContext().getBean("&sessionFactory");
-        Field f=LocalSessionFactoryBean.class.getDeclaredField("configTimeDataSourceHolder");
-        f.setAccessible(true);
-        ThreadLocal<DataSource> configTimeDataSourceHolder=(ThreadLocal<DataSource>) f.get(sessionFactoryBean);
-        configTimeDataSourceHolder.set(sessionFactoryBean.getDataSource());
-        Configuration config=sessionFactoryBean.getConfiguration();
-        config.addAnnotatedClass(entityClass);
-        SessionFactory newSessionFactory=config.buildSessionFactory();
-        sessionFactories.add(newSessionFactory);
-        configTimeDataSourceHolder.remove();
-        return newSessionFactory;
     }
 }
