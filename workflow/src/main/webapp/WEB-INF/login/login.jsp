@@ -54,7 +54,7 @@
                             <h3 class="panel-title">请登录</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="check">
+                            <form role="form" method="post" action="${pageContext.request.contextPath}/check/login">
                                 <fieldset>
                                     <div class="form-group">
                                         <input name="username" type="text" class="form-control" placeholder="用户名" />

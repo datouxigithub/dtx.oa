@@ -134,4 +134,9 @@
     <bean id="userEntityManager" class="dtx.oa.workflow.entity.impl.DTXUserEntityManager" />
     <bean id="groupEntityManager" class="dtx.oa.workflow.entity.impl.DTXGroupEntityManager" />
     <bean id="membershipEntityManager" class="dtx.oa.workflow.entity.impl.DTXMembershipEntityManager" />
+    
+    <bean id="entityUtil" class="dtx.oa.workflow.util.EntityUtil" />
+    
+    <bean id="rbac" class="dtx.oa.rbac.dao.RBACDao" scope="session" />
+    <bean id="requestHeader" class="dtx.oa.workflow.model.RequestHeaderModel" scope="session" />
 </beans>

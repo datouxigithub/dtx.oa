@@ -6,5 +6,5 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    request.getRequestDispatcher("login").forward(request, response);
+    request.getRequestDispatcher("test/util").forward(request, response);
 %>

@@ -5,10 +5,10 @@
  */
 package dtx.oa.workflow.util;
 
+import dtx.oa.rbac.dao.RBACDao;
 import dtx.oa.workflow.app.CustomFormClassHelper;
 import dtx.oa.workflow.app.DynamicSessionFactory;
-import java.util.ArrayList;
-import java.util.List;
+import dtx.oa.workflow.model.RequestHeaderModel;
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
@@ -18,62 +18,81 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
  * @author datouxi
  */
-public class EntityUtil {
+public class EntityUtil implements ApplicationContextAware{
     
-    private final static ApplicationContext context=new ClassPathXmlApplicationContext("testbeans.xml");
+    private static ApplicationContext context=new ClassPathXmlApplicationContext("testbeans.xml");
+    
+    public static void setContext(ApplicationContext ac){
+        context=ac;
+    }
     
     public static ApplicationContext getContext(){
         return context;
     }
     
     public static SessionFactory getSessionFactory(){
-        return (SessionFactory) context.getBean("sessionFactory");
+        return (SessionFactory) getContext().getBean("sessionFactory");
     }
     
     public static DynamicSessionFactory getDynamicSessionFactory(){
-        return (DynamicSessionFactory) context.getBean("dynamicSessionFactory");
+        return (DynamicSessionFactory) getContext().getBean("dynamicSessionFactory");
     }
     
     public static CustomFormClassHelper getCustomFormClassHelper(){
-        return (CustomFormClassHelper) context.getBean("customFormClassHelper");
+        return (CustomFormClassHelper) getContext().getBean("customFormClassHelper");
     }
     
     public static ProcessEngine getProcessEngine(){
-        return (ProcessEngine) context.getBean("processEngine");
+        return (ProcessEngine) getContext().getBean("processEngine");
     }
     
     public static RepositoryService getRepositoryService(){
-        return (RepositoryService) context.getBean("repositoryService");
+        return (RepositoryService) getContext().getBean("repositoryService");
     }
     
     public static RuntimeService getRuntimeService(){
-        return (RuntimeService) context.getBean("runtimeService");
+        return (RuntimeService) getContext().getBean("runtimeService");
     }
     
     public static TaskService getTaskService(){
-        return (TaskService) context.getBean("taskService");
+        return (TaskService) getContext().getBean("taskService");
     }
     
     public static FormService getFormService(){
-        return (FormService) context.getBean("formService");
+        return (FormService) getContext().getBean("formService");
     }
     
     public static HistoryService getHistoryService(){
-        return (HistoryService) context.getBean("historyService");
+        return (HistoryService) getContext().getBean("historyService");
     }
     
     public static ManagementService getManagementService(){
-        return (ManagementService) context.getBean("managementService");
+        return (ManagementService) getContext().getBean("managementService");
     }
     
     public static IdentityService getIdentityService(){
-        return (IdentityService) context.getBean("identityService");
+        return (IdentityService) getContext().getBean("identityService");
+    }
+    
+    public static RBACDao getRBAC(){
+        return (RBACDao) getContext().getBean("rbac");
+    }
+    
+    public static RequestHeaderModel getRequestHeader(){
+        return (RequestHeaderModel) getContext().getBean("requestHeader");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        EntityUtil.setContext(ac);
     }
 }
