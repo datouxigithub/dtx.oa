@@ -12,13 +12,14 @@ import dtx.oa.rbac.model.NodeTree;
 import dtx.oa.rbac.model.RoleTree;
 import dtx.oa.rbac.model.User;
 import dtx.oa.util.StringUtil;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  *
  * @author datouxi
  */
-public class RBACDao implements IRBACDao {
+public class RBACDao implements IRBACDao,Serializable {
 
     private User loginInfo;
     private NodeTree nodeTree;

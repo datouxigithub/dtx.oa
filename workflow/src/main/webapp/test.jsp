@@ -6,5 +6,5 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    request.getRequestDispatcher("test/util").forward(request, response);
+    request.getRequestDispatcher("test/input?id=2").forward(request, response);
 %>

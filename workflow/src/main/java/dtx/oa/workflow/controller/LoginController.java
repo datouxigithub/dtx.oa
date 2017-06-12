@@ -5,9 +5,9 @@
  */
 package dtx.oa.workflow.controller;
 
-import dtx.oa.workflow.util.RequestUtil;
+import dtx.oa.workflow.util.EntityUtil;
+import dtx.oa.workflow.util.SessionUtil;
 import java.io.IOException;
-import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -23,21 +23,18 @@ public class LoginController {
     
     //有DispatcherServlet943行处被调用,未显示页面
     @RequestMapping(value = "login",method = RequestMethod.GET)
-    public String login(){
+    public String login(HttpServletResponse response) throws IOException{
         return "login/login";
     }
     
     @RequestMapping(value = "check/login",method = RequestMethod.POST)
-    public void check(HttpServletResponse response) throws IOException{
-        HttpServletRequest request=RequestUtil.getRequest();
-        Enumeration<String> enu=request.getParameterNames();
-        while(enu.hasMoreElements())
-            response.getWriter().write("<h2>"+enu.nextElement()+"</h2>");
+    public void login(HttpServletRequest request,HttpServletResponse response) throws IOException{
+        EntityUtil.getRBAC().authenticate(request.getParameter("username"), request.getParameter("userpwd"));
     }
     
     @RequestMapping("login_out")
-    public void loginOut(){
-        
+    public void loginOut(HttpServletResponse response) throws IOException{
+        SessionUtil.destorySession();
     }
     
 }

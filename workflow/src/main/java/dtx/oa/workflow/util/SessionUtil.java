@@ -20,4 +20,10 @@ public class SessionUtil {
         return null;
     }
     
+    public static void destorySession(){
+        HttpSession session=getExistsSession();
+        if(session!=null)
+            session.invalidate();
+    }
+    
 }

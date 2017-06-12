@@ -23,4 +23,12 @@ public class RequestUtil {
         return null;
     }
     
+    public static String getWholeRequestURI(){
+        HttpServletRequest request=getRequest();
+        String uri=request.getRequestURI();
+        if(request.getQueryString()!=null)
+            uri+="?"+request.getQueryString();
+        return uri;
+    }
+    
 }

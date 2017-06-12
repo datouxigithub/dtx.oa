@@ -5,11 +5,13 @@
  */
 package dtx.oa.workflow.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author gg
  */
-public class RequestHeaderModel {
+public class RequestHeaderModel implements Serializable{
     private String referer;
 
     public String getReferer() {
