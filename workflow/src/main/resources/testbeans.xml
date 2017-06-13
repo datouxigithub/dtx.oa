@@ -94,7 +94,26 @@
                 </bean>
             </list>
         </property>
+        <property name="eventListeners">
+            <list>
+                <ref bean="workflowGlobalListener" />
+            </list>
+        </property>
     </bean>
+    
+    <bean id="workflowGlobalListener" class="dtx.oa.workflow.listener.WorkFlowGlobalListener">
+        <property name="handleMap">
+            <map>
+                <entry key="ENTITY_CREATED" value-ref="entityCreatedHandler"/>
+                <entry key="ENTITY_INITIALIZED" value-ref="entityInitializedhandler" />
+                <entry key="TASK_CREATED" value-ref="taskCreatedHandler" />
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="entityCreatedHandler" class="dtx.oa.workflow.handler.EntityCreatedHandler" />
+    <bean id="entityInitializedhandler" class="dtx.oa.workflow.handler.EntityInitialzedHandler" />
+    <bean id="taskCreatedHandler" class="dtx.oa.workflow.handler.TaskCreatedHandler" />
     
     <bean id="testDao" class="dtx.oa.workflow.dao.TestDao" />
     <bean id="customFormClassDao" class="dtx.oa.workflow.dao.CustomFormClassDao">

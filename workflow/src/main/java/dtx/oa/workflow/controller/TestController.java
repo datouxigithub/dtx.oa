@@ -101,7 +101,7 @@ public class TestController {
         while(!ManageTaskListener.sampleUsers.isEmpty()){
             String assigner=ManageTaskListener.sampleUsers.pop();
             Task task=(Task) EntityUtil.getTaskService().createTaskQuery().taskAssignee(assigner).singleResult();
-            System.out.println(assigner+"------------------->>>"+task.toString());
+            System.out.println(task.getAssignee()+"------------------->>>"+task.toString());
             EntityUtil.getTaskService().complete(task.getId());
         }
         
