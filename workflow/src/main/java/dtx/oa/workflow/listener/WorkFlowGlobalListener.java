@@ -25,7 +25,6 @@ public class WorkFlowGlobalListener implements ActivitiEventListener{
 
     @Override
     public void onEvent(ActivitiEvent event) {
-//        System.out.println("==================>>>"+event.getType().name());
         WorkFlowEventHandler handler=handleMap.get(event.getType().name());
         if(handler!=null)
             handler.handle(event);

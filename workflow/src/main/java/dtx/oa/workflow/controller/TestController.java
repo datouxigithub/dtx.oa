@@ -16,6 +16,7 @@ import dtx.oa.workflow.idao.IUserFormDao;
 import dtx.oa.workflow.model.ApproverOptionModel;
 import dtx.oa.workflow.model.CustomFormInfoModel;
 import dtx.oa.workflow.model.DefaultUserForm;
+import dtx.oa.workflow.util.ActivitiHelper;
 import dtx.oa.workflow.util.EntityUtil;
 import dtx.oa.workflow.util.RequestUtil;
 import java.io.IOException;
@@ -96,15 +97,17 @@ public class TestController {
         System.out.println(deployment.toString());
         
         
-        ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
+        ProcessDefinition processDefinition=ActivitiHelper.getProcessDefinitionByDeploymentId(deployment.getId());
         ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey());
-        while(!ManageTaskListener.sampleUsers.isEmpty()){
-            String assigner=ManageTaskListener.sampleUsers.pop();
-            Task task=(Task) EntityUtil.getTaskService().createTaskQuery().taskAssignee(assigner).singleResult();
-            System.out.println(task.getAssignee()+"------------------->>>"+task.toString());
-            EntityUtil.getTaskService().complete(task.getId());
-        }
-        
+//        while(!ManageTaskListener.sampleUsers.isEmpty()){
+//            String assigner=ManageTaskListener.sampleUsers.pop();
+//            Task task=(Task) EntityUtil.getTaskService().createTaskQuery().taskAssignee(assigner).singleResult();
+//            System.out.println(task.getAssignee()+"------------------->>>"+task.toString());
+//            EntityUtil.getTaskService().complete(task.getId());
+//        }
+        Task task=ActivitiHelper.getTaskByAssinger("大头希1");
+        ActivitiHelper.completeTask(task.getId());
+        System.out.println("=======================>>任务结束");
         response.sendRedirect(String.format("%s/workflow/list", request.getContextPath()));
     }
 }
