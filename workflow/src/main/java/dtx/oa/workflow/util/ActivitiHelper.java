@@ -30,11 +30,20 @@ public class ActivitiHelper {
     }
     
     public static Task getTaskByAssinger(String assigner){
-        return EntityUtil.getTaskService().createTaskQuery().taskAssignee(assigner).orderByDueDate().desc().singleResult();
+        List<Task> result=getTasksByAssinger(assigner);
+        if(result.isEmpty())
+            return null;
+        return result.get(0);
     }
     
     public static void completeTask(String taskId){
         EntityUtil.getTaskService().complete(taskId);
+    }
+    
+    public static boolean isTheStartTask(String processInstanceId){
+        if(EntityUtil.getRuntimeService().createProcessInstanceQuery().processInstanceId(processInstanceId)==null)
+            return false;
+        return EntityUtil.getHistoryService().createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).list().isEmpty();
     }
     
     public static ProcessDefinition getProcessDefinitionById(String processDefinitionId){

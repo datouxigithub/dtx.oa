@@ -15,6 +15,16 @@ public abstract class DefaultUserForm implements Serializable {
     private int id;
     private boolean isDel;
     private Date startDate,dateLine;
+    private String starter;
+
+    @Column(nullable = false)
+    public String getStarter() {
+        return starter;
+    }
+
+    public void setStarter(String starter) {
+        this.starter = starter;
+    }
 
     @Column(nullable = false,columnDefinition = "timestamp default current_timestamp")
     @Temporal(TemporalType.TIMESTAMP)

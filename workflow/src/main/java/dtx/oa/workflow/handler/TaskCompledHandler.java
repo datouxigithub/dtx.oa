@@ -15,10 +15,14 @@ import org.activiti.engine.impl.persistence.entity.TaskEntity;
  */
 public class TaskCompledHandler implements WorkFlowEventHandler{
 
+    public static int count=1;
+    
     @Override
     public void handle(ActivitiEvent event) {
         ActivitiEntityEvent entityEvent=(ActivitiEntityEvent) event;
         TaskEntity task=(TaskEntity) entityEvent.getEntity();
+        if(task.getAssignee()==null)
+            task.setAssignee("臭屎洋"+(TaskCompledHandler.count++));
     }
     
 }

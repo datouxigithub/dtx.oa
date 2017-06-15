@@ -8,20 +8,14 @@ package dtx.oa.workflow.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dtx.oa.rbac.dao.RBACDao;
-import dtx.oa.workflow.app.ManageTaskListener;
-import dtx.oa.workflow.dao.TestDao;
-import dtx.oa.workflow.idao.IApproverOptionDao;
 import dtx.oa.workflow.idao.ICustomFormInfoDao;
 import dtx.oa.workflow.idao.IUserFormDao;
-import dtx.oa.workflow.model.ApproverOptionModel;
 import dtx.oa.workflow.model.CustomFormInfoModel;
 import dtx.oa.workflow.model.DefaultUserForm;
 import dtx.oa.workflow.util.ActivitiHelper;
 import dtx.oa.workflow.util.EntityUtil;
-import dtx.oa.workflow.util.RequestUtil;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 import javassist.CannotCompileException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +27,7 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.springframework.context.ApplicationContext;
+import org.activiti.engine.task.TaskQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,8 +36,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  *
@@ -75,6 +67,7 @@ public class TestController {
         EntityUtil.getDynamicSessionFactory().createNewSessionFactory(userForm.getClass());
 //        TestDao dao=(TestDao) EntityUtil.getContext().getBean("testDao");
         IUserFormDao iUserDao=(IUserFormDao) EntityUtil.getContext().getBean("userFormDao");
+        userForm.setStarter(EntityUtil.getRBAC().getLoginInfo().getUuid());
         Serializable result=iUserDao.add(userForm);
         response.getWriter().write(result.toString());
 //        ApproverOptionModel option=new ApproverOptionModel();
@@ -98,16 +91,23 @@ public class TestController {
         
         
         ProcessDefinition processDefinition=ActivitiHelper.getProcessDefinitionByDeploymentId(deployment.getId());
-        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey());
+        ICustomFormInfoDao dao=(ICustomFormInfoDao) EntityUtil.getContext().getBean("customFormInfoDao");
+//        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey());
+        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey(), dao.getById(2).getCustomFormClass().getFormClassName()+".1");
+        TaskQuery query=EntityUtil.getTaskService().createTaskQuery().processInstanceId(processInstance.getId());
+        while(query.count()>0){
+            Task task=query.singleResult();
+            ActivitiHelper.completeTask(task.getId());
+        }
 //        while(!ManageTaskListener.sampleUsers.isEmpty()){
 //            String assigner=ManageTaskListener.sampleUsers.pop();
 //            Task task=(Task) EntityUtil.getTaskService().createTaskQuery().taskAssignee(assigner).singleResult();
 //            System.out.println(task.getAssignee()+"------------------->>>"+task.toString());
 //            EntityUtil.getTaskService().complete(task.getId());
 //        }
-        Task task=ActivitiHelper.getTaskByAssinger("大头希1");
-        ActivitiHelper.completeTask(task.getId());
-        System.out.println("=======================>>任务结束");
+//        Task task=ActivitiHelper.getTaskByAssinger("大头希");
+//        if(task!=null)
+//            ActivitiHelper.completeTask(task.getId());
         response.sendRedirect(String.format("%s/workflow/list", request.getContextPath()));
     }
 }

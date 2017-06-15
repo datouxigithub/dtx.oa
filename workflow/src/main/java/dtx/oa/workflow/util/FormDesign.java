@@ -5,6 +5,12 @@
  */
 package dtx.oa.workflow.util;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import dtx.oa.rbac.model.Node;
+import dtx.oa.rbac.model.Role;
+import dtx.oa.rbac.model.RoleNode;
+import dtx.oa.rbac.model.RoleUser;
+import dtx.oa.rbac.model.User;
 import dtx.oa.workflow.app.DynamicSessionFactory;
 import dtx.oa.workflow.dao.TestDao;
 import dtx.oa.workflow.model.CustomFormClassModel;
@@ -361,7 +367,15 @@ public class FormDesign {
         CustomFormInfoModel customFormInfoModel=fd.parseForm("请假表单", "<p style=\"text-align: left; text-indent: 0em;\">\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-size: 24px; font-family: 微软雅黑,Microsoft YaHei;\"><strong><span style=\"font-size: 24px; color: rgb(0, 0, 0);\">请假申请表</span></strong></span><br/>\n</p>\n<table>\n<tbody>\n<tr class=\"firstRow\">\n<td style=\"word-break: break-all;\" align=\"right\" width=\"224\" valign=\"middle\" height=\"71\">\n请假天数<br/>\n</td>\n<td align=\"left\" width=\"489\" valign=\"middle\" height=\"71\">\n<input name=\"leipiNewField\" title=\"请假天数\" value=\"\" leipiplugins=\"text\" orghide=\"0\" style=\"text-align: left; width: 150px;\" orgalign=\"left\" orgwidth=\"150\" orgtype=\"text\" type=\"text\"/>\n</td>\n</tr>\n<tr>\n<td align=\"right\" width=\"224\" valign=\"middle\" height=\"82\">\n请假原因<br/>\n</td>\n<td align=\"left\" width=\"489\" valign=\"middle\" height=\"82\">\n<textarea title=\"请假原因\" name=\"leipiNewField\" leipiplugins=\"textarea\" value=\"\" orgrich=\"0\" orgfontsize=\"\" orgwidth=\"300\" orgheight=\"80\" style=\"width:300px;height:80px;\"></textarea>\n</td>\n</tr>\n</tbody>\n</table>\n<p>\n<br/>\n</p>");
         CtClass ctc=fd.obtainTableClass(customFormInfoModel.getCustomFormClass().getFormClassName(), null, new JSONObject(customFormInfoModel.getAddFields()));
         DynamicSessionFactory sf=EntityUtil.getDynamicSessionFactory();
+//        List<Class<?>> classes=new ArrayList<>();
+//        classes.add(User.class);
+//        classes.add(RoleUser.class);
+//        classes.add(Role.class);
+//        classes.add(RoleNode.class);
+//        classes.add(Node.class);
+//        classes.add(ctc.toClass());
         sf.createNewSessionFactory(ctc.toClass());
+//        sf.createNewSessionFactory(classes);
         TestDao dao=(TestDao) EntityUtil.getContext().getBean("testDao");
         customFormInfoModel.getCustomFormClass().setClassSource(ctc.toBytecode());
         customFormInfoModel.setCreateTime(new Date());
