@@ -118,6 +118,9 @@
     <bean id="taskCompledHandler" class="dtx.oa.workflow.handler.TaskCompledHandler" />
     
     <bean id="testDao" class="dtx.oa.workflow.dao.TestDao" />
+    <bean id="testDao2" class="dtx.oa.workflow.dao.TestDao2">
+        <property name="sessionFactory" ref="dynamicSessionFactory" />
+    </bean>
     <bean id="customFormClassDao" class="dtx.oa.workflow.dao.CustomFormClassDao">
         <property name="sessionFactory" ref="dynamicSessionFactory" />
     </bean>

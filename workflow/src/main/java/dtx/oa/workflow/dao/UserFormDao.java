@@ -8,10 +8,12 @@ import dtx.oa.workflow.model.DefaultUserForm;
 import dtx.oa.workflow.util.EntityUtil;
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Connection;
 import java.util.Stack;
 import javassist.CannotCompileException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.impl.SessionImpl;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
 
 public class UserFormDao extends BasicDao implements IUserFormDao{
@@ -28,11 +30,11 @@ public class UserFormDao extends BasicDao implements IUserFormDao{
     
     @Override
     public DefaultUserForm getById(String formClassName, int id) {
-//        Class clazz=loadClass(formClassName);
+        Class clazz=loadClass(formClassName);
 //        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
-        return (DefaultUserForm) findById(loadClass(formClassName), id);
-//        Stack<SessionFactory> stack=((DynamicSessionFactory)sessionFactory).view();
-//        return (DefaultUserForm) session.get(clazz, id);
+        Session session=SessionFactoryUtils.getNewSession(sessionFactory);
+//        return (DefaultUserForm) findById(loadClass(formClassName), id);
+        return (DefaultUserForm) session.get(clazz, id);
     }
     
     @Override
