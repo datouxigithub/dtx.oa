@@ -33,8 +33,12 @@ public class TestDao2  extends BasicDao implements ITestDao{
     @Override
     public Session getById(String formClassName, int id) {
         Class clazz=loadClass(formClassName);
+//        Session session=SessionFactoryUtils.getNewSession(sessionFactory);
         Session session=SessionFactoryUtils.getSession(sessionFactory, false);
+        session.beginTransaction();
         session.get(clazz, id);
+//        session.getTransaction().commit();
+//        session.close();
         return session;
     }
     

@@ -8,13 +8,7 @@ import dtx.oa.workflow.model.DefaultUserForm;
 import dtx.oa.workflow.util.EntityUtil;
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.util.Stack;
 import javassist.CannotCompileException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.impl.SessionImpl;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
 
 public class UserFormDao extends BasicDao implements IUserFormDao{
     
@@ -29,12 +23,11 @@ public class UserFormDao extends BasicDao implements IUserFormDao{
     }
     
     @Override
-    public DefaultUserForm getById(String formClassName, int id) {
-        Class clazz=loadClass(formClassName);
-//        Session session=SessionFactoryUtils.getSession(sessionFactory, false);
-        Session session=SessionFactoryUtils.getNewSession(sessionFactory);
-//        return (DefaultUserForm) findById(loadClass(formClassName), id);
-        return (DefaultUserForm) session.get(clazz, id);
+    public DefaultUserForm getById(Class userFormClass, int id) {
+        if(userFormClass.isAssignableFrom(DefaultUserForm.class))
+            return (DefaultUserForm) findById(userFormClass, id);
+        else
+            return null;
     }
     
     @Override
@@ -42,7 +35,7 @@ public class UserFormDao extends BasicDao implements IUserFormDao{
         if(!(obj instanceof DefaultUserForm)){
             throw new RuntimeException("保存的对象必须为DefaultUserForm类型");
         }
-        loadClass(obj.getClass().getName());
+//        loadClass(obj.getClass().getName());
         return super.add(obj);
     }
 

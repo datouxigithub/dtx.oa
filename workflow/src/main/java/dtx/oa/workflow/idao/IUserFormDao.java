@@ -5,6 +5,6 @@ import dtx.oa.workflow.model.DefaultUserForm;
 
 public interface IUserFormDao extends IBasicDao{
     
-    public DefaultUserForm getById(String formClassName,int id);
+    public DefaultUserForm getById(Class userFormClass,int id);
     
 }
