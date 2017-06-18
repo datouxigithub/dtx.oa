@@ -1,10 +1,12 @@
 package dtx.oa.workflow.idao;
 
-import dtx.oa.rbac.basic.IBasicDao;
 import dtx.oa.workflow.model.DefaultUserForm;
+import java.io.Serializable;
 
-public interface IUserFormDao extends IBasicDao{
+public interface IUserFormDao{
     
-    public DefaultUserForm getById(Class userFormClass,int id);
+    public DefaultUserForm getById(String formClassName,int id);
+    
+    public Serializable add(DefaultUserForm userForm);
     
 }

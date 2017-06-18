@@ -33,8 +33,7 @@ public class TaskCreatedHandler implements WorkFlowEventHandler{
 //                if(businessInfo.length<2)
 //                    throw new RuntimeException("businesskey错误");
             }
-            IUserFormDao dao=(IUserFormDao) EntityUtil.getContext().getBean("userFormDao");
-            DefaultUserForm userForm=dao.getById(formClassName, formId);
+            DefaultUserForm userForm=EntityUtil.getUserFormDao().getById(formClassName, formId);
             task.setAssignee(userForm.getStarter());
         }
     }

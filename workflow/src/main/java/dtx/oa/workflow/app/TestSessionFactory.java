@@ -5,8 +5,9 @@
  */
 package dtx.oa.workflow.app;
 
-import dtx.oa.workflow.helper.UserFormDaoHelper;
+import dtx.oa.workflow.idao.IUserFormDao;
 import dtx.oa.workflow.model.DefaultUserForm;
+import dtx.oa.workflow.util.EntityUtil;
 import java.io.IOException;
 import javassist.CannotCompileException;
 
@@ -16,11 +17,11 @@ import javassist.CannotCompileException;
  */
 public class TestSessionFactory {
     public static void main(String[] args) throws ReflectiveOperationException, IOException, CannotCompileException {
-//        IUserFormDao dao=(IUserFormDao) EntityUtil.getContext().getBean("userFormDao");
+        IUserFormDao dao=(IUserFormDao) EntityUtil.getContext().getBean("userFormDao");
 //        EntityUtil.getDynamicSessionFactory().createNewSessionFactory(EntityUtil.getCustomFormClassHelper().loadClass("dtx.oa.workflow.model.UserForm22c95ca9810f43288b97666592dbe9d4"));
-//        DefaultUserForm userForm=dao.getById("dtx.oa.workflow.model.UserForm22c95ca9810f43288b97666592dbe9d4", 1);
+        DefaultUserForm userForm=dao.getById("dtx.oa.workflow.model.UserForm0175e8f3d36d421e8a36556082b1792d", 1);
 //        System.out.println(userForm.getStarter());
-        DefaultUserForm userForm=UserFormDaoHelper.getById("dtx.oa.workflow.model.UserForm22c95ca9810f43288b97666592dbe9d4", 1);
+//        DefaultUserForm userForm=EntityUtil.getIUserFormDaoHelper().getById("dtx.oa.workflow.model.UserForm0175e8f3d36d421e8a36556082b1792d", 1);
         System.out.println(userForm.getStarter());
     }
  

@@ -57,7 +57,9 @@
     </bean>
     
     <bean id="dynamicSessionFactory" class="dtx.oa.workflow.app.DynamicSessionFactory" />
-       
+    
+    <bean id="loadUserFormAdvice" class="dtx.oa.workflow.advice.LoadUserFormAdvice" />
+    
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!-- <tx:method name="get*" propagation="REQUIRED" read-only="true" />-->
@@ -67,7 +69,11 @@
     
     <aop:config>
         <aop:pointcut id="daoPointCut" expression="execution(* dtx.oa.workflow.dao.*.*(..))" />
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="daoPointCut" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="daoPointCut" order="2" />
+        <aop:aspect id="userFormHandler" ref="loadUserFormAdvice" order="1">
+            <aop:pointcut id="userFormPointCut" expression="execution(* dtx.oa.workflow.dao.UserFormDao.*(..))" />
+            <aop:before pointcut-ref="userFormPointCut" method="doBefore" />
+        </aop:aspect>
     </aop:config>
     
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -118,9 +124,6 @@
     <bean id="taskCompledHandler" class="dtx.oa.workflow.handler.TaskCompledHandler" />
     
     <bean id="testDao" class="dtx.oa.workflow.dao.TestDao" />
-    <bean id="testDao2" class="dtx.oa.workflow.dao.TestDao2">
-        <property name="sessionFactory" ref="dynamicSessionFactory" />
-    </bean>
     <bean id="customFormClassDao" class="dtx.oa.workflow.dao.CustomFormClassDao">
         <property name="sessionFactory" ref="dynamicSessionFactory" />
     </bean>

@@ -21,5 +21,5 @@
 var ACTIVITI = ACTIVITI || {};
 
 ACTIVITI.CONFIG = {
-	'contextRoot' : '/test-activiti-web/service',
+	'contextRoot' : '/workflow/service',
 };

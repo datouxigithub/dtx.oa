@@ -65,10 +65,8 @@ public class TestController {
     @RequestMapping(value = "submit",method = RequestMethod.POST)
     public void submit(@ModelAttribute("userForm") DefaultUserForm userForm,HttpServletRequest request,HttpServletResponse response) throws IOException, IllegalArgumentException, IllegalAccessException, CannotCompileException, ReflectiveOperationException{
         EntityUtil.getDynamicSessionFactory().createNewSessionFactory(userForm.getClass());
-//        TestDao dao=(TestDao) EntityUtil.getContext().getBean("testDao");
-        IUserFormDao iUserDao=(IUserFormDao) EntityUtil.getContext().getBean("userFormDao");
         userForm.setStarter(EntityUtil.getRBAC().getLoginInfo().getUuid());
-        Serializable result=iUserDao.add(userForm);
+        Serializable result=EntityUtil.getUserFormDao().add(userForm);
         response.getWriter().write(result.toString());
 //        ApproverOptionModel option=new ApproverOptionModel();
 //        option.setAppvoer(ManageTaskListener.sampleUsers.pop());
@@ -81,19 +79,22 @@ public class TestController {
     }
     
     @RequestMapping(value = "run/{modelId}")
-    public void run(@PathVariable("modelId")String modelId,HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public void run(@PathVariable("modelId")String modelId,HttpServletRequest request,HttpServletResponse response) throws IOException, CannotCompileException, ReflectiveOperationException{
         RepositoryService repositoryService=EntityUtil.getRepositoryService();
         org.activiti.engine.repository.Model model=repositoryService.getModel(modelId);
         ObjectNode nodeModel=(ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(model.getId()));
         BpmnModel bpmnModel=new BpmnJsonConverter().convertToBpmnModel(nodeModel);
-        Deployment deployment=repositoryService.createDeployment().name(model.getName()).addString(model.getName()+".bpmn20.xml", new String(new BpmnXMLConverter().convertToXML(bpmnModel))).deploy();
+        Deployment deployment=repositoryService.createDeployment().name(model.getName()).addString(model.getName()+".bpmn20.xml", new String(new BpmnXMLConverter().convertToXML(bpmnModel),"utf8")).deploy();
         System.out.println(deployment.toString());
         
         
         ProcessDefinition processDefinition=ActivitiHelper.getProcessDefinitionByDeploymentId(deployment.getId());
         ICustomFormInfoDao dao=(ICustomFormInfoDao) EntityUtil.getContext().getBean("customFormInfoDao");
 //        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey());
-        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey(), dao.getById(2).getCustomFormClass().getFormClassName()+".1");
+        Class clazz=EntityUtil.getCustomFormClassHelper().loadClass("dtx.oa.workflow.model.UserForm0175e8f3d36d421e8a36556082b1792d");
+        EntityUtil.getDynamicSessionFactory().createNewSessionFactory(clazz);
+        CustomFormInfoModel customFormInfo=dao.getById(2);
+        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey(), customFormInfo.getCustomFormClass().getFormClassName()+".1");
         TaskQuery query=EntityUtil.getTaskService().createTaskQuery().processInstanceId(processInstance.getId());
         while(query.count()>0){
             Task task=query.singleResult();
