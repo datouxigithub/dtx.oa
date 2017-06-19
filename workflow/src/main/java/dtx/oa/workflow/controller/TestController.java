@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dtx.oa.rbac.dao.RBACDao;
 import dtx.oa.workflow.idao.ICustomFormInfoDao;
-import dtx.oa.workflow.idao.IUserFormDao;
 import dtx.oa.workflow.model.CustomFormInfoModel;
 import dtx.oa.workflow.model.DefaultUserForm;
 import dtx.oa.workflow.util.ActivitiHelper;
@@ -81,23 +80,22 @@ public class TestController {
     @RequestMapping(value = "run/{modelId}")
     public void run(@PathVariable("modelId")String modelId,HttpServletRequest request,HttpServletResponse response) throws IOException, CannotCompileException, ReflectiveOperationException{
         RepositoryService repositoryService=EntityUtil.getRepositoryService();
-        org.activiti.engine.repository.Model model=repositoryService.getModel(modelId);
-        ObjectNode nodeModel=(ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(model.getId()));
-        BpmnModel bpmnModel=new BpmnJsonConverter().convertToBpmnModel(nodeModel);
-        Deployment deployment=repositoryService.createDeployment().name(model.getName()).addString(model.getName()+".bpmn20.xml", new String(new BpmnXMLConverter().convertToXML(bpmnModel),"utf8")).deploy();
-        System.out.println(deployment.toString());
+//        org.activiti.engine.repository.Model model=repositoryService.getModel(modelId);
+//        ObjectNode nodeModel=(ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(model.getId()));
+//        BpmnModel bpmnModel=new BpmnJsonConverter().convertToBpmnModel(nodeModel);
+//        Deployment deployment=repositoryService.createDeployment().name(model.getName()).addString(model.getName()+".bpmn20.xml", new String(new BpmnXMLConverter().convertToXML(bpmnModel),"utf8")).deploy();
         
+        Deployment deployment=repositoryService.createDeploymentQuery().deploymentId(modelId).singleResult();
         
         ProcessDefinition processDefinition=ActivitiHelper.getProcessDefinitionByDeploymentId(deployment.getId());
         ICustomFormInfoDao dao=(ICustomFormInfoDao) EntityUtil.getContext().getBean("customFormInfoDao");
 //        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey());
-        Class clazz=EntityUtil.getCustomFormClassHelper().loadClass("dtx.oa.workflow.model.UserForm0175e8f3d36d421e8a36556082b1792d");
-        EntityUtil.getDynamicSessionFactory().createNewSessionFactory(clazz);
         CustomFormInfoModel customFormInfo=dao.getById(2);
         ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey(), customFormInfo.getCustomFormClass().getFormClassName()+".1");
         TaskQuery query=EntityUtil.getTaskService().createTaskQuery().processInstanceId(processInstance.getId());
         while(query.count()>0){
             Task task=query.singleResult();
+//            break;
             ActivitiHelper.completeTask(task.getId());
         }
 //        while(!ManageTaskListener.sampleUsers.isEmpty()){

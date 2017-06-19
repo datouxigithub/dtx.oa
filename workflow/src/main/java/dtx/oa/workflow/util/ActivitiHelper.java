@@ -8,9 +8,8 @@ package dtx.oa.workflow.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.PvmTransition;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
+import org.activiti.bpmn.model.SequenceFlow;
+import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -58,19 +57,17 @@ public class ActivitiHelper {
         return EntityUtil.getRuntimeService().createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
     }
     
-    public static List<String> getOutComesByTaskId(String taskId){
+    public static List<String> getOutComesByTask(Task task){
         List<String> result=new ArrayList<>();
-        Task task=getTaskById(taskId);
-        ProcessDefinitionEntity processDefinitionEntity=(ProcessDefinitionEntity) getProcessDefinitionById(task.getProcessDefinitionId());
-        ProcessInstance processInstance=getProcessInstanceById(task.getProcessInstanceId());
-        ActivityImpl activityImpl=processDefinitionEntity.findActivity(processInstance.getActivityId());
-        Iterator<PvmTransition> iter=activityImpl.getOutgoingTransitions().iterator();
-        while(iter.hasNext()){
-            String name=(String) iter.next().getProperty("name");
-            if(name!=null)
-                result.add(name);
-        }
+        UserTask userTask=(UserTask) EntityUtil.getRepositoryService().getBpmnModel(task.getProcessDefinitionId()).getFlowElement(task.getTaskDefinitionKey());
+        Iterator<SequenceFlow> iter=userTask.getOutgoingFlows().iterator();
+        while(iter.hasNext())
+            result.add(iter.next().getName());
         return result;
+    }
+    
+    public static List<String> getOutComesByTaskId(String taskId){
+        return getOutComesByTask(getTaskById(taskId));
     }
     
 }

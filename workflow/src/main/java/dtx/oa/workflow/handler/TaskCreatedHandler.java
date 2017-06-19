@@ -5,7 +5,6 @@
  */
 package dtx.oa.workflow.handler;
 
-import dtx.oa.workflow.idao.IUserFormDao;
 import dtx.oa.workflow.model.DefaultUserForm;
 import dtx.oa.workflow.util.ActivitiHelper;
 import dtx.oa.workflow.util.EntityUtil;
@@ -27,7 +26,6 @@ public class TaskCreatedHandler implements WorkFlowEventHandler{
             String businessKey=task.getProcessInstance().getBusinessKey();
             String formClassName=businessKey.substring(0, businessKey.lastIndexOf("."));
             int formId=Integer.parseInt(businessKey.substring(businessKey.lastIndexOf(".")+1));
-            System.out.println("======================>>>["+formClassName+","+formId+"]");
             {
 //                检查bussinesskey是否合格
 //                if(businessInfo.length<2)
@@ -35,6 +33,7 @@ public class TaskCreatedHandler implements WorkFlowEventHandler{
             }
             DefaultUserForm userForm=EntityUtil.getUserFormDao().getById(formClassName, formId);
             task.setAssignee(userForm.getStarter());
+            System.out.println("=======================>>>"+ActivitiHelper.getOutComesByTask(task));
         }
     }
     
