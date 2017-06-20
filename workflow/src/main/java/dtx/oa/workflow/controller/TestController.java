@@ -15,6 +15,8 @@ import dtx.oa.workflow.util.ActivitiHelper;
 import dtx.oa.workflow.util.EntityUtil;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 import javassist.CannotCompileException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,6 +77,24 @@ public class TestController {
 //        IApproverOptionDao iApproverDao=(IApproverOptionDao) EntityUtil.getContext().getBean("approverOptionDao");
 //        iApproverDao.add(option);
 //        response.getWriter().write(option.toString());
+    }
+    
+    @RequestMapping(value = "run2/{deploymentId}")
+    public void run2(@PathVariable("deploymentId")String deploymentId,HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
+        RepositoryService repositoryService=EntityUtil.getRepositoryService();
+        Deployment deployment=repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
+        ProcessDefinition processDefinition=ActivitiHelper.getProcessDefinitionByDeploymentId(deploymentId);
+        ICustomFormInfoDao dao=(ICustomFormInfoDao) EntityUtil.getContext().getBean("customFormInfoDao");
+        ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey(), dao.getById(2).getCustomFormClass().getFormClassName()+".1");
+        TaskQuery query=EntityUtil.getTaskService().createTaskQuery().processInstanceId(processInstance.getId());
+        ActivitiHelper.completeTask(query.singleResult().getId());
+        Task task2=query.singleResult();
+        task2.setAssignee("ttt");
+        ActivitiHelper.completeTask(task2.getId());
+        List<Task> list=query.list();
+        for(Task task:list){
+            System.out.println("===============>>>"+new String(task.getName().getBytes(),"utf8"));
+        }
     }
     
     @RequestMapping(value = "run/{modelId}")
