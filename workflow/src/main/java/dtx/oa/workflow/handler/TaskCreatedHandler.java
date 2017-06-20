@@ -5,8 +5,6 @@
  */
 package dtx.oa.workflow.handler;
 
-import dtx.oa.workflow.model.DefaultUserForm;
-import dtx.oa.workflow.util.ActivitiHelper;
 import dtx.oa.workflow.util.EntityUtil;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.engine.delegate.event.ActivitiEvent;
@@ -22,18 +20,9 @@ public class TaskCreatedHandler implements WorkFlowEventHandler{
     public void handle(ActivitiEvent event) {
         ActivitiEntityEvent entityEvent=(ActivitiEntityEvent) event;
         TaskEntity task=(TaskEntity) entityEvent.getEntity();
-        if(ActivitiHelper.isTheStartTask(entityEvent.getProcessInstanceId())){
-            String businessKey=task.getProcessInstance().getBusinessKey();
-            String formClassName=businessKey.substring(0, businessKey.lastIndexOf("."));
-            int formId=Integer.parseInt(businessKey.substring(businessKey.lastIndexOf(".")+1));
-            {
-//                检查bussinesskey是否合格
-//                if(businessInfo.length<2)
-//                    throw new RuntimeException("businesskey错误");
-            }
-            DefaultUserForm userForm=EntityUtil.getUserFormDao().getById(formClassName, formId);
-            task.setAssignee(userForm.getStarter());
-            System.out.println("=======================>>>"+ActivitiHelper.getOutComesByTask(task));
+        if(EntityUtil.getRuntimeService().getVariables(entityEvent.getExecutionId()).containsKey(ProcessStartHandler.STARTER_KEY)){
+            task.setAssignee((String) EntityUtil.getRuntimeService().getVariable(entityEvent.getExecutionId(), ProcessStartHandler.STARTER_KEY));
+            EntityUtil.getRuntimeService().removeVariable(entityEvent.getExecutionId(), ProcessStartHandler.STARTER_KEY);
         }
     }
     

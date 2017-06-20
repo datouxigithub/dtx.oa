@@ -114,6 +114,7 @@
                 <entry key="ENTITY_INITIALIZED" value-ref="entityInitializedhandler" />
                 <entry key="TASK_CREATED" value-ref="taskCreatedHandler" />
                 <entry key="TASK_COMPLETED" value-ref="taskCompledHandler" />
+                <entry key="PROCESS_STARTED" value-ref="processStartHandler" />
             </map>
         </property>
     </bean>
@@ -122,6 +123,7 @@
     <bean id="entityInitializedhandler" class="dtx.oa.workflow.handler.EntityInitialzedHandler" />
     <bean id="taskCreatedHandler" class="dtx.oa.workflow.handler.TaskCreatedHandler" />
     <bean id="taskCompledHandler" class="dtx.oa.workflow.handler.TaskCompledHandler" />
+    <bean id="processStartHandler" class="dtx.oa.workflow.handler.ProcessStartHandler" />
     
     <bean id="testDao" class="dtx.oa.workflow.dao.TestDao" />
     <bean id="customFormClassDao" class="dtx.oa.workflow.dao.CustomFormClassDao">
