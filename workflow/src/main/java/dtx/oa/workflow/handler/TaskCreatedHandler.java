@@ -18,6 +18,7 @@ public class TaskCreatedHandler implements WorkFlowEventHandler{
 
     @Override
     public void handle(ActivitiEvent event) {
+        System.out.println("=================>>>[task_create]");
         ActivitiEntityEvent entityEvent=(ActivitiEntityEvent) event;
         TaskEntity task=(TaskEntity) entityEvent.getEntity();
         if(EntityUtil.getRuntimeService().getVariables(entityEvent.getExecutionId()).containsKey(ProcessStartHandler.STARTER_KEY)){

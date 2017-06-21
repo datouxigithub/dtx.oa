@@ -19,6 +19,7 @@ public class TaskCompledHandler implements WorkFlowEventHandler{
     
     @Override
     public void handle(ActivitiEvent event) {
+        System.out.println("==================>>>[task_complete]");
         ActivitiEntityEvent entityEvent=(ActivitiEntityEvent) event;
         TaskEntity task=(TaskEntity) entityEvent.getEntity();
         if(task.getAssignee()==null)

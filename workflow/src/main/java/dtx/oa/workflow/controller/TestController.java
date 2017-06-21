@@ -5,8 +5,6 @@
  */
 package dtx.oa.workflow.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import dtx.oa.rbac.dao.RBACDao;
 import dtx.oa.workflow.idao.ICustomFormInfoDao;
 import dtx.oa.workflow.model.CustomFormInfoModel;
@@ -20,9 +18,6 @@ import java.util.List;
 import javassist.CannotCompileException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -88,13 +83,13 @@ public class TestController {
         ProcessInstance processInstance=EntityUtil.getRuntimeService().startProcessInstanceByKey(processDefinition.getKey(), dao.getById(2).getCustomFormClass().getFormClassName()+".1");
         TaskQuery query=EntityUtil.getTaskService().createTaskQuery().processInstanceId(processInstance.getId());
         ActivitiHelper.completeTask(query.singleResult().getId());
-        Task task2=query.singleResult();
-        task2.setAssignee("ttt");
-        ActivitiHelper.completeTask(task2.getId());
-        List<Task> list=query.list();
-        for(Task task:list){
-            System.out.println("===============>>>"+new String(task.getName().getBytes(),"utf8"));
-        }
+//        Task task2=query.singleResult();
+//        task2.setAssignee("ttt");
+//        ActivitiHelper.completeTask(task2.getId());
+//        List<Task> list=query.list();
+//        for(Task task:list){
+//            System.out.println("===============>>>"+new String(task.getName().getBytes(),"utf8"));
+//        }
     }
     
     @RequestMapping(value = "run/{modelId}")
