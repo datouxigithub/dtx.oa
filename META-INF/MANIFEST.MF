@@ -1,0 +1,334 @@
+Manifest-Version: 1.0
+Export-Package: net.xmind.verify,net.xmind.verify.ui
+Bundle-ActivationPolicy: lazy
+Built-By: so
+Bundle-Name: %pluginName
+Bundle-Localization: plugin
+Created-By: Apache Maven 3.3.3
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.apache.com
+ mons.codec,org.json,net.xmind.signin;bundle-version="[3.6.0,3.7.0)",o
+ rg.xmind.ui.toolkit;bundle-version="[3.6.0,3.7.0)",org.xmind.core.com
+ mand;bundle-version="[3.6.0,3.7.0)"
+Bundle-Vendor: %providerName
+Build-Jdk: 1.7.0_75
+Bundle-Version: 3.6.1.201512221925
+Bundle-ManifestVersion: 2
+Bundle-Activator: net.xmind.verify.internal.VerifyPlugin
+Bundle-SymbolicName: net.xmind.verify;singleton:=true
+Archiver-Version: Plexus Archiver
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$7.clas
+ s
+SHA-256-Digest: UzAsYnNacAIW3/SDkvW6pk80hEDCLxYnNJPcwoxFmLY=
+
+Name: net/xmind/verify/ui/VerifyWizardPageWithPro20141031.class
+SHA-256-Digest: 0C1PVqoXvmPQVsDr8pYk4VXt7noIK/pEf+GPs7WHlf4=
+
+Name: net/xmind/verify/ui/VerifyWizardPage20141031$2.class
+SHA-256-Digest: cN5heHebR0yLNjzCnFi2aKN1J16/tkO0bL0a4mhK/to=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog2$3.class
+SHA-256-Digest: mKK7xCRLctmqaIfzcGpUhb0nMSN4o21Us89ffG7KszY=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$6.clas
+ s
+SHA-256-Digest: 1VsqJPVNOHf/WrCk2vIBijC7hMwH0cxWeHvZjR7lYws=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog$1.class
+SHA-256-Digest: lZN6/nSztHYu/277bl67eHT4G2k+hiPkEPDk8WhffZQ=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$8.clas
+ s
+SHA-256-Digest: 8Tj5RPWmF5JJ/jPxWGSP7MDAXhgskabSyQuw4sNJuQ8=
+
+Name: net/xmind/verify/internal/LicenseKeyHeader.class
+SHA-256-Digest: lSl2yhtmi7OGlrWwkj91GH6kwTz9bKIHR2yeGWvdflY=
+
+Name: net/xmind/verify/internal/legacy/LegacyLicenseVerifierUtil$1.cla
+ ss
+SHA-256-Digest: bgGCXjSf+GBzCSldjXS0uc6G9FtQVyKOiDJJ6Wkzwac=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog$6.class
+SHA-256-Digest: bWzQ20jpX8bXOYjjIcll2NrYY2dsITSYcp+Bnn+wnDA=
+
+Name: net/xmind/verify/ui/AbstractProViewPart20141031$3.class
+SHA-256-Digest: B7yu4KOd2IqmzdTzoyH0n+H4MUQY07V0zukBQidqYs8=
+
+Name: net/xmind/verify/internal/Base32.class
+SHA-256-Digest: wKEGbhxh3eDC8bRxccrEcOimI1cJQs/JeUeN0BLRS2Y=
+
+Name: net/xmind/verify/ui/VerifyWizardPage20141031.class
+SHA-256-Digest: UId1g8dHBr6dL3SS+S4R4K9vsDGimT0pUqo2LvotoeQ=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog$5.class
+SHA-256-Digest: kHILny3ydByHzafon+GLNRtk9U6J9mebcJVJjRNtTbg=
+
+Name: META-INF/maven/org.xmind.meggy.plugins/net.xmind.verify/pom.xml
+SHA-256-Digest: bLz+/9ZGdKhp1NOoFPxk0PeYJeb6U0SPCQPbZ7JZB/w=
+
+Name: net/xmind/verify/ui/AbstractProViewPart20141031$1.class
+SHA-256-Digest: aZ8by7vDkVL26dnbMBvUslyzGtBxBGaLqRFSVKmYylA=
+
+Name: net/xmind/verify/internal/LicenseVerifier$ValidityNotifier$1$1.c
+ lass
+SHA-256-Digest: OdL2UhJAJCwI/VhcpP/7zPsNiA8Rp/H1iQszm/W8f/Q=
+
+Name: net/xmind/verify/internal/LicenseVerifier$2.class
+SHA-256-Digest: /SBILCrmSCdDy/NmiUbrp6lnann9CMO+BEu9oUmAJzE=
+
+Name: net/xmind/verify/internal/VerifyPlugin.class
+SHA-256-Digest: kzA4ibiYLb5D/H0sh0IlWN4Cn2m5EEy2tloY0QU1Ets=
+
+Name: net/xmind/verify/internal/LicenseVerifier$ValidityNotifier$2.cla
+ ss
+SHA-256-Digest: RraJGfMlP35kwkYasbH3oYEAujr9WZx1UKjx18w6nHI=
+
+Name: net/xmind/verify/IValidity.class
+SHA-256-Digest: cCVSHtZhERos0rt/8Ytj7rJ+HS5J41aA5WQEHKkdCAY=
+
+Name: net/xmind/verify/internal/IVerifyCallback.class
+SHA-256-Digest: tw2Ms9lA2pa41BCKzpEFiydnW9JswV7HgCBHihAkUcY=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog$3.class
+SHA-256-Digest: 1DpHIeOKP9/hhJERkFh0Ihg7DU38OVlzT2cMt6EpjeQ=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2$3.class
+SHA-256-Digest: TuLJ4BgvJ6j/uh89gQYHscMraXIDxpHZD/+sGeKU7nI=
+
+Name: net/xmind/verify/ui/internal/VerifyingStatusDialog.class
+SHA-256-Digest: LjGDnBdo5DAgzWYhnuYPrG19dHg9v+s+yemE7hzhTAE=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog.class
+SHA-256-Digest: CL0iqAtgpBdnnMCpOXfIYEHB23MtDmoypKIl1fo4mRo=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2$5.class
+SHA-256-Digest: XQ8Qvo6Alc+SU7/QdJxE2dHXwG4A55cRVSEkhalkWe8=
+
+Name: net/xmind/verify/internal/legacy/LegacyValidity.class
+SHA-256-Digest: zzACQKoFhQi7q9Glc9y1UZG+AP0d38p8IwYk6ap7/PM=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$3.clas
+ s
+SHA-256-Digest: RplNL/xrYr4zXv7KMSp0WuBILqDmfUrQXHgFKTzKS6k=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog2.class
+SHA-256-Digest: yW8lNit8P8Au9jWBJOEWVgE+eBKG043YqyACKZaFtNg=
+
+Name: icons/brainstorming.png
+SHA-256-Digest: C6HoeafUAfgcEsl4L/kQvEfpU6JIyeXfU0P3D5yQ79Y=
+
+Name: icons/presentation.png
+SHA-256-Digest: SvyACQTlmKb/lmyIdMMr7xqwOOAvxPdwGdyUAc8XU0o=
+
+Name: about.html
+SHA-256-Digest: ubyNDyIZu4fWD9Ye1hNYLzBy2OVDBLEF52x1LGSNREE=
+
+Name: META-INF/maven/org.xmind.meggy.plugins/net.xmind.verify/pom.prop
+ erties
+SHA-256-Digest: o6GyQdBwTPGjdzoaHb4t5/4jpemPLIA3kdqRgo+BAyU=
+
+Name: net/xmind/verify/internal/AbstractVerifySession.class
+SHA-256-Digest: bDtdhqtEysfPoezAoIsB8q7FcuCtn4S5FZnX7S7P+r4=
+
+Name: net/xmind/verify/ui/internal/SubscriptionInfoDialog.class
+SHA-256-Digest: hJNswRq7yjKAhSVpHjrNunOrzEp6k+6A5BwQzMUNdAQ=
+
+Name: net/xmind/verify/internal/ActivateLicenseHandler.class
+SHA-256-Digest: X3W8WBuo/4I3TUAFzulPEvxLkug4pdRIOI+ztIRq9pY=
+
+Name: net/xmind/verify/ui/VerifyUI20141031.class
+SHA-256-Digest: b/GXBChYzXyMIUJDVSDQO1t+0MpZXigNaOPA+zQRCTI=
+
+Name: net/xmind/verify/internal/LicenseVerifier$FreeStartDate.class
+SHA-256-Digest: son3SDeP/H09qU8a9kWdT+hOAljJiywByXkHDXL2ORk=
+
+Name: icons/pro.png
+SHA-256-Digest: CONihe2eQQpOJktGWPifQyZT+hSSdL8vDqtpI2ZBoys=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog2$2.class
+SHA-256-Digest: JdznYffp1K3fzLeXtwTPIu4PEB3/TTOHUm+yx7ojFdo=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob.class
+SHA-256-Digest: 9NjwgoFM6ZhExzysSwfWFirrobcp0efx4ENpFM5uRuw=
+
+Name: net/xmind/verify/ui/VerifyWizardPage20141031$1.class
+SHA-256-Digest: Z2h6dTM5dHWKQzcMHZmoCxMytGohtNXUlIyoVWgVgpA=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$4.clas
+ s
+SHA-256-Digest: vhNZMmdqTG9brVAkgFrVlHkCHEBaKW6rSgX6r8bUqAQ=
+
+Name: net/xmind/verify/ui/AbstractProViewPart20141031.class
+SHA-256-Digest: 7PRoSq9ORFe84GwBi+ZgD171IpW/Ms2oFucUUf8S0Cg=
+
+Name: net/xmind/verify/internal/legacy/LegacyLicenseVerifierUtil$Crypt
+ us.class
+SHA-256-Digest: 5CET5gBJKSOhxs7+FynjmlKxQb29+rKps/XekHoeSyk=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2$6.class
+SHA-256-Digest: eM5E02AwyJDeynFlnBSoxsFb7RUC+qgI2iBFliBozKA=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$2.clas
+ s
+SHA-256-Digest: p492yOOHr6ys5U9uOloa34eTPJJOWyGuRX/ZYYLgcqM=
+
+Name: net/xmind/verify/ui/internal/SubscriptionInfoDialog$1.class
+SHA-256-Digest: u+AD/WcYzD51wc97zC5vPWJt3Qyx12ng4k1d1VtfTqs=
+
+Name: plugin.xml
+SHA-256-Digest: a3qvh9L2Xy1ALIbUGK8l34L8p+03DSw/phDJ5i7vfE4=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$10.cla
+ ss
+SHA-256-Digest: 3bxT4eQdD+PJHU/aeWXPS7PAfqlAeFVZr9utaDilssI=
+
+Name: net/xmind/verify/internal/Validity.class
+SHA-256-Digest: disEO8Yb5cz+InWGO0JepgLQI5GA3gNsM/RaLg9AGtk=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog2$1.class
+SHA-256-Digest: U6K93yClUTaCAkUE45ARJzeH1IjM06Le0EswH6oR7dg=
+
+Name: net/xmind/verify/internal/LicenseVerifier$1.class
+SHA-256-Digest: mrXHBGnr7bo2nKBFVDxUrdYokyOV4/TPLR08oYC1PK4=
+
+Name: net/xmind/verify/internal/LicenseVerifier.class
+SHA-256-Digest: ULee4sShSt7Ep8T/DI88dCHTePT9lsGo+JGCbHb0em4=
+
+Name: net/xmind/verify/ui/internal/StartupVerifier.class
+SHA-256-Digest: f0wpCusM6tkg3W4yxgf4AwqUPCQYgy7ACYB/XqWyNJk=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog$1.class
+SHA-256-Digest: GHMBDP/bPeILDgFEydeMrwDj8bap0OjhXZcIRFlVy7s=
+
+Name: net/xmind/verify/ui/internal/ActivateProHandler$1.class
+SHA-256-Digest: BaqgX+hHynbVf+NuoPbC9H2A/3AQrSoyPQDhHxmkuho=
+
+Name: net/xmind/verify/ui/AbstractProViewPart20141031$4.class
+SHA-256-Digest: l9KIQMmVO0KXpv5OiHVCjApCdDOX8Lx6y88ihEPkfs0=
+
+Name: .options
+SHA-256-Digest: n/ADAUSdRUFRzbu770wcNQJX+JojWr74F71SHP8auco=
+
+Name: net/xmind/verify/ui/internal/ViewLicenseInfoActionDelegate$1.cla
+ ss
+SHA-256-Digest: W81z5a2yW/vo7mqEP5htxVvZAHomQY9RDncLrZ4PFkg=
+
+Name: net/xmind/verify/internal/legacy/LegacyValidity$LegacyVersion.cl
+ ass
+SHA-256-Digest: CPq6qqsZVNb9qTvxfQs47oIVEyMDpOMgd/fAoq3b4HA=
+
+Name: net/xmind/verify/ui/VerifyUI20141031$1.class
+SHA-256-Digest: Lr2sYvh9jK+HWx29Z3B4d3yXIKtTkQUt5xiaydT5oY8=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog$2.class
+SHA-256-Digest: TszMp78jae+B5CW92f40rLErODGMZz7xbnoH71Tak8o=
+
+Name: net/xmind/verify/internal/messages.properties
+SHA-256-Digest: XWmIoACDiSgYLXiO1SphVemFEyn05onHUAV0qg553jU=
+
+Name: net/xmind/verify/ui/internal/ViewLicenseInfoActionDelegate.class
+SHA-256-Digest: TbTFm/cFBSBeOIQrytqEVn10Z0xQx2Xp1MPPWWIo6lg=
+
+Name: plugin.properties
+SHA-256-Digest: 6pCd3HvL+KDqUhPVvalKrsNhFB2HIXvOmpd6QCVgNf4=
+
+Name: icons/gantt.png
+SHA-256-Digest: +8JX7eKbLB57qARXJ0bcbWVMutuMAnyVXZ+6o+3RGUM=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2$4.class
+SHA-256-Digest: iQe2gwDB+XRARnfN8JLz7TWZ9Vf27bMxmnnmvHEISfM=
+
+Name: net/xmind/verify/ui/internal/ActivateProHandler.class
+SHA-256-Digest: fmQim+R9vda+EkGKIf6eAsuhLppzbcyYtERjtdHYzM0=
+
+Name: net/xmind/verify/internal/LicenseVerifier$ValidityNotifier$1.cla
+ ss
+SHA-256-Digest: dLNiXK1yEC+f0ggtk6pbV50UYRW/Xaj7zQz+JEb7cK8=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog$4.class
+SHA-256-Digest: VFh3j7kdSv4sr6kzTiOuvQknUn4QsoDakTaKs4JUqAk=
+
+Name: net/xmind/verify/internal/legacy/StartupLegacyVerifier.class
+SHA-256-Digest: 6ycAFdWSq2wfefJJBB1JocVrSLOaE0sfgJ9y6Mi4XHA=
+
+Name: net/xmind/verify/internal/VerifyPolicy.class
+SHA-256-Digest: vXSgB/IPs+rVjDSwpy5R9BjwrJeN7oPoJavuIC+Uo0c=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2.class
+SHA-256-Digest: diqGEsjwPimLHVgh4IrbEbLg5Z0oXyXmUcIW46k3w70=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog2$4.class
+SHA-256-Digest: xu5fElj99BgAVm4J4ULfEXW0vTJcFcR7XejPWBPB0qg=
+
+Name: net/xmind/verify/internal/legacy/LegacyLicenseVerifierUtil$1$1.c
+ lass
+SHA-256-Digest: +3mcOjR/QFhpdhTI6hC6dU4bO2VRPpqoT0Qx5YA78KA=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2$1.class
+SHA-256-Digest: RIqspE1DGbqJz9PCTdnIqk1sk3dG0JBYkIJOP99AirE=
+
+Name: icons/valid.png
+SHA-256-Digest: R9Tb+tyHlQ2ZLgwQQi4wM5Ef6ET6+tn1QOjGmav94jU=
+
+Name: net/xmind/verify/internal/Messages.class
+SHA-256-Digest: PlBs5L4Q2uOe7ky+ThpmKk5yAtDKKC0J8RspQUFEYiI=
+
+Name: net/xmind/verify/internal/legacy/XMind2012LicenseVerifier.class
+SHA-256-Digest: T5GSh42HFnHpC0Lfy3nKL7kTP0J51Khbc/lexjPdKAM=
+
+Name: net/xmind/verify/internal/legacy/LegacyLicenseVerifierUtil$1$2.c
+ lass
+SHA-256-Digest: XW1Q3N4CmL9U1ngDKMWVqp5HyamxMC1BAQ24P2YbKpg=
+
+Name: net/xmind/verify/ui/AbstractProViewPart20141031$2.class
+SHA-256-Digest: TJDra4S9loR79lCdqRbFeqmcemcau0zazvT8L8kDehM=
+
+Name: net/xmind/verify/internal/legacy/XMindLicenseVerifier.class
+SHA-256-Digest: ZjLtu3HhWwDVtXy8s55FGbEJ2rIyvk4EobAWZwtJYEc=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog$3.class
+SHA-256-Digest: EFo8vN3J6Ype3w8rTDfDufbabiCOSdri0QC5ucalwpE=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog2$2.class
+SHA-256-Digest: OonZxA7q+dPGBhUpvRtRd6qyd0MwhYpBBYBF02KtS3E=
+
+Name: net/xmind/verify/ui/internal/LicenseKeyInputDialog$2.class
+SHA-256-Digest: h8jwxVZu5tLoy3PnlJPeN8B1eVO11NA+5sJis368suI=
+
+Name: net/xmind/verify/internal/LicenseVerifier$ValidityNotifier.class
+SHA-256-Digest: ZzoEybuJmt7LV5sIFnirmScu3ta7VYoQJiYJRa/5drg=
+
+Name: net/xmind/verify/internal/legacy/LegacyLicenseVerifierUtil.class
+SHA-256-Digest: 3dJfWZD7s2zXEShfwduofXCf9aM03uv01PjTw+jGUvM=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$1.clas
+ s
+SHA-256-Digest: U/UFhplWgiT2EPkezm8iWxQidszJDIbHgV0KdfROIzY=
+
+Name: net/xmind/verify/internal/LicenseVerifier$Cryptus.class
+SHA-256-Digest: 6xkL6x9sCE6NcFJoZiBIQn2feC1VOpFQHynySELhRss=
+
+Name: net/xmind/verify/IVerifyListener.class
+SHA-256-Digest: 82ehRbDzds5e/wGID9LrnxeAeKnY3wPzX0IzBS2dcug=
+
+Name: net/xmind/verify/ui/internal/StartupVerifier$1.class
+SHA-256-Digest: Ry620NKGX46RGyhumfoCjyVp0FKOujc61B/nOQSldyk=
+
+Name: net/xmind/verify/VerifyEngine20151108.class
+SHA-256-Digest: aL73Le5TtG9SFKcc4iOYpDlByt8DH+3L1VufY+VutoA=
+
+Name: icons/export.png
+SHA-256-Digest: 2FTX6H5McyH/Y8FXAkyThmKFdE0qXCE0SOAqt4sUw2o=
+
+Name: net/xmind/verify/ui/internal/LicenseInfoDialog.class
+SHA-256-Digest: tsNHOH8/FCMLUKZ7FAHRTZbQou1v/sKityqkGRdefYk=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$9.clas
+ s
+SHA-256-Digest: NIjuPmzoOToNwklitVMKsiKxVC+/RK7AWhsdsRzJo/k=
+
+Name: net/xmind/verify/internal/LicenseVerifier$VerificationJob$5.clas
+ s
+SHA-256-Digest: Qq7+Yo3OWSR1MYroZaU7belf5llPKgbks3NTeR4w0G8=
+
